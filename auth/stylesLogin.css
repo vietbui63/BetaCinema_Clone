@@ -1,0 +1,59 @@
+body { 
+    background-image: url('/BetaCinema_Clone/assets/background-login.png'); 
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    font-size: 20px;
+}
+
+.container{
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(20px); 
+    padding: 30px; 
+    border-radius: 20px; 
+    max-width: 700px; 
+    margin: 50px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.navbar-brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+img{
+    width: 200px;
+    height: 100px;
+    padding-bottom: 20px;
+} 
+
+label{
+    padding-top: 20px;
+    font-weight: bold;
+}
+
+.input-group-text{
+    height: 100%;
+    color: #ccc;
+}
+
+span{
+    font-weight: bold;
+    color: red;
+}
+
+/* CAPTCHA */
+.bi-arrow-repeat{
+    font-size: 30px;
+    color: #0a64a7;
+    margin-left: 10px;
+}
+
+#captcha-image{
+    height: 60px;
+}

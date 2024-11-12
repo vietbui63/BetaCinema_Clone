@@ -1,0 +1,282 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* HEADER */
+header .btn, header span{
+    font-size: 15px;
+    color: #fff;
+    display: flex;
+    align-items: center;
+}
+
+header .btn:hover{
+    color: #fff;
+    text-decoration: underline;
+}
+
+header{
+    display: flex;
+    justify-content: end;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 9998;
+    transition: top 0.1s;
+}
+
+.bi-box-arrow-left{
+    color: #fff;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+}
+
+/* NAVBAR */
+.navbar{
+    position: sticky;
+    top: 35px; 
+    z-index: 9999;
+    box-shadow: 0 1px 3px #ddd;
+    transition: top 0.1s;
+}
+
+.nav-link{
+    color: #333;
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.main:hover{
+    color: #337ab7;
+}
+
+#cinemas{
+    border: solid 1px #ccc;
+    border-radius: 16px;
+    float: left;
+    line-height: 1.2;
+    min-height: 31px;
+    font-size: 20px;
+}
+
+/* CAROUSEL */
+.carousel-control-prev{
+    width: 10%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);
+}
+
+.carousel-control-next{
+    width: 10%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0.0001) 0, rgba(0, 0, 0, 0.5) 100%);
+}
+
+.carousel-indicators button{
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    background-color: black;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+    width: 50px;
+    height: 50px;
+}
+
+#test{
+    width: 20px;
+    height: 20px;
+    background-color: #333;
+    border: solid 2px #c9cdce;
+    border-radius: 50%;
+}
+
+/* TABS */
+.nav-tabs .nav-link {
+    font-weight: bold;
+    color: #333;
+    font-size: 30px;
+}
+
+.nav-tabs .nav-link.active {
+    color: #03599D;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
+    border-image-slice: 1;
+    border-width: 0px 0px 4px 0px;
+}
+
+.tab-content {
+    margin-top: 30px;
+}
+
+/* CARDS */
+.card{
+    border: none;
+    margin: 20px;
+}
+
+.card img{
+    border-radius: 20px;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.buy-ticket{
+    font-size: larger;
+    background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+    color: #fff;
+    border: none;
+}
+
+.buy-ticket:hover{
+    background-image: linear-gradient(to right, #208adb 0%, #3da2e0 51%, #58b8f0 100%) !important;
+}
+
+.card-title{
+    font-size: 20px;
+    color: #337ab7;
+    font-weight: bold;
+}
+
+.card-text span{
+    font-weight: bold;
+}
+
+.bi-ticket-perforated-fill {
+    font-size: 60px;
+    position: absolute;
+    left: 15px;
+    bottom: 0;
+    opacity: 0.5;
+    rotate: 130deg;
+}
+
+/* BUTTON PLAY KHI HOVER PIC */
+.image-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.image-container img {
+    width: 100%;
+    height: auto;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5); 
+    opacity: 0; 
+}
+
+.play-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    display: none; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    color: white;
+    text-decoration: none;
+}
+
+.image-container:hover .overlay {
+    opacity: 1; 
+    border-radius: 20px;
+}
+
+.image-container:hover .play-button {
+    display: inline-block; 
+    opacity: 1;
+    font-size: 50px;
+}
+
+/* MODAL LOGIN & REGISTER */
+.modal-content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* FOOTER */
+footer {
+    border-top: 2px solid transparent;
+    border-color: #d1d1d1;
+    border-image-slice: 1;
+}
+
+h3{
+    font-size: 30px;
+    padding-bottom: 7px;
+    margin: 0 0 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border-bottom: 4px solid transparent;
+    border-image: linear-gradient(to right, #39adf0 0%, #075fa3 100%);
+    border-image-slice: 1;
+}
+
+.col-md-3, .col-md-4, .col-md-2{
+    padding: 0 30px 0 30px;
+}
+
+.col-md-4 ul li{
+    list-style: none;
+    padding-bottom: 20px;
+}
+
+.col-md-4 ul li a{
+    font-weight: 600;
+    color: #111;
+    text-decoration: none;
+}
+
+.col-md-4 ul li a:hover{
+    color: #337ab7;
+    text-decoration: underline;
+}
+
+.col-md-4 ul{
+    padding-left: 0;
+}
+
+.bi-facebook, .bi-youtube, .bi-tiktok, .bi-instagram{
+    font-size: 35px; 
+    color: #6e6e6e;
+    padding-right: 20px;
+}
+
+.bi-facebook:hover{
+    color: #337ab7;
+}
+
+.bi-youtube:hover{
+    color: #fd0100;
+}
+
+.bi-tiktok:hover{
+    color: #111;
+}
+
+.bi-instagram{
+    transition: background-image 0.3s; 
+}
+
+.bi-instagram:hover{
+    background-image: linear-gradient(45deg, #405de6, #5851db, #833ab4, #c13584, #e1306c, #fd1d1d);
+    -webkit-background-clip: text;
+    color: transparent;
+}

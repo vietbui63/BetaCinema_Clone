@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- BOOTSTRAP -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <!-- CSS -->
+    <link rel="stylesheet" href="stylesLogin.css">
+    <script src="refresh_captcha.js"></script>
+
+    <title>Trang đăng nhập</title>
+</head>
+<body>
+    <?php
+        require 'config.php';
+
+        session_start();
+        
+        $error = '';
+
+        if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['refreshCaptcha'])) {
+            $email = $_POST['email'];
+            $password = $_POST['password'];
+            $captcha = $_POST['captcha'];  // Mã CAPTCHA từ form
+        
+            // Kiểm tra mã CAPTCHA
+            if ($captcha !== $_SESSION['captcha']) {
+                $error = 'Mã CAPTCHA không đúng!';
+            } else {
+                // Xử lý đăng nhập
+                $sql = "SELECT * FROM users WHERE Email='$email'";
+                $result = mysqli_query($connect, $sql);
+        
+                if ($result && mysqli_num_rows($result) == 1) {
+                    $user = mysqli_fetch_assoc($result);
+                    if (password_verify($password, $user['Pass_word'])) {
+                        $_SESSION['loggedin'] = true;
+                        $_SESSION['Fullname'] = $user['Fullname'];
+                        $_SESSION['UserID'] = $user['UserID'];
+                        header("Location: /BetaCinema_Clone/home/index.php");
+                        exit();
+                    } else {
+                        $error = 'Email hoặc mật khẩu không đúng!';
+                    }
+                } else {
+                    $error = 'Email hoặc mật khẩu không đúng!';
+                }
+            }
+        }
+    ?>
+
+    <div class="container" style="max-width:500px">
+        <form method="POST" action="">
+            <a class="navbar-brand" href="/BetaCinema_Clone/home/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
+            <div class="row">
+                <label for="email" class="form-label">Email</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-envelope-at-fill"></i></div>
+                    <input type="email" class="form-control" placeholder="Email" id="email" name="email" required>
+                </div>
+            </div>
+            <div class="row">
+                <label for="password" class="form-label">Mật khẩu</label>
+                <div class="input-group">
+                    <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
+                    <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password" required>
+                </div>
+            </div>
+            <div class="col mt-3">
+                Bạn chưa có tài khoản? <a href="/BetaCinema_Clone/auth/register.php">ĐĂNG KÝ</a>
+            </div>
+            <div class="row mt-4">
+                <div class="col-7">
+                    <img id="captcha-image" src="captcha.php" alt="Captcha Image">
+                    <a href="" onclick="refreshCaptcha()"><i class="bi bi-arrow-repeat"></i></a>
+                </div>
+                <div class="col-5">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Mã xác thực" id="captcha" name="captcha" required>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-3">
+                <div class="col">
+                    <button type="submit" class="btn btn-submit col-12">ĐĂNG NHẬP</button>
+                </div>
+                <div class="col">
+                    <a href="/BetaCinema_Clone/home/index.php" class="btn btn-back col-12">
+                        QUAY LẠI
+                    </a>
+                </div>
+            </div>
+            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center'>$error</div>"; } ?>
+        </form>
+    </div>
+</body>
+<style>
+    .btn{
+        font-size: 20px;
+        text-align: center;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+    .btn:hover {
+        background-position: right center; 
+    }
+
+    .btn-submit, .btn-submit:hover{
+        background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
+    }
+
+    .btn-back, .btn-back:hover{
+        background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+    }
+</style>
+</html>
