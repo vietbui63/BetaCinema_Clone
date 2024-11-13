@@ -38,7 +38,7 @@
                 echo '      <div class="video-container">';
                 echo '          <iframe src="' . htmlspecialchars($trailer_url) . '" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>';
                 echo '      </div>';
-                echo '      <a href="/BetaCinema_Clone/home/index.php" id="btn-back" class="btn btn-primary col-4 mt-4">
+                echo '      <a href="/BetaCinema_Clone/pages/Home/index.php" id="btn-back" class="btn btn-primary col-4 mt-4">
                                 QUAY LẠI
                             </a>';
                 echo '  </div>';

@@ -151,7 +151,7 @@
                     <button type="submit" class="btn btn-submit col-12">ĐĂNG KÝ</button>
                 </div>
                 <div class="col">
-                    <a href="/BetaCinema_Clone/home/index.php" class="btn btn-back col-12">QUAY LẠI</a>
+                    <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn btn-back col-12">QUAY LẠI</a>
                 </div>
             </div>
             <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' style='color:red; font-weight:bold'>$error</div>"; } ?>

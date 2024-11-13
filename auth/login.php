@@ -40,7 +40,8 @@
                         $_SESSION['loggedin'] = true;
                         $_SESSION['Fullname'] = $user['Fullname'];
                         $_SESSION['UserID'] = $user['UserID'];
-                        header("Location: /BetaCinema_Clone/home/index.php");
+                        $_SESSION['Email'] = $user['Email'];
+                        header("Location: /BetaCinema_Clone/pages/Home/index.php");
                         exit();
                     } else {
                         $error = 'Email hoặc mật khẩu không đúng!';
@@ -54,7 +55,7 @@
 
     <div class="container" style="max-width:500px">
         <form method="POST" action="">
-            <a class="navbar-brand" href="/BetaCinema_Clone/home/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="/BetaCinema_Clone/pages/Home/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
             <div class="row">
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group">
@@ -88,7 +89,7 @@
                     <button type="submit" class="btn btn-submit col-12">ĐĂNG NHẬP</button>
                 </div>
                 <div class="col">
-                    <a href="/BetaCinema_Clone/home/index.php" class="btn btn-back col-12">
+                    <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn btn-back col-12">
                         QUAY LẠI
                     </a>
                 </div>

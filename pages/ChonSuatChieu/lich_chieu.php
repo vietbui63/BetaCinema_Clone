@@ -3,12 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-
     <title>Chọn lịch chiếu</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel='stylesheet' href='lich_chieu.css'>
 </head>
 <body>
     <?php
@@ -40,18 +38,18 @@
         }
     ?>
     <div class="container">     
-        <form action="chon_ghe.php" method="post" class="p-4">
+        <form action="/BetaCinema_Clone/pages/Chonghe/chon_ghe.php" method="post" class="p-4">
             <input type="hidden" name="cinema_id" value="<?php echo htmlspecialchars($cinema_id); ?>">
             <input type="hidden" name="movie_id" value="<?php echo htmlspecialchars($movie_id); ?>">
 
             <h2 class="text-center mb-4">LỊCH CHIẾU - <?php echo htmlspecialchars($movie_title); ?></h2> 
-            <h3 class="text-center mb-5">Rạp <?php echo htmlspecialchars(string: $cinema_name); ?></h3> 
+            <h3 class="text-center mb-5">Rạp <?php echo htmlspecialchars($cinema_name); ?></h3> 
 
             <div class="mb-4">
                 <select name="showdate" id="showdate" class="form-select" required>
                     <option value="">Chọn ngày</option>
                     <?php
-                        $query = "SELECT ShowDate, StartTime FROM `show_times` WHERE MovieID = '$movie_id' ORDER BY ShowDate, StartTime";
+                        $query = "SELECT ShowDate, StartTime, HallID FROM `show_times` WHERE MovieID = '$movie_id' ORDER BY ShowDate, StartTime";
                         $result = mysqli_query($connect, $query);
 
                         if (!$result) {
@@ -79,7 +77,7 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $startTime = $row['StartTime'];
                             $formattedTime = date("H:i", strtotime($startTime));
-                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($row['ShowDate']) . '">' . htmlspecialchars($formattedTime) . '</option>';
+                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($row['ShowDate']) . '">' . htmlspecialchars($formattedTime) . ' - Hall ' . htmlspecialchars($row['HallID']) . '</option>';
                         }
                     ?>
                 </select>
@@ -89,7 +87,7 @@
                 ĐỒNG Ý
             </button>
 
-            <a href="/BetaCinema_Clone/home/index.php" class="btn btn-back col-12 w-50 mt-3">
+            <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn btn-back col-12 w-50 mt-3">
                 QUAY LẠI
             </a>
         </form>
@@ -110,63 +108,4 @@
         document.getElementById('showdate').dispatchEvent(new Event('change'));
     </script>
 </body>
-
-<style>
-    body {
-        background-image: url('/BetaCinema_Clone/assets/bg-lich-chieu.png'); 
-        background-position: center; 
-        background-size: cover;
-        background-repeat: no-repeat;
-        display: flex; 
-        justify-content: center; 
-        align-items: center; 
-        height: 100vh;
-    }
-
-    .container {
-        background: rgba(255, 255, 255, 0.5); 
-        backdrop-filter: blur(20px); 
-        text-align: center;
-        width: 90%; 
-        max-width: 600px; 
-        margin: auto;
-        padding: 20px;
-        border-radius: 20px; 
-    }
-
-    .mb-4{
-        display: flex;
-        justify-content: center;
-    }
-
-    .mb-4 select{
-        font-weight: bold;
-        font-size: 20px;
-        border: 2px solid #ced4da;
-    }
-    
-    .btn{
-        font-size: 20px;
-        text-align: center;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-    }
-
-    .btn, .btn:hover{
-        background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
-        color: #fff;
-        border: none;
-    }
-
-    .btn:hover {
-        background-position: right center; 
-    }
-
-    .btn-back, .btn-back:hover{
-        background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
-    }
-</style>
 </html>

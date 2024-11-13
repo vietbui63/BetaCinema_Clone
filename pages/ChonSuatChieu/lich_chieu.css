@@ -1,0 +1,56 @@
+body {
+    background-image: url('/BetaCinema_Clone/assets/bg-lich-chieu.png'); 
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(20px); 
+    text-align: center;
+    width: 90%; 
+    max-width: 600px; 
+    margin: auto;
+    padding: 20px;
+    border-radius: 20px; 
+}
+
+.mb-4{
+    display: flex;
+    justify-content: center;
+}
+
+.mb-4 select{
+    font-weight: bold;
+    font-size: 20px;
+    border: 2px solid #ced4da;
+}
+
+.btn{
+    font-size: 20px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.btn, .btn:hover{
+    background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+    color: #fff;
+    border: none;
+}
+
+.btn:hover {
+    background-position: right center; 
+}
+
+.btn-back, .btn-back:hover{
+    background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
+}
