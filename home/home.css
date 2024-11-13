@@ -59,9 +59,52 @@ header{
     border: 1px solid #333;
 }
 
+#cinemas{
+    border: solid 1px #ccc;
+    border-radius: 16px;
+    float: left;
+    line-height: 1.2;
+    min-height: 31px;
+    font-size: 20px;
+}
+
+.search-movie{
+    margin-right: 10px;
+    border: 1px solid #ccc;
+    border-radius: 16px;
+}
+
+.btn-outline-primary{
+    border-radius: 16px;
+}
+
+/* BUTTON BACK TO TOP */
+#backToTopBtn {
+    display: none; 
+    position: fixed; 
+    bottom: 20px; 
+    right: 20px; 
+    z-index: 99; 
+    background-color: #333; 
+    color: white; 
+    border: none;
+    border-radius: 50%;
+    cursor: pointer; 
+    padding: 0 10px 0 10px;
+    opacity: 0.3; 
+}
+
+.bi-arrow-up-short{
+    font-size: 40px;
+}
+
+#backToTopBtn:hover {
+    background-color: #555; 
+}
+
 /* CAROUSEL */
 .d-block{
-    margin-top: 35px;
+    margin-top: 33px;
 }
 
 .carousel-control-prev{
