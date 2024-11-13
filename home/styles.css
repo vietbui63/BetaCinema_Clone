@@ -54,16 +54,16 @@ header{
     color: #337ab7;
 }
 
-#cinemas{
-    border: solid 1px #ccc;
-    border-radius: 16px;
-    float: left;
-    line-height: 1.2;
-    min-height: 31px;
-    font-size: 20px;
+.form-control .search-movie{
+    margin-right: 10px;
+    border: 1px solid #333;
 }
 
 /* CAROUSEL */
+.d-block{
+    margin-top: 35px;
+}
+
 .carousel-control-prev{
     width: 10%;
     background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5) 0, rgba(0, 0, 0, 0.0001) 100%);

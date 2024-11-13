@@ -9,18 +9,18 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- CSS -->
-    <link rel='stylesheet' href='stylesIndex.css'>
+    <link rel='stylesheet' href='styles.css'>
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="index.js"></script>
 </head>
 <script>
     function submitForm() {
-    var cinemaID = document.getElementById('cinemas').value;
-    if (cinemaID) {
-        document.getElementById('cinemaForm').submit();
+        var cinemaID = document.getElementById('cinemas').value;
+        if (cinemaID) {
+            document.getElementById('cinemaForm').submit();
+        }
     }
-}
 </script>
 <body>
     <?php
@@ -107,9 +107,9 @@
                         <a class="nav-link main" href="#">THÀNH VIÊN</a>
                     </li>
                 </ul>
-                <form class="d-flex" role="search">
-                    <input class="form-control me-2" type="search" placeholder="Tìm phim..." aria-label="Search" size="20" style="border: solid 1px #ccc;">
-                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search-heart" style="font-size:20px;"></i></button>
+                <form class="d-flex" role="search" method="post">
+                    <input type="text" class="form-control search-movie" name="search" size="35" placeholder="Tìm kiếm phim..." aria-label="Search for movie">
+                    <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size:20px;"></i></button>
                 </form>
             </div>
         </div>
@@ -122,6 +122,7 @@
             <button id="test" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
             <button id="test" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
             <button id="test" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+            <button id="test" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
         </div>
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -135,6 +136,9 @@
             </div>
             <div class="carousel-item">
                 <img src="/BetaCinema_Clone/assets/car_4.png" class="d-block w-100" alt="">
+            </div>
+            <div class="carousel-item">
+                <img src="/BetaCinema_Clone/assets/car_5.png" class="d-block w-100" alt="">
             </div>
         </div>
         <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
@@ -163,7 +167,7 @@
             </ul>
 
             <div class="tab-content" id="movieTabContent">
-                <!-- Tab PHIM SẮP CHIẾU -->
+                <!-- TAB PHIM SẮP CHIẾU -->
                 <div class="tab-pane fade" id="upcoming" role="tabpanel" aria-labelledby="upcoming-tab">
                     <div class="row row-cols-1 row-cols-md-4 g-4">
                         <?php
@@ -188,7 +192,7 @@
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . htmlspecialchars($row['Title']) . '</h5>';
                                 echo '          <p class="card-text">' . '<span>Thể loại: </span>' . $row['Genre'] . '</p>';
-                                echo '          <p class="card-text">' . '<span>Thời lượng: </span>' . $row['Duration'] . '</p>';
+                                echo '          <p class="card-text">' . '<span>Thời lượng: </span>' . $row['Duration'] . ' phút' . '</p>';
                                 echo '          <p class="card-text">' . '<span>Ngày khởi chiếu: </span>' . $formattedDate . '</p>';
                                 echo '      </div>';
                                 echo '  </div>';
@@ -198,13 +202,19 @@
                     </div>
                 </div>
 
-                <!-- Tab PHIM ĐANG CHIẾU -->
+                <!-- TAB PHIM ĐANG CHIẾU -->
                 <div class="tab-pane fade show active" id="now-showing" role="tabpanel" aria-labelledby="now-showing-tab">
                     <div class="row row-cols-1 row-cols-md-4 g-4">
                         <?php
-                            require 'config.php';
+                            $search_term = "";
 
-                            $query = "SELECT * FROM `movies` WHERE status = 'Phim đang chiếu'";
+                            if (isset($_POST['search']) && !empty(trim($_POST['search']))) {
+                                $search_term = mysqli_real_escape_string($connect, trim($_POST['search']));
+                                $query = "SELECT * FROM `movies` WHERE status = 'Phim đang chiếu' AND `Title` LIKE '%$search_term%'";
+                            } else {
+                                $query = "SELECT * FROM `movies` WHERE status = 'Phim đang chiếu'";
+                            }
+
                             $result = mysqli_query($connect, $query);
 
                             if (!$result) {
@@ -216,15 +226,19 @@
                                 echo '  <div class="card">';
                                 echo '      <div class="image-container position-relative">';
                                 echo '          <img src="' . htmlspecialchars($row['Pic']) . '" class="card-img-top" alt="' . htmlspecialchars($row['Title']) . '">';
-                                echo '          <div class="overlay"></div>';  
+                                echo '          <div class="overlay"></div>';
                                 echo '          <a href="play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute" name="' . $row['MoviesID'] . '"><i class="bi bi-play-circle-fill"></i></a>';
                                 echo '      </div>';
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . $row['Title'] . '</h5>';
                                 echo '          <p class="card-text"><span>Thể loại: </span>' . $row['Genre'] . '</p>';
-                                echo '          <p class="card-text"><span>Thời lượng: </span>' . $row['Duration'] . '</p>';
+                                echo '          <p class="card-text"><span>Thời lượng: </span>' . $row['Duration'] . ' phút' . '</p>';
                                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                                    echo '      <a href="chon_ghe.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
+                                    if ($selectedCinemaID) {
+                                        echo '      <a href="lich_chieu.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
+                                    } else {
+                                        echo '      <button class="btn btn-primary buy-ticket" onclick="alert(\'Vui lòng chọn rạp phim trước khi mua vé.\')"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</button>';
+                                    }
                                 } else {
                                     echo '      <a href="/BetaCinema_Clone/auth/login.php" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
                                 }
@@ -236,7 +250,8 @@
                     </div>
                 </div>
 
-                <!-- Tab SUẤT CHIẾU ĐẶC BIỆT -->
+                
+                <!-- TAB SUẤT CHIẾU ĐẶC BIỆT -->
                 <div class="tab-pane fade" id="special" role="tabpanel" aria-labelledby="special-tab">
                     <div class="row row-cols-1 row-cols-md-4 g-4">
                         <?php
@@ -258,7 +273,7 @@
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . $row['Title'] . '</h5>';
                                 echo '          <p class="card-text">' . '<span>Thể loại: </span>' . $row['Genre'] . '</p>';
-                                echo '          <p class="card-text">' . '<span>Thời lượng: </span>' . $row['Duration'] . '</p>';
+                                echo '          <p class="card-text">' . '<span>Thời lượng: </span>' . $row['Duration'] . ' phút' . '</p>';
                                 echo '          <a href="#" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
                                 echo '      </div>';
                                 echo '  </div>';
@@ -326,4 +341,26 @@
         </div>
     </footer>
 </body>
+<style>
+    .d-block{
+        margin-top: 33px;
+    }
+
+    .search-movie{
+        margin-right: 10px;
+        border: 1px solid #ccc;
+        border-radius: 16px;
+    }
+
+    .btn-outline-primary{
+        border-radius: 16px;
+    }
+
+    .navbar-nav select{
+        background: #f9f9f9;
+        color: #595f65;
+        border: solid 1px #ccc;
+        border-radius: 16px !important;
+    }
+</style>
 </html>

@@ -19,7 +19,3 @@ document.getElementById('movieTabs').addEventListener('shown.bs.tab', function (
 function refreshCaptcha() {
     document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
 }
-
-/* SELECT CINEMAS */
-
-
