@@ -17,6 +17,20 @@
     function refreshCaptcha() {
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
     }
+
+    setTimeout(function() {
+        var messageElement = document.getElementById("mess");
+        if (messageElement) {
+            messageElement.style.display = "none";
+        }
+    }, 2000); 
+
+    setTimeout(function() {
+        var errorElement = document.getElementById("error");
+        if (errorElement) {
+            errorElement.style.display = "none";
+        }
+    }, 2000); 
 </script>
 <body>
     <?php
@@ -69,7 +83,7 @@
 
     <div class="container">
         <form method="POST" action="">
-            <a class="navbar-brand" href="/BetaCinema_Clone/pages/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="/BetaCinema_Clone/home/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
             <div class="row">
                 <div class="col">
                     <span>*</span>
@@ -160,9 +174,18 @@
                     <button type="submit" class="btn btn-submit col-12">ĐĂNG KÝ</button>
                 </div>
             </div>
-            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' style='color:red; font-weight:bold'>$error</div>"; } ?>
-            <?php if ($mess) { echo "<div class='alert alert-success mt-4 p-1 text-center' style='color:green; font-weight:bold'>$mess</div>"; } ?>
+            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>"; } ?>
+            <?php if ($mess) { echo "<div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>$mess</div>"; } ?>
         </form>
     </div>
 </body>
+<style>
+    body { 
+        font-size: 15px;
+    }
+
+    .btn{
+        font-size: 15px;
+    }
+</style>
 </html>

@@ -103,4 +103,13 @@
         </form>
     </div>
 </body>
+<style>
+    body { 
+        font-size: 15px;
+    }
+
+    .btn{
+        font-size: 15px;
+    }
+</style>
 </html>

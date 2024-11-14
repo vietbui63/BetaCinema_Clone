@@ -107,13 +107,13 @@
 
                         <div class="row kindofseat">
                             <div class="col mt-4 me-5" style="background-color: #6c757d">
-                                <h5>Ghế thường <br>(45.000 VNĐ)</h5>
+                                <p>Ghế thường <br>(45.000 VNĐ)</p>
                             </div>
                             <div class="col mt-4 me-5" style="background-color: #0dcaf0">
-                                <h5>Ghế VIP <br>(70.000 VNĐ)</h5>
+                                <p>Ghế VIP <br>(70.000 VNĐ)</p>
                             </div>
                             <div class="col mt-4" style="background-color: #ffc107">
-                                <h5>Ghế Couple <br>(120.000 VNĐ)</h5>
+                                <p>Ghế Couple <br>(120.000 VNĐ)</p>
                             </div>
                         </div>
                     </div>
@@ -198,6 +198,18 @@
     .img-movie{
         height: 100%;
         border-radius: 20px;
+    }
+
+    .table th, .table td {
+        font-size: 15px;
+    }
+
+    .btn-next, .btn-back{
+        font-size: 15px;
+    }
+
+    p{
+        margin-top: 10px;
     }
 </style>
 </html>

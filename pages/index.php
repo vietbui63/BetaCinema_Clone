@@ -78,27 +78,33 @@
                     <li class="nav-item">
                         <?php
                             if ($selectedCinemaID) 
-                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/rap.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 20px">RẠP</a>';
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/rap.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 15px">RẠP</a>';
                             else
-                                echo '<a class="nav-link main" href="" style="margin-left: 20px" onclick="alert(\'Vui lòng chọn rạp phim.\')">RẠP</a>';
+                                echo '<a class="nav-link main" href="" style="margin-left: 15px" onclick="alert(\'Vui lòng chọn rạp phim.\')">RẠP</a>';
                         ?>
                     </li>
                     <li class="nav-item">
                         <?php
                             if ($selectedCinemaID) 
-                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/gia_ve.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 20px">GIÁ VÉ</a>';
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/gia_ve.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 15px">GIÁ VÉ</a>';
                             else
-                                echo '<a class="nav-link main" href="" style="margin-left: 20px" onclick="alert(\'Vui lòng chọn rạp phim.\')">GIÁ VÉ</a>';
+                                echo '<a class="nav-link main" href="" style="margin-left: 15px" onclick="alert(\'Vui lòng chọn rạp phim.\')">GIÁ VÉ</a>';
                         ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="/BetaCinema_Clone/pages/news.php" style="margin-left: 20px">TIN MỚI VÀ ƯU ĐÃI</a>
+                        <a class="nav-link main" href="/BetaCinema_Clone/pages/news.php" style="margin-left: 15px">TIN MỚI VÀ ƯU ĐÃI</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="/BetaCinema_Clone/pages/nhuong_quyen.php" style="margin-left: 20px">NHƯỢNG QUYỀN</a>
+                        <a class="nav-link main" href="/BetaCinema_Clone/pages/nhuong_quyen.php" style="margin-left: 15px">NHƯỢNG QUYỀN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="#" style="margin-left: 20px">THÀNH VIÊN</a>
+                        <?php
+                            if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) 
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/thanh_vien.php" style="margin-left: 15px">THÀNH VIÊN</a>';
+                            else
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/auth/login.php" style="margin-left: 15px">THÀNH VIÊN</a>';
+                        ?>
+                        
                     </li>
                 </ul>
                 <form class="d-flex" role="search" method="post">
@@ -345,4 +351,20 @@
         </div>
     </footer>
 </body>
+<style>
+    .nav-link{
+        color: #333;
+        font-weight: bold;
+        font-size: 16px;
+    }
+
+    #cinemas{
+        border: solid 1px #ccc;
+        border-radius: 16px;
+        float: left;
+        line-height: 1.2;
+        min-height: 31px;
+        font-size: 15px;
+    }
+</style>
 </html>

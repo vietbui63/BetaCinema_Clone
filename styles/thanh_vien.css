@@ -1,74 +1,48 @@
-body {
-    background-image: url('/BetaCinema_Clone/assets/bg-lich-chieu.png'); 
+body { 
+    background-image: url('/BetaCinema_Clone/assets/bg-thanh-vien.png'); 
     background-position: center; 
     background-size: cover;
     background-repeat: no-repeat;
     display: flex; 
     justify-content: center; 
     align-items: center; 
-    min-height: 100vh; 
+    height: 100vh;
+    font-size: 15px;
 }
 
-.container {
+.container{
     background: rgba(255, 255, 255, 0.5); 
-    backdrop-filter: blur(30px); 
-    text-align: center;
-    width: 90%; 
-    max-width: 100%; 
-    margin: 0 auto;
-    padding: 50px;
+    backdrop-filter: blur(40px); 
+    padding: 30px; 
     border-radius: 20px; 
+    max-width: 900px; 
+    margin: 50px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-/* CHỌN GHẾ */
-.mt-4{
-    border-radius: 10px;
+.form-control{
+    font-size: 20px;
 }
 
-.kindofseat{
-    margin-left: 5px;
-}
-
-/* THÔNG TIN PHIM */
-.img-movie{
-    height: 80%;
-    border-radius: 20px;
-}
-
-h1{
-    color: #0077b6;
+.nav-tabs .nav-link {
     font-weight: bold;
+    color: #333;
+    font-size: 30px;
 }
 
-.bi{
-    margin-right: 10px;
-}
-
-.table th, .table td {
-    text-align: left;
-    background: none; 
+.nav-link:hover{
     border: none;
-    font-size: 20px;
 }
 
-.table tr th{
-    padding-left: 40px;
-}
-
-/* BUTTON CHỌN GHẾ */
-.btn.selected {
-    background-color: #70e000; 
-    border: 1px solid #70e000;
-}
-
-/* TỔNG GIÁ */
-#total-price{
+.mb-3 label{
     font-weight: bold;
-    font-size: 20px;
-    color: #c9184a;
 }
 
-/* BUTTON NEXT, BACK */
+span{
+    font-weight: bold;
+    color: red;
+}
+
 .btn-next, .btn-back{
     font-size: 20px;
     text-align: center;

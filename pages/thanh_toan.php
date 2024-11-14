@@ -87,7 +87,7 @@
                 <!-- Payment Method Selection -->
                 <div class="col-12 col-lg-6">
                     <div class="row mb-4 text-center mt-5">
-                        <h5 class="mb-5">CHỌN PHƯƠNG THỨC THANH TOÁN</h5>
+                        <h5 class="mb-5">PHƯƠNG THỨC THANH TOÁN</h5>
                         <div class="col-4">
                             <input type="radio" class="form-check-input" id="zalopay" name="payment_method" value="Zalopay">
                             <label class="form-check-label" for="zalopay">
@@ -135,4 +135,17 @@
         }
     </script>
 </body>
+<style>
+    .table th, .table td {
+        font-size: 15px;
+    }
+
+    .form-check-input{
+        font-size: 15px;
+    }
+
+    .btn-next, .btn-back{
+        font-size: 15px;
+    }
+</style>
 </html>

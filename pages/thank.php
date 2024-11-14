@@ -42,10 +42,20 @@
 
     <div class="container mt-5 text-center">
         <img class="mb-5" src="/BetaCinema_Clone/assets/logo.png" alt="Logo">
-        <h2 class="mb-5">CẢM ƠN BẠN ĐẶT VÉ</h2>
-        <h2 class="mb-5">CHÚC BẠN CÓ NHỮNG PHÚT GIÂY VUI VẺ CÙNG BETA</h2>
+        <h5 class="mb-5">CẢM ƠN BẠN ĐẶT VÉ</h5>
+        <h5 class="mb-5">CHÚC BẠN CÓ NHỮNG PHÚT GIÂY VUI VẺ CÙNG BETA</h5>
         <a href="/BetaCinema_Clone/pages/index.php" class="btn col-12 w-50 mt-3">
             TRANG CHỦ
         </a>
     </div>
 </body>
+<style>
+    .btn{
+        font-size: 15px;
+    }
+
+    .container img{
+        width: 250px;
+        height: 80px;
+    }
+</style>
