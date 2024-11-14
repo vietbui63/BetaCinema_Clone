@@ -12,13 +12,13 @@
 
     // Tạo hình ảnh CAPTCHA
     header('Content-Type: image/png');
-    $image = imagecreate(100, 30); // Giảm chiều rộng xuống 100 và chiều cao xuống 30
+    $image = imagecreate(100, 30); 
     $background_color = imagecolorallocate($image, 255, 255, 255);  // Màu nền trắng
     $text_color = imagecolorallocate($image, 0, 0, 0);  // Màu chữ đen
     $line_color = imagecolorallocate($image, 64, 64, 64);  // Màu đường nét
 
     // Vẽ một số đường chéo để làm phức tạp CAPTCHA
-    for ($i = 0; $i < 15; $i++) {
+    for ($i = 0; $i < 10; $i++) {
         imageline($image, mt_rand(0, 100), mt_rand(0, 30), mt_rand(0, 100), mt_rand(0, 30), $line_color);
     }
 

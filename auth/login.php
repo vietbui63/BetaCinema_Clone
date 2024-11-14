@@ -8,11 +8,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- CSS -->
-    <link rel="stylesheet" href="stylesLogin.css">
-    <script src="refresh_captcha.js"></script>
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/login_register.css">
 
     <title>Trang đăng nhập</title>
 </head>
+<script>
+    /* REFRESH CAPTCHA */
+    function refreshCaptcha() {
+        document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
+    }
+</script>
 <body>
     <?php
         require 'config.php';
@@ -41,7 +46,7 @@
                         $_SESSION['Fullname'] = $user['Fullname'];
                         $_SESSION['UserID'] = $user['UserID'];
                         $_SESSION['Email'] = $user['Email'];
-                        header("Location: /BetaCinema_Clone/pages/Home/index.php");
+                        header("Location: /BetaCinema_Clone/pages/index.php");
                         exit();
                     } else {
                         $error = 'Email hoặc mật khẩu không đúng!';
@@ -55,7 +60,7 @@
 
     <div class="container" style="max-width:500px">
         <form method="POST" action="">
-            <a class="navbar-brand" href="/BetaCinema_Clone/pages/Home/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
+            <a class="navbar-brand" href="/BetaCinema_Clone/pages/index.php"><img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
             <div class="row">
                 <label for="email" class="form-label">Email</label>
                 <div class="input-group">
@@ -84,41 +89,18 @@
                     </div>
                 </div>
             </div>
-            <div class="row mt-3">
+            <div class="row mt-3">   
                 <div class="col">
-                    <button type="submit" class="btn btn-submit col-12">ĐĂNG NHẬP</button>
-                </div>
-                <div class="col">
-                    <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn btn-back col-12">
+                    <a href="/BetaCinema_Clone/pages/index.php" class="btn btn-back col-12">
                         QUAY LẠI
                     </a>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-submit col-12">ĐĂNG NHẬP</button>
                 </div>
             </div>
             <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center'>$error</div>"; } ?>
         </form>
     </div>
 </body>
-<style>
-    .btn{
-        font-size: 20px;
-        text-align: center;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-    }
-
-    .btn:hover {
-        background-position: right center; 
-    }
-
-    .btn-submit, .btn-submit:hover{
-        background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
-    }
-
-    .btn-back, .btn-back:hover{
-        background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
-    }
-</style>
 </html>

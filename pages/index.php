@@ -8,10 +8,10 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- CSS -->
-    <link rel='stylesheet' href='home.css'>
+    <link rel='stylesheet' href='/BetaCinema_Clone/styles/home.css'>
     <!-- JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="home.js"></script>
+    <script src="/BetaCinema_Clone/js/home.js"></script>
 
     <title>Beta Cinemas Clone (home page)</title>
 </head>
@@ -76,25 +76,29 @@
                     </form>
 
                     <li class="nav-item">
-                        <a class="nav-link main" href="#">LỊCH CHIẾU THEO RẠP</a>
+                        <?php
+                            if ($selectedCinemaID) 
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/rap.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 20px">RẠP</a>';
+                            else
+                                echo '<a class="nav-link main" href="" style="margin-left: 20px" onclick="alert(\'Vui lòng chọn rạp phim.\')">RẠP</a>';
+                        ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="#">PHIM</a>
+                        <?php
+                            if ($selectedCinemaID) 
+                                echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/gia_ve.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 20px">GIÁ VÉ</a>';
+                            else
+                                echo '<a class="nav-link main" href="" style="margin-left: 20px" onclick="alert(\'Vui lòng chọn rạp phim.\')">GIÁ VÉ</a>';
+                        ?>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="#">RẠP</a>
+                        <a class="nav-link main" href="/BetaCinema_Clone/pages/news.php" style="margin-left: 20px">TIN MỚI VÀ ƯU ĐÃI</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="#">GIÁ VÉ</a>
+                        <a class="nav-link main" href="/BetaCinema_Clone/pages/nhuong_quyen.php" style="margin-left: 20px">NHƯỢNG QUYỀN</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link main" href="#">TIN MỚI VÀ ƯU ĐÃI</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link main" href="#">NHƯỢNG QUYỀN</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link main" href="#">THÀNH VIÊN</a>
+                        <a class="nav-link main" href="#" style="margin-left: 20px">THÀNH VIÊN</a>
                     </li>
                 </ul>
                 <form class="d-flex" role="search" method="post">
@@ -180,7 +184,7 @@
                                 echo '      <div class="image-container position-relative">';
                                 echo '          <img src="' . htmlspecialchars($row['Pic']) . '" class="card-img-top" alt="' . htmlspecialchars($row['Title']) . '">';
                                 echo '          <div class="overlay"></div>';  
-                                echo '          <a href="/BetaCinema_Clone/pages/Trailer/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute"><i class="bi bi-play-circle-fill"></i></a>';
+                                echo '          <a href="/BetaCinema_Clone/pages/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute"><i class="bi bi-play-circle-fill"></i></a>';
                                 echo '      </div>';
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . htmlspecialchars($row['Title']) . '</h5>';
@@ -220,7 +224,7 @@
                                 echo '      <div class="image-container position-relative">';
                                 echo '          <img src="' . htmlspecialchars($row['Pic']) . '" class="card-img-top" alt="' . htmlspecialchars($row['Title']) . '">';
                                 echo '          <div class="overlay"></div>';
-                                echo '          <a href="/BetaCinema_Clone/pages/Trailer/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute" name="' . $row['MoviesID'] . '"><i class="bi bi-play-circle-fill"></i></a>';
+                                echo '          <a href="/BetaCinema_Clone/pages/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute" name="' . $row['MoviesID'] . '"><i class="bi bi-play-circle-fill"></i></a>';
                                 echo '      </div>';
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . $row['Title'] . '</h5>';
@@ -228,7 +232,7 @@
                                 echo '          <p class="card-text"><span>Thời lượng: </span>' . $row['Duration'] . ' phút' . '</p>';
                                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                                     if ($selectedCinemaID) {
-                                        echo '      <a href="/BetaCinema_Clone/pages/ChonSuatChieu/lich_chieu.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
+                                        echo '      <a href="/BetaCinema_Clone/pages/lich_chieu.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
                                     } else {
                                         echo '      <button class="btn btn-primary buy-ticket" onclick="alert(\'Vui lòng chọn rạp phim trước khi mua vé.\')"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</button>';
                                     }
@@ -260,7 +264,7 @@
                                 echo '      <div class="image-container position-relative">';
                                 echo '          <img src="' . htmlspecialchars($row['Pic']) . '" class="card-img-top" alt="' . htmlspecialchars($row['Title']) . '">';
                                 echo '          <div class="overlay"></div>';  
-                                echo '          <a href="/BetaCinema_Clone/pages/Trailer/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute" name="PlayTrailer"><i class="bi bi-play-circle-fill"></i></a>';
+                                echo '          <a href="/BetaCinema_Clone/pages/play_trailer.php?movie_id=' . $row['MoviesID'] . '" class="play-button position-absolute" name="PlayTrailer"><i class="bi bi-play-circle-fill"></i></a>';
                                 echo '      </div>';
                                 echo '      <div class="card-body">';
                                 echo '          <h5 class="card-title">' . $row['Title'] . '</h5>';
@@ -268,7 +272,7 @@
                                 echo '          <p class="card-text">' . '<span>Thời lượng: </span>' . $row['Duration'] . ' phút' . '</p>';
                                 if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
                                     if ($selectedCinemaID) {
-                                        echo '      <a href="/BetaCinema_Clone/pages/ChonSuatChieu/lich_chieu.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
+                                        echo '      <a href="/BetaCinema_Clone/pages/lich_chieu.php?cinema_id=' . $selectedCinemaID . '&movie_id=' . $row['MoviesID'] . '" class="btn btn-primary buy-ticket"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</a>';
                                     } else {
                                         echo '      <button class="btn btn-primary buy-ticket" onclick="alert(\'Vui lòng chọn rạp phim trước khi mua vé.\')"><i class="bi bi-ticket-perforated-fill"></i>MUA VÉ</button>';
                                     }

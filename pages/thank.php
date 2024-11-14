@@ -6,7 +6,7 @@
     <title>Thank You</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel='stylesheet' href='thank.css'>
+    <link rel='stylesheet' href='/BetaCinema_Clone/styles/thank.css'>
 </head>
 <body>
     <?php
@@ -44,7 +44,7 @@
         <img class="mb-5" src="/BetaCinema_Clone/assets/logo.png" alt="Logo">
         <h2 class="mb-5">CẢM ƠN BẠN ĐẶT VÉ</h2>
         <h2 class="mb-5">CHÚC BẠN CÓ NHỮNG PHÚT GIÂY VUI VẺ CÙNG BETA</h2>
-        <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn col-12 w-50 mt-3">
+        <a href="/BetaCinema_Clone/pages/index.php" class="btn col-12 w-50 mt-3">
             TRANG CHỦ
         </a>
     </div>

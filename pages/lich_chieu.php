@@ -6,7 +6,7 @@
     <title>Chọn lịch chiếu</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel='stylesheet' href='lich_chieu.css'>
+    <link rel='stylesheet' href='/BetaCinema_Clone/styles/lich_chieu.css'>
 </head>
 <body>
     <?php
@@ -38,7 +38,7 @@
         }
     ?>
     <div class="container">     
-        <form action="/BetaCinema_Clone/pages/Chonghe/chon_ghe.php" method="post" class="p-4">
+        <form action="/BetaCinema_Clone/pages/chon_ghe.php" method="post" class="p-4">
             <input type="hidden" name="cinema_id" value="<?php echo htmlspecialchars($cinema_id); ?>">
             <input type="hidden" name="movie_id" value="<?php echo htmlspecialchars($movie_id); ?>">
 
@@ -59,7 +59,7 @@
                         $dates = [];
                         while ($row = mysqli_fetch_assoc($result)) {
                             $showDate = $row['ShowDate'];
-                            $formattedDate = date("d/m/Y", strtotime($showDate));
+                            $formattedDate = date("d/m/Y - l", strtotime($showDate));
                             if (!in_array($showDate, $dates)) {
                                 $dates[] = $showDate;
                                 echo '<option value="' . htmlspecialchars($showDate) . '">' . htmlspecialchars($formattedDate) . '</option>';
@@ -83,13 +83,18 @@
                 </select>
             </div>
 
-            <button type="submit" class="btn btn-primary w-50 mt-3">
-                ĐỒNG Ý
-            </button>
-
-            <a href="/BetaCinema_Clone/pages/Home/index.php" class="btn btn-back col-12 w-50 mt-3">
-                QUAY LẠI
-            </a>
+            <div class="row">
+                <div class="col">
+                    <a href="/BetaCinema_Clone/pages/index.php" class="btn btn-back col-12 w-100 mt-3">
+                        QUAY LẠI
+                    </a>
+                </div>
+                <div class="col">
+                    <button type="submit" class="btn btn-primary w-100 mt-3">
+                        ĐỒNG Ý
+                    </button>
+                </div>
+            </div>
         </form>
     </div>
 
@@ -108,4 +113,29 @@
         document.getElementById('showdate').dispatchEvent(new Event('change'));
     </script>
 </body>
+<style>
+    .btn{
+        font-size: 20px;
+        text-align: center;
+        transition: 0.5s;
+        background-size: 200% auto;
+        color: white;
+        font-weight: bold;
+        border-radius: 10px;
+    }
+
+    .btn, .btn:hover{
+        background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
+        color: #fff;
+        border: none;
+    }
+
+    .btn:hover {
+        background-position: right center; 
+    }
+
+    .btn-back, .btn-back:hover{
+        background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+    }
+</style>
 </html>

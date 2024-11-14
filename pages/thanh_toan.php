@@ -6,7 +6,7 @@
     <title>Thanh Toán</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel='stylesheet' href='thanh_toan.css'>
+    <link rel='stylesheet' href='/BetaCinema_Clone/styles/thanh_toan.css'>
 </head>
 <body>
     <?php
@@ -26,7 +26,7 @@
     
     <div class="container mt-5">
         <h2 class="text-center mb-5">THANH TOÁN</h2>
-        <form action="/BetaCinema_Clone/pages/Thank/thank.php" method="post" onsubmit="return validatePaymentMethod()">
+        <form action="/BetaCinema_Clone/pages/thank.php" method="post" onsubmit="return validatePaymentMethod()">
             <div class="row">
                 <!-- Movie Information -->
                 <div class="col-12 col-lg-6 mb-4">
