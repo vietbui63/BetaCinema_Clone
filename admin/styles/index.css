@@ -1,0 +1,26 @@
+nav{
+    background-color: #00b4d8;
+}
+
+.nav-item a, .admin{
+    color: #fff;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 25px;
+}
+
+.admin-name{
+    margin-top: 10px;
+}
+
+.bi-box-arrow-left{
+    font-size: 25px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.content {
+    display: none; /* Ẩn nội dung mặc định */
+    padding: 20px;
+}
+

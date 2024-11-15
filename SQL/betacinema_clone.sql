@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 13, 2024 at 06:40 PM
+-- Generation Time: Nov 15, 2024 at 09:25 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -30,7 +30,11 @@ SET time_zone = "+00:00";
 CREATE TABLE `cinemas` (
   `CinemaID` int(11) NOT NULL,
   `CinemaName` varchar(50) NOT NULL,
+  `Address` text NOT NULL,
   `Location` varchar(50) NOT NULL,
+  `Pic` text NOT NULL,
+  `Map` text NOT NULL,
+  `GiaVe` text NOT NULL,
   `Hotline` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -38,12 +42,12 @@ CREATE TABLE `cinemas` (
 -- Dumping data for table `cinemas`
 --
 
-INSERT INTO `cinemas` (`CinemaID`, `CinemaName`, `Location`, `Hotline`) VALUES
-(1, 'Beta Nha Trang', 'Khánh Hoà', '0399475165'),
-(2, 'Beta Thanh Xuân', 'Hà Nội', '0824812878'),
-(3, 'Beta Mỹ Đình', 'Hà Nội', '0866154610'),
-(4, 'Beta Trần Quang Khải', 'TP. Hồ Chí Minh', '1900638362'),
-(5, 'Beta Quang Trung', 'TP. Hồ Chí Minh', '0706075509');
+INSERT INTO `cinemas` (`CinemaID`, `CinemaName`, `Address`, `Location`, `Pic`, `Map`, `GiaVe`, `Hotline`) VALUES
+(1, 'Beta Nha Trang', '10 Hoàng Hoa Thám, phường Lộc Thọ, TP Nha Trang, tỉnh Khánh Hòa.', 'Khánh Hoà', 'https://files.betacorp.vn/media/images/2024/04/05/1165aa02-3b37-4fe2-8237-c65b6f584a8d-144948-050424-38.jpeg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3898.98884118032!2d109.19125987496825!3d12.249034188003858!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31706781803f3585%3A0x96ed6a252df8d7ce!2zMTAgxJAuIEhvw6BuZyBIb2EgVGjDoW0sIEzhu5ljIFRo4buNLCBOaGEgVHJhbmcsIEtow6FuaCBIw7JhIDY1MDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1731569908811!5m2!1svi!2s', 'https://files.betacorp.vn/cms/images/2024/04/03/bang-gia-ve-nt-ve-2d-va-3d-1920x2400-151318-030424-10.png', '0399475165'),
+(2, 'Beta Thanh Xuân', 'Tầng hầm B1, tòa nhà Golden West, Số 2 Lê Văn Thiêm, Nhân Chính, Thanh Xuân, Hà Nội  (cách đường Lê Văn Lương 80m, đối diện số 56 Lê Văn Thiêm) ', 'Hà Nội', 'https://files.betacorp.vn/media/images/2024/04/05/f03ec357-4c2a-4618-bca3-c81e6dc7f38f-145111-050424-90.jpeg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.7571503036174!2d105.79956767516394!3d21.0023696806403!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3135ad5ac9beb0bd%3A0xc4069a08defd1deb!2sChung%20c%C6%B0%20Golden%20West!5e0!3m2!1svi!2s!4v1731570165376!5m2!1svi!2s', 'https://files.betacorp.vn/cms/images/2024/04/03/bang-gia-ve-tx-ve-2d-va-3d-1920x2400-150646-030424-93.png', '0824812878'),
+(3, 'Beta Mỹ Đình', 'Tầng hầm B1, tòa nhà Golden Palace, đường Mễ Trì, quận Nam Từ Liêm, Hà Nội', 'Hà Nội', 'https://files.betacorp.vn/media/images/2024/04/05/f03ec357-4c2a-4618-bca3-c81e6dc7f38f-145111-050424-90.jpeg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3724.5233881558574!2d105.77231507516426!3d21.01173398063335!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x313453209305f15b%3A0xef45eb492b0d2577!2zQmV0YSBDaW5lbWFzIE3hu7kgxJDDrG5o!5e0!3m2!1svi!2s!4v1731570223739!5m2!1svi!2s', 'https://files.betacorp.vn/cms/images/2024/04/03/bang-gia-ve-md-ve-2d-va-3d-1920x2400-1-151421-030424-73.png', '0866154610'),
+(4, 'Beta Trần Quang Khải', 'Tầng 2, Trung tâm văn hóa đa năng IMC, 62 đường Trần Quang Khải, Phường Tân Định, Quận 1, Thành phố Hồ Chí Minh ', 'TP. Hồ Chí Minh', 'https://files.betacorp.vn/media/images/2024/04/05/baaffbf4-e510-4125-935f-2f644ef7d6b9-135617-050424-86.jpeg', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3919.244695016377!2d106.6914625749453!3d10.792561589357106!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x31752948ca60f5e1%3A0x42809199e4fe4dd!2zVHJ1bmcgVMOibSBWxINuIEjDs2EgxJBhIE7Eg25nIGlNQw!5e0!3m2!1svi!2s!4v1731570267518!5m2!1svi!2s', 'https://files.betacorp.vn/cms/images/2024/04/03/bang-gia-ve-imc-tqk-ve-2d-va-3d-1920x2400-144501-030424-13.png', '1900638362'),
+(5, 'Beta Quang Trung', 'số 645 Quang Trung, Phường 11, Quận Gò Vấp, Thành phố Hồ Chí Minh', 'TP. Hồ Chí Minh', 'https://files.betacorp.vn/media/images/2024/04/05/a899ce96-07e0-432a-8961-c43eb6b77ae4-143443-050424-84.png', 'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3918.680976117912!2d106.65826207494598!3d10.835707989316612!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x317529a770bc1fd9%3A0x4929aeac98d08c96!2zNjQ1IMSQLiBRdWFuZyBUcnVuZywgUGjGsOG7nW5nIDExLCBHw7IgVuG6pXAsIEjhu5MgQ2jDrSBNaW5oIDcwMDAwMCwgVmnhu4d0IE5hbQ!5e0!3m2!1svi!2s!4v1731570299895!5m2!1svi!2s', 'https://files.betacorp.vn/media/images/2024/04/23/bang-gia-ve-qt-2-ve-2d-va-3d-1920x2400-101513-230424-98.png', '0706075509');
 
 -- --------------------------------------------------------
 
@@ -141,7 +145,8 @@ CREATE TABLE `payments` (
 
 INSERT INTO `payments` (`PaymentID`, `PaymentDate`, `PaymentMethod`, `UserID`, `MovieTitle`, `CinemaName`, `ShowDate`, `HallName`, `StartTime`, `Seats`, `TotalPrice`) VALUES
 (10, '2024-11-14', 'Thanh toán tại Beta', 8, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-26', 'P2', '13:50:00', 'C1, C2, C3', 210000),
-(28, '2024-11-14', 'Thanh toán tại Beta', 8, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-27', 'P2', '13:50:00', 'D1, D2, D3', 360000);
+(28, '2024-11-14', 'Thanh toán tại Beta', 8, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-27', 'P2', '13:50:00', 'D1, D2, D3', 360000),
+(29, '2024-11-14', 'Thanh toán tại Beta', 8, 'Venom: Kèo Cuối', 'Beta Trần Quang Khải', '2024-11-30', 'P1', '17:00:00', 'A5, B5, C5, D5', 280000);
 
 -- --------------------------------------------------------
 
@@ -182,26 +187,26 @@ INSERT INTO `seats` (`SeatID`, `SeatNumber`, `VIP`, `Couple`, `HallID`) VALUES
 (45, 'D3', '0', '1', 1),
 (46, 'D4', '0', '1', 1),
 (47, 'D5', '0', '1', 1),
-(48, 'A1', '0', '0', 2),
-(49, 'A2', '0', '0', 2),
-(50, 'A3', '0', '0', 2),
-(51, 'A4', '0', '0', 2),
-(52, 'A5', '0', '0', 2),
-(53, 'B1', '0', '0', 2),
-(54, 'B2', '0', '0', 2),
-(55, 'B3', '0', '0', 2),
-(56, 'B4', '0', '0', 2),
-(57, 'B5', '0', '0', 2),
-(58, 'C1', '1', '0', 2),
-(59, 'C2', '1', '0', 2),
-(60, 'C3', '1', '0', 2),
-(61, 'C4', '1', '0', 2),
-(62, 'C5', '1', '0', 2),
-(63, 'D1', '0', '1', 2),
-(64, 'D2', '0', '1', 2),
-(65, 'D3', '0', '1', 2),
-(66, 'D4', '0', '1', 2),
-(67, 'D5', '0', '1', 2);
+(68, 'A1', '0', '0', 2),
+(69, 'A2', '0', '0', 2),
+(70, 'A3', '0', '0', 2),
+(71, 'A4', '0', '0', 2),
+(72, 'A5', '0', '0', 2),
+(73, 'B1', '0', '0', 2),
+(74, 'B2', '0', '0', 2),
+(75, 'B3', '0', '0', 2),
+(76, 'B4', '0', '0', 2),
+(77, 'B5', '0', '0', 2),
+(78, 'C1', '1', '0', 2),
+(79, 'C2', '1', '0', 2),
+(80, 'C3', '1', '0', 2),
+(81, 'C4', '1', '0', 2),
+(82, 'C5', '1', '0', 2),
+(83, 'D1', '0', '1', 2),
+(84, 'D2', '0', '1', 2),
+(85, 'D3', '0', '1', 2),
+(86, 'D4', '0', '1', 2),
+(87, 'D5', '0', '1', 2);
 
 -- --------------------------------------------------------
 
@@ -230,7 +235,55 @@ INSERT INTO `show_times` (`ShowtimeID`, `ShowDate`, `StartTime`, `EndTime`, `Mov
 (6, '2024-11-27', '13:50:00', '15:53:00', 1, 2),
 (7, '2024-11-27', '19:00:00', '21:03:00', 1, 1),
 (9, '2024-11-28', '13:50:00', '15:53:00', 1, 2),
-(10, '2024-11-28', '19:00:00', '21:03:00', 1, 1);
+(10, '2024-11-28', '19:00:00', '21:03:00', 1, 1),
+(11, '2024-11-29', '13:50:00', '15:53:00', 1, 1),
+(12, '2024-11-29', '19:00:00', '21:03:00', 1, 2),
+(13, '2024-11-29', '20:00:00', '22:03:00', 1, 1),
+(14, '2024-11-29', '22:10:00', '00:13:00', 1, 1),
+(15, '2024-11-30', '13:50:00', '15:53:00', 1, 1),
+(16, '2024-11-30', '19:00:00', '21:03:00', 1, 2),
+(17, '2024-12-01', '13:50:00', '15:53:00', 1, 2),
+(18, '2024-12-01', '19:00:00', '21:03:00', 1, 1),
+(19, '2024-11-30', '17:00:00', '19:18:00', 2, 2),
+(20, '2024-11-30', '20:00:00', '22:18:00', 2, 1),
+(21, '2024-12-01', '17:00:00', '19:18:00', 2, 1),
+(22, '2024-12-01', '20:00:00', '22:18:00', 2, 2),
+(25, '2024-11-30', '17:00:00', '18:49:00', 3, 1),
+(26, '2024-11-30', '20:00:00', '21:49:00', 3, 2),
+(27, '2024-12-01', '17:00:00', '18:49:00', 3, 1),
+(28, '2024-12-01', '20:00:00', '21:49:00', 3, 1),
+(29, '2024-11-26', '14:00:00', '16:15:00', 4, 1),
+(30, '2024-11-26', '19:00:00', '21:15:00', 4, 2),
+(31, '2024-11-26', '20:00:00', '22:15:00', 4, 1),
+(32, '2024-11-26', '22:10:00', '00:25:00', 4, 2),
+(33, '2024-11-27', '13:50:00', '16:05:00', 4, 1),
+(34, '2024-11-27', '19:00:00', '21:15:00', 4, 2),
+(35, '2024-11-28', '13:50:00', '16:05:00', 4, 1),
+(36, '2024-11-28', '19:00:00', '21:15:00', 4, 2),
+(37, '2024-11-29', '13:50:00', '16:05:00', 4, 2),
+(38, '2024-11-29', '19:00:00', '21:15:00', 4, 1),
+(39, '2024-11-29', '20:00:00', '22:15:00', 4, 2),
+(40, '2024-11-29', '22:10:00', '00:25:00', 4, 2),
+(41, '2024-11-30', '13:50:00', '16:05:00', 4, 2),
+(42, '2024-11-30', '19:00:00', '21:15:00', 4, 1),
+(43, '2024-12-01', '13:50:00', '16:05:00', 4, 1),
+(44, '2024-12-01', '19:00:00', '21:15:00', 4, 2),
+(45, '2024-11-30', '17:00:00', '18:50:00', 5, 2),
+(46, '2024-11-30', '20:00:00', '21:50:00', 5, 1),
+(47, '2024-12-01', '17:00:00', '18:50:00', 5, 2),
+(48, '2024-12-01', '20:00:00', '21:50:00', 5, 2),
+(49, '2024-11-30', '17:00:00', '18:51:00', 6, 1),
+(50, '2024-11-30', '20:00:00', '21:51:00', 6, 2),
+(51, '2024-12-01', '17:00:00', '18:51:00', 6, 1),
+(52, '2024-12-01', '20:00:00', '21:51:00', 6, 1),
+(53, '2024-11-30', '17:00:00', '18:53:00', 7, 2),
+(54, '2024-11-30', '20:00:00', '21:53:00', 7, 1),
+(55, '2024-12-01', '17:00:00', '18:53:00', 7, 2),
+(56, '2024-12-01', '20:00:00', '21:53:00', 7, 2),
+(57, '2024-11-30', '17:00:00', '18:50:00', 8, 1),
+(58, '2024-11-30', '20:00:00', '21:50:00', 8, 1),
+(59, '2024-12-01', '17:00:00', '18:50:00', 8, 1),
+(60, '2024-12-01', '20:00:00', '21:50:00', 8, 1);
 
 -- --------------------------------------------------------
 
@@ -254,8 +307,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Fullname`, `Email`, `Pass_word`, `Dob`, `Sex`, `Phone`, `Role`) VALUES
-(8, 'Nguyễn Huy Toàn', 'toan.nh.63cntt@ntu.edu.vn', '$2y$10$hFXXuA/ydOES7/KKFqAqx.aB6OaQfAEYOiRLpU.lRNutmnzMVFg.6', '2024-10-30', 'Nam', '123', 0),
-(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$O0xgWOOv3uKUWLDeGxkixuZ0c6GJGyfNu5V45xVDc82Tu0Oo1FQWW', '2024-11-24', 'Nam', '0935941419', 1);
+(8, 'Nguyễn Huy Toàn', 'toan.nh.63cntt@ntu.edu.vn', '$2y$10$JZpN51oBCeJ3lklaJDhHf.LxHPRgeQD96Vv0DZkuRO.UK2DIQ8Sg6', '2003-03-14', 'Khác', '0935941419', 0),
+(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$O0xgWOOv3uKUWLDeGxkixuZ0c6GJGyfNu5V45xVDc82Tu0Oo1FQWW', '2024-11-24', 'Nam', '0935941419', 1),
+(11, 'test', 'test@gmail.com', '$2y$10$gjXp7uw6SqCwxVYky6D3fOUSXjb0HyOuYeCxvU0eTcOkNW1hdMxxW', '2024-11-13', 'Nam', '999999999', 1);
 
 --
 -- Indexes for dumped tables
@@ -334,25 +388,25 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT for table `seats`
 --
 ALTER TABLE `seats`
-  MODIFY `SeatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=68;
+  MODIFY `SeatID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=88;
 
 --
 -- AUTO_INCREMENT for table `show_times`
 --
 ALTER TABLE `show_times`
-  MODIFY `ShowtimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `ShowtimeID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=61;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Constraints for dumped tables

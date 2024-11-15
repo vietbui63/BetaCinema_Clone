@@ -17,6 +17,13 @@
     function refreshCaptcha() {
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
     }
+
+    setTimeout(function() {
+        var messageElement = document.getElementById("error");
+        if (messageElement) {
+            messageElement.style.display = "none";
+        }
+    }, 2000); 
 </script>
 <body>
     <?php
@@ -46,7 +53,13 @@
                         $_SESSION['Fullname'] = $user['Fullname'];
                         $_SESSION['UserID'] = $user['UserID'];
                         $_SESSION['Email'] = $user['Email'];
-                        header("Location: /BetaCinema_Clone/pages/index.php");
+
+                        if ($user['Role'] == 1) {
+                            header("Location: /BetaCinema_Clone/pages/index.php");
+                        } else if ($user['Role'] == 0) {
+                            header("Location: /BetaCinema_Clone/admin/index.php");
+                        }
+
                         exit();
                     } else {
                         $error = 'Email hoặc mật khẩu không đúng!';
@@ -99,7 +112,7 @@
                     <button type="submit" class="btn btn-submit col-12">ĐĂNG NHẬP</button>
                 </div>
             </div>
-            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center'>$error</div>"; } ?>
+            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>"; } ?>
         </form>
     </div>
 </body>

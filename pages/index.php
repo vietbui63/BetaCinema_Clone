@@ -366,5 +366,11 @@
         min-height: 31px;
         font-size: 15px;
     }
+
+    .nav-tabs .nav-link {
+        font-weight: bold;
+        color: #333;
+        font-size: 25px;
+    }
 </style>
 </html>
