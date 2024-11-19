@@ -57,7 +57,7 @@
                         if ($user['Role'] == 1) {
                             header("Location: /BetaCinema_Clone/pages/index.php");
                         } else if ($user['Role'] == 0) {
-                            header("Location: /BetaCinema_Clone/admin/index.php");
+                            header("Location: /BetaCinema_Clone/admin/pages/index.php");
                         }
 
                         exit();
