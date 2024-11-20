@@ -62,8 +62,12 @@
         </div>
     </nav>
 
+    <div id="content-default" class="content">
+        <img src="/BetaCinema_Clone/assets/admin.png" alt="Default" class="img-fluid mx-auto d-block">
+    </div>
+
     <div id="content-user" class="content" style="display:none;">
-        <?php include './users.php'; ?>
+        <?php include './users/users.php'; ?>
     </div>
     <div id="content-movies" class="content" style="display:none;">
         <?php include './movies.php'; ?>
@@ -84,4 +88,23 @@
         <?php include './payments.php'; ?>
     </div>
 </body>
+<style>
+    body{
+        background-color: #e3f2fd;
+    }
+
+    .content {
+        display: none;
+    }
+
+    #content-default {
+        display: block;
+        text-align: center;
+    }
+
+    #content-default img {
+        max-width: 50%;
+        height: auto;
+    }
+</style>
 </html>
