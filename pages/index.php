@@ -48,8 +48,6 @@
                         <select name="cinemas" id="cinemas" class="nav-link" style="margin-right: 50px" onchange="submitForm()">
                             <option value="" selected>CHỌN RẠP PHIM</option>
                             <?php
-                                session_start();
-
                                 $query = "SELECT * FROM `cinemas` ORDER BY `Location`";
                                 $result = mysqli_query($connect, $query);
 
