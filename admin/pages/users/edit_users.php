@@ -97,7 +97,7 @@
                 </div>
                 <div class="row text-center">
                     <button type="submit" class="btn btn-warning mt-4">CẬP NHẬT</button>
-                    <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-warning mt-3">QUAY LẠI</a>
+                    <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-warning mt-3">QUAY LẠI</a> 
                 </div>
             </div>
         </form>

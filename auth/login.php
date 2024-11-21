@@ -15,6 +15,7 @@
 <script>
     /* REFRESH CAPTCHA */
     function refreshCaptcha() {
+        event.preventDefault();
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
     }
 
