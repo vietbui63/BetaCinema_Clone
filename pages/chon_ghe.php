@@ -105,7 +105,7 @@
 
                             // Hiển thị ghế
                             $counter = 0;
-                            echo '<div class="d-flex flex-wrap justify-content-center gap-3">';
+                            echo '<div class="d-flex flex-wrap justify-content-center gap-2">';
                             while ($row_seat = mysqli_fetch_assoc($result_seats)) {
                                 $seat_number = htmlspecialchars($row_seat['SeatNumber']);
                                 $is_vip = $row_seat['VIP'];
@@ -133,10 +133,10 @@
 
                                 // Tạo nút hiển thị ghế
                                 if ($counter % 5 == 0 && $counter > 0) {
-                                    echo '</div><div class="d-flex flex-wrap justify-content-center gap-3">';
+                                    echo '</div><div class="d-flex flex-wrap justify-content-center gap-2">';
                                 }
 
-                                echo '<div class="col-4 col-sm-3 col-md-2 mb-3">';
+                                echo '<div class="col-sm-3 col-md-2 mb-3 w-10">';
                                 echo '<button type="button" class="btn ' . $btn_class . ' w-100" onclick="toggleSeat(this, \'' . $seat_type . '\', \'' . $seat_number . '\')" ' . $disabled . '>' . $seat_number . '</button>';
                                 echo '</div>';
 
@@ -145,11 +145,27 @@
                             echo '</div>';
                         ?>
 
-                        <div class="row kindofseat">
-                            <p class="col mt-4 me-5" style="background-color: #6c757d">Ghế Thường <br>(45.000 VNĐ)</p>
-                            <p class="col mt-4 me-5" style="background-color: #0dcaf0">Ghế VIP <br>(70.000 VNĐ)</p>
-                            <p class="col mt-4 me-5" style="background-color: #ffc107">Ghế Couple <br>(120.000 VNĐ)</p>
-                            <p class="col mt-4" style="background-color: #c45761">Ghế Đã Đặt</p>
+                        <div class="row" style="margin-left: 1px">
+                            <div class="col-6 col-md-3">
+                                <p class="badge bg-secondary py-3 w-100">
+                                    Ghế Thường <br>(45.000 VNĐ)
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3">
+                                <p class="badge bg-info text-dark py-3 w-100">
+                                    Ghế VIP <br>(70.000 VNĐ)
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3 mt-3 mt-md-0">
+                                <p class="badge bg-warning text-dark py-3 w-100">
+                                    Ghế Couple <br>(120.000 VNĐ)
+                                </p>
+                            </div>
+                            <div class="col-6 col-md-3 mt-3 mt-md-0">
+                                <p class="badge bg-danger py-3 w-100">
+                                    Ghế <br> Đã Đặt
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
