@@ -14,7 +14,7 @@
         $result = mysqli_query($connect, $query);
     ?>
     <div class="container mt-5">
-        <a href="/BetaCinema_Clone/admin/pages/users/add_users.php" class="btn btn-success text-center mt-5">THÊM MỚI USER</a>
+        <a href="/BetaCinema_Clone/admin/pages/users/add_users.php" class="btn btn-success text-center">THÊM MỚI USER</a>
         <table class="table table-info table-bordered border-info table-striped mt-3">
             <thead>
                 <tr class="text-center">
