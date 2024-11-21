@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 15, 2024 at 09:25 AM
+-- Generation Time: Nov 21, 2024 at 09:20 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -109,7 +109,7 @@ INSERT INTO `movies` (`MoviesID`, `Title`, `Type`, `Genre`, `Duration`, `Release
 (5, 'Linh Miêu', '2D Phụ đề', 'Kinh dị', 110, '2024-11-22', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f14%2f400x633%2D114106%2D141024%2D83.jpg', 'https://www.youtube.com/watch?v=4oxoPMxBO6s&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim đang chiếu', 0),
 (6, 'Tee Yod: Quỷ Ăn Tạng Phần 2', '2D Phụ đề', 'Kinh dị', 111, '2024-10-18', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f15%2f400wx633h%2D3%2D163518%2D151024%2D56.jpg', 'https://www.youtube.com/watch?v=Tx5JuN-5n8U&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim đang chiếu', 1),
 (7, 'Cười Xuyên Biên Giới', '2D Phụ đề', 'Hài hước', 113, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f11%2f08%2f400wx633h%2D1%2D154452%2D081124%2D12.jpg', 'https://www.youtube.com/watch?v=_IK-eb2AbKQ&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim đang chiếu', 0),
-(8, 'Học Viện Anh Hùng: You\'re Next', '2D Phụ đề', 'Hoạt hình', 110, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f15%2fscreenshot%2D2024%2D10%2D15%2D145811%2D145844%2D151024%2D25.png', 'https://www.youtube.com/watch?v=O_JcwpDergM', 'Phim đang chiếu', 1),
+(8, 'Học Viện Anh Hùng: You are Next', '2D Phụ đề', 'Hoạt hình', 110, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f15%2fscreenshot%2D2024%2D10%2D15%2D145811%2D145844%2D151024%2D25.png', 'https://www.youtube.com/watch?v=O_JcwpDergM', 'Phim đang chiếu', 1),
 (9, 'Cu Li Không Bao Giờ Khóc', '2D Phụ đề', 'Kịch', 93, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f22%2fscreenshot%2D2024%2D10%2D22%2D134228%2D134311%2D221024%2D56.png', 'https://www.youtube.com/watch?v=kMjlJkmt5nk&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim sắp chiếu', 1),
 (10, 'Rebellious', '2D Phụ đề', 'Hoạt hình', 94, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f16%2fscreenshot%2D2024%2D10%2D16%2D151244%2D151347%2D161024%2D13.png', 'https://www.youtube.com/watch?v=98GOZuXSWLY&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim sắp chiếu', 1),
 (11, 'Võ Sĩ Giác Đấu II', '2D Phụ đề', 'Hành động, Hài hước', 120, '2024-11-15', 'https://files.betacorp.vn/media%2fimages%2f2024%2f10%2f23%2f151124%2Dgladiator%2Dii%2D135227%2D231024%2D46.jpg', 'https://www.youtube.com/watch?v=4rgYUipGJNo&embeds_referring_euri=https%3A%2F%2Fbetacinemas.vn%2F&source_ve_path=Mjg2NjY', 'Phim sắp chiếu', 1),
@@ -146,7 +146,10 @@ CREATE TABLE `payments` (
 INSERT INTO `payments` (`PaymentID`, `PaymentDate`, `PaymentMethod`, `UserID`, `MovieTitle`, `CinemaName`, `ShowDate`, `HallName`, `StartTime`, `Seats`, `TotalPrice`) VALUES
 (10, '2024-11-14', 'Thanh toán tại Beta', 8, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-26', 'P2', '13:50:00', 'C1, C2, C3', 210000),
 (28, '2024-11-14', 'Thanh toán tại Beta', 8, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-27', 'P2', '13:50:00', 'D1, D2, D3', 360000),
-(29, '2024-11-14', 'Thanh toán tại Beta', 8, 'Venom: Kèo Cuối', 'Beta Trần Quang Khải', '2024-11-30', 'P1', '17:00:00', 'A5, B5, C5, D5', 280000);
+(40, '2024-11-21', 'Thanh toán tại Beta', 9, 'Thần Dược', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'B2, B3, B4', 135000),
+(46, '2024-11-21', 'Thanh toán tại Beta', 9, 'Cười Xuyên Biên Giới', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'A2, A3, A4', 135000),
+(47, '2024-11-21', 'Thanh toán tại Beta', 9, 'Venom: Kèo Cuối', 'Beta Nha Trang', '2024-11-30', 'P1', '17:00:00', 'A1, A2, A3', 135000),
+(54, '2024-11-21', 'Thanh toán tại Beta', 9, 'Linh Miêu', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'D3, D4, D5', 360000);
 
 -- --------------------------------------------------------
 
@@ -281,7 +284,7 @@ INSERT INTO `show_times` (`ShowtimeID`, `ShowDate`, `StartTime`, `EndTime`, `Mov
 (55, '2024-12-01', '17:00:00', '18:53:00', 7, 2),
 (56, '2024-12-01', '20:00:00', '21:53:00', 7, 2),
 (57, '2024-11-30', '17:00:00', '18:50:00', 8, 1),
-(58, '2024-11-30', '20:00:00', '21:50:00', 8, 1),
+(58, '2024-11-30', '20:00:00', '21:50:00', 8, 2),
 (59, '2024-12-01', '17:00:00', '18:50:00', 8, 1),
 (60, '2024-12-01', '20:00:00', '21:50:00', 8, 1);
 
@@ -299,7 +302,7 @@ CREATE TABLE `users` (
   `Dob` date NOT NULL,
   `Sex` enum('Nam','Nữ','Khác') NOT NULL,
   `Phone` varchar(50) NOT NULL,
-  `Role` int(11) NOT NULL DEFAULT 1
+  `Role` enum('0','1') NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -307,9 +310,8 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`UserID`, `Fullname`, `Email`, `Pass_word`, `Dob`, `Sex`, `Phone`, `Role`) VALUES
-(8, 'Nguyễn Huy Toàn', 'toan.nh.63cntt@ntu.edu.vn', '$2y$10$JZpN51oBCeJ3lklaJDhHf.LxHPRgeQD96Vv0DZkuRO.UK2DIQ8Sg6', '2003-03-14', 'Khác', '0935941419', 0),
-(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$O0xgWOOv3uKUWLDeGxkixuZ0c6GJGyfNu5V45xVDc82Tu0Oo1FQWW', '2024-11-24', 'Nam', '0935941419', 1),
-(11, 'test', 'test@gmail.com', '$2y$10$gjXp7uw6SqCwxVYky6D3fOUSXjb0HyOuYeCxvU0eTcOkNW1hdMxxW', '2024-11-13', 'Nam', '999999999', 1);
+(8, 'Nguyễn Huy Toàn', 'toan.nh.63cntt@ntu.edu.vn', '$2y$10$JZpN51oBCeJ3lklaJDhHf.LxHPRgeQD96Vv0DZkuRO.UK2DIQ8Sg6', '2003-03-14', 'Khác', '0935941419', '0'),
+(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$O0xgWOOv3uKUWLDeGxkixuZ0c6GJGyfNu5V45xVDc82Tu0Oo1FQWW', '2024-11-24', 'Nam', '0935941419', '1');
 
 --
 -- Indexes for dumped tables
@@ -388,7 +390,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 
 --
 -- AUTO_INCREMENT for table `seats`
@@ -406,7 +408,7 @@ ALTER TABLE `show_times`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Constraints for dumped tables
