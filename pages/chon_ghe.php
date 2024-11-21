@@ -66,55 +66,90 @@
         }
     ?>
 
-    <div class="container mt-5">
+    <div class="container">
         <form action="/BetaCinema_Clone/pages/thanh_toan.php" method="post">
             <div class="row">
                 <!-- CHỌN GHẾ -->
                 <div class="col-12 col-md-6 mb-4 mb-md-0 mt-5">
                     <div class="row p-3">
                         <img src="/BetaCinema_Clone/assets/ic-screen.png" alt="Logo" class="img-fluid">
-                        <p class="text-start mb-4" style="font-size: 20px">Lối Vào</p>
+                        <p class="text-start mb-4 mt-5" style="font-size: 20px">Lối Vào</p>
                         <?php
-                            $counter = 0; 
-                            echo '<div class="d-flex flex-wrap justify-content-center gap-3">'; 
+                            $query_payment = "SELECT Seats FROM `payments` WHERE 
+                                            MovieTitle = '$movie_title' AND 
+                                            CinemaName = '$cinema_name' AND 
+                                            ShowDate = '$show_date' AND 
+                                            HallName = '$hall_name' AND 
+                                            StartTime = '$start_time'";
+                            $result_payment = mysqli_query($connect, $query_payment);
+
+                            // Tạo mảng lưu tất cả các ghế đã đặt
+                            $booked_seats = [];
+                            if ($result_payment) {
+                                while ($row_payment = mysqli_fetch_assoc($result_payment)) {
+                                    $seats_string = $row_payment['Seats']; 
+                                    $seats_array = explode(", ", $seats_string); 
+                                    $booked_seats = array_merge($booked_seats, $seats_array); 
+                                }
+                            } else {
+                                die("Query failed: " . mysqli_error($connect));
+                            }
+
+                            // Truy vấn lấy tất cả ghế từ bảng seats theo HallID
+                            $query_seats = "SELECT * FROM `seats` WHERE HallID = '$hall_id'";
+                            $result_seats = mysqli_query($connect, $query_seats);
+
+                            if (!$result_seats) {
+                                die("Query failed: " . mysqli_error($connect));
+                            }
+
+                            // Hiển thị ghế
+                            $counter = 0;
+                            echo '<div class="d-flex flex-wrap justify-content-center gap-3">';
                             while ($row_seat = mysqli_fetch_assoc($result_seats)) {
                                 $seat_number = htmlspecialchars($row_seat['SeatNumber']);
-                                $is_vip = $row_seat['VIP']; 
-                                $is_couple = $row_seat['Couple']; 
+                                $is_vip = $row_seat['VIP'];
+                                $is_couple = $row_seat['Couple'];
 
+                                // Kiểm tra loại ghế
                                 if ($is_vip == 1) {
-                                    $btn_class = 'btn-info'; // GHẾ VIP
+                                    $btn_class = 'btn-info'; // Ghế VIP
                                     $seat_type = 'vip';
                                 } elseif ($is_couple == 1) {
-                                    $btn_class = 'btn-warning'; // GHẾ COUPLE
+                                    $btn_class = 'btn-warning'; // Ghế Couple
                                     $seat_type = 'couple';
                                 } else {
-                                    $btn_class = 'btn-secondary'; // GHẾ THƯỜNG
+                                    $btn_class = 'btn-secondary'; // Ghế Thường
                                     $seat_type = 'regular';
                                 }
 
+                                // Kiểm tra nếu ghế đã được đặt
+                                if (in_array($seat_number, $booked_seats)) {
+                                    $btn_class = 'btn-danger'; // Ghế Đã Đặt
+                                    $disabled = 'disabled';   // Không thể chọn
+                                } else {
+                                    $disabled = ''; // Ghế có thể chọn
+                                }
+
+                                // Tạo nút hiển thị ghế
                                 if ($counter % 5 == 0 && $counter > 0) {
-                                    echo '</div><div class="d-flex flex-wrap justify-content-center gap-3">'; 
+                                    echo '</div><div class="d-flex flex-wrap justify-content-center gap-3">';
                                 }
 
                                 echo '<div class="col-4 col-sm-3 col-md-2 mb-3">';
-                                echo '<button type="button" class="btn ' . $btn_class . ' w-100" onclick="toggleSeat(this, \'' . $seat_type . '\', \'' . $seat_number . '\')">' . $seat_number . '</button>';
+                                echo '<button type="button" class="btn ' . $btn_class . ' w-100" onclick="toggleSeat(this, \'' . $seat_type . '\', \'' . $seat_number . '\')" ' . $disabled . '>' . $seat_number . '</button>';
                                 echo '</div>';
-                                $counter++; 
+
+                                $counter++;
                             }
-                            echo '</div>'; 
+                            echo '</div>';
                         ?>
 
                         <div class="row kindofseat">
-                            <div class="col mt-4 me-5" style="background-color: #6c757d">
-                                <p>Ghế thường <br>(45.000 VNĐ)</p>
-                            </div>
-                            <div class="col mt-4 me-5" style="background-color: #0dcaf0">
-                                <p>Ghế VIP <br>(70.000 VNĐ)</p>
-                            </div>
-                            <div class="col mt-4" style="background-color: #ffc107">
-                                <p>Ghế Couple <br>(120.000 VNĐ)</p>
-                            </div>
+                            <p class="col mt-4 me-5" style="background-color: #6c757d">Ghế Thường <br>(45.000 VNĐ)</p>
+                            <p class="col mt-4 me-5" style="background-color: #0dcaf0">Ghế VIP <br>(70.000 VNĐ)</p>
+                            <p class="col mt-4 me-5" style="background-color: #ffc107">Ghế Couple <br>(120.000 VNĐ)</p>
+                            <p class="col mt-4" style="background-color: #c45761">Ghế Đã Đặt</p>
                         </div>
                     </div>
                 </div>
