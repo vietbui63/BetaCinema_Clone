@@ -39,7 +39,7 @@
                             WHERE UserID=$id";
 
             if (mysqli_query($connect, $updateQuery)) {
-                header("Location: users.php?message=User updated successfully.");
+                header("Location: /BetaCinema_Clone/admin/pages/index.php?message=User updated successfully.");
                 exit();
             } else {
                 $error = "Error: " . mysqli_error($connect);
