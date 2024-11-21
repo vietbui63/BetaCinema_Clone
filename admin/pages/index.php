@@ -66,7 +66,7 @@
         <?php include './users/users.php'; ?>
     </div>
     <div id="content-movies" class="content" style="display:none;">
-        <?php include './movies.php'; ?>
+        <?php include './movies/movies.php'; ?>
     </div>
     <div id="content-cinemas" class="content" style="display:none;">
         <?php include './cinemas.php'; ?>

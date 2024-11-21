@@ -9,6 +9,7 @@
 </head>
 <body>
     <?php
+        require 'config.php';
         $query = "SELECT * FROM users";
         $result = mysqli_query($connect, $query);
     ?>
