@@ -48,7 +48,7 @@
                 $mail->Host       = 'smtp.gmail.com';  
                 $mail->SMTPAuth   = true;
                 $mail->Username   = 'betacinema.clone@gmail.com'; 
-                $mail->Password   = 'hqvqbvtopyuebjby'; 
+                $mail->Password   = '*************'; 
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
