@@ -24,70 +24,68 @@
         $total_price = htmlspecialchars($_POST['total_price']);   
     ?>
     
-    <div class="container mt-5 w-75">
+    <div class="container w-75">
         <h2 class="text-center mb-5">THANH TOÁN</h2>
         <form action="/BetaCinema_Clone/pages/thank.php" method="post" onsubmit="return validatePaymentMethod()">
-            <div class="row">
+            <div class="row d-flex justify-content-center">
                 <!-- THÔNG TIN PHIM -->
-                <div class="col-12 col-lg-6 mb-4">
-                    <div class="table-responsive">
-                        <table class="table table-borderless">
-                            <tr>
-                                <th>Tên phim</th>
-                                <td><?php echo $movie_title; ?></td>
-                                <input type="hidden" name="movie_title" value="<?php echo $movie_title; ?>">
-                            </tr>
-                            <tr>
-                                <th>Chế độ</th>
-                                <td><?php echo $movie_type; ?></td>
-                                <input type="hidden" name="movie_type" value="<?php echo $movie_type; ?>">
-                            </tr>
-                            <tr>
-                                <th>Thể loại</th>
-                                <td><?php echo $movie_genra; ?></td>
-                                <input type="hidden" name="movie_genra" value="<?php echo $movie_genra; ?>">
-                            </tr>
-                            <tr>
-                                <th>Thời lượng</th>
-                                <td><?php echo $movie_duration; ?> phút</td>
-                                <input type="hidden" name="movie_duration" value="<?php echo $movie_duration; ?>">
-                            </tr>
-                            <tr>
-                                <th>Rạp chiếu</th>
-                                <td><?php echo $cinema_name; ?></td>
-                                <input type="hidden" name="cinema_name" value="<?php echo $cinema_name; ?>">
-                            </tr>
-                            <tr>
-                                <th>Ngày chiếu</th>
-                                <td><?php echo date("d/m/Y", strtotime($show_date)); ?></td>
-                                <input type="hidden" name="show_date" value="<?php echo $show_date; ?>">
-                            </tr>
-                            <tr>
-                                <th>Giờ chiếu</th>
-                                <td><?php echo date("H:i", strtotime($start_time)); ?></td>
-                                <input type="hidden" name="start_time" value="<?php echo $start_time; ?>">
-                            </tr>
-                            <tr>
-                                <th>Phòng chiếu</th>
-                                <td><?php echo $hall_name; ?></td>
-                                <input type="hidden" name="hall_name" value="<?php echo $hall_name; ?>">
-                            </tr>
-                            <tr>
-                                <th>Ghế ngồi</th>
-                                <td><?php echo $selected_seats; ?></td>
-                                <input type="hidden" name="selected_seats" value="<?php echo $selected_seats; ?>">
-                            </tr>
-                            <tr>
-                                <th>Tổng giá</th>
-                                <td><?php echo $total_price; ?></td>
-                                <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
-                            </tr>
-                        </table>
-                    </div>
+                <div class="col-12 col-lg-5">
+                    <table class="table">
+                        <tr>
+                            <th>Tên phim</th>
+                            <td><?php echo $movie_title; ?></td>
+                            <input type="hidden" name="movie_title" value="<?php echo $movie_title; ?>">
+                        </tr>
+                        <tr>
+                            <th>Chế độ</th>
+                            <td><?php echo $movie_type; ?></td>
+                            <input type="hidden" name="movie_type" value="<?php echo $movie_type; ?>">
+                        </tr>
+                        <tr>
+                            <th>Thể loại</th>
+                            <td><?php echo $movie_genra; ?></td>
+                            <input type="hidden" name="movie_genra" value="<?php echo $movie_genra; ?>">
+                        </tr>
+                        <tr>
+                            <th>Thời lượng</th>
+                            <td><?php echo $movie_duration; ?> phút</td>
+                            <input type="hidden" name="movie_duration" value="<?php echo $movie_duration; ?>">
+                        </tr>
+                        <tr>
+                            <th>Rạp chiếu</th>
+                            <td><?php echo $cinema_name; ?></td>
+                            <input type="hidden" name="cinema_name" value="<?php echo $cinema_name; ?>">
+                        </tr>
+                        <tr>
+                            <th>Ngày chiếu</th>
+                            <td><?php echo date("d/m/Y", strtotime($show_date)); ?></td>
+                            <input type="hidden" name="show_date" value="<?php echo $show_date; ?>">
+                        </tr>
+                        <tr>
+                            <th>Giờ chiếu</th>
+                            <td><?php echo date("H:i", strtotime($start_time)); ?></td>
+                            <input type="hidden" name="start_time" value="<?php echo $start_time; ?>">
+                        </tr>
+                        <tr>
+                            <th>Phòng chiếu</th>
+                            <td><?php echo $hall_name; ?></td>
+                            <input type="hidden" name="hall_name" value="<?php echo $hall_name; ?>">
+                        </tr>
+                        <tr>
+                            <th>Ghế ngồi</th>
+                            <td><?php echo $selected_seats; ?></td>
+                            <input type="hidden" name="selected_seats" value="<?php echo $selected_seats; ?>">
+                        </tr>
+                        <tr>
+                            <th>Tổng giá</th>
+                            <td><?php echo $total_price; ?></td>
+                            <input type="hidden" name="total_price" value="<?php echo $total_price; ?>">
+                        </tr>
+                    </table>        
                 </div>
 
                 <!-- PHƯƠNG THỨC THANH TOÁN -->
-                <div class="col-12 col-lg-6 mt-5">
+                <div class="col-12 col-lg-5 mt-5">
                     <div class="text-center">
                         <h5 class="mb-4">PHƯƠNG THỨC THANH TOÁN</h5>
                     </div>
@@ -108,7 +106,7 @@
                             <input type="radio" class="form-check-input" id="cod" name="payment_method" value="Thanh toán tại Beta">
                             <label class="form-check-label d-block" for="cod">
                                 <img src="/BetaCinema_Clone/assets/cart.png" alt="Thanh toán tại Beta" class="img-fluid mb-2" style="max-width: 100px;">
-                                <span>Thanh toán tại Beta</span>
+                                <br><span>Thanh toán tại Beta</span>
                             </label>
                         </div>
                     </div>
@@ -127,7 +125,6 @@
             </div>
         </form>
     </div>
-
 
     <script>
         function validatePaymentMethod() {

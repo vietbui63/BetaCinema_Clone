@@ -56,3 +56,23 @@ function toggleSeat(button, seatType, seatNumber) {
         updateDisplay(seatType, seatNumber, 'add');
     }
 }
+
+// ĐẾM NGƯỢC 10P
+let countdownTime = 600; 
+
+function updateCountdown() {
+    const minutes = Math.floor(countdownTime / 60);
+    const seconds = countdownTime % 60;
+
+    document.getElementById('countdown-timer').textContent = 
+        `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+
+    if (countdownTime === 0) {
+        clearInterval(timerInterval); 
+        window.location.href = 'index.php'; 
+    }
+
+    countdownTime--; 
+}
+
+const timerInterval = setInterval(updateCountdown, 1000);
