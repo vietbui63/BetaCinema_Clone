@@ -47,9 +47,9 @@
                 echo "<td>" . htmlspecialchars($row['status']) . "</td>";
                 echo "<td>" . htmlspecialchars($row['SpecialShow']) . "</td>";
                 echo "<td>
-                                <a href='/BetaCinema_Clone/admin/pages/movies/edit_movies.php?movie_id=" . htmlspecialchars($row['MoviesID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
-                                <a href='/BetaCinema_Clone/admin/pages/movies/delete_movies.php?movie_id=" . htmlspecialchars($row['MoviesID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá movie này không?');\">XOÁ</a>
-                            </td>";
+                        <a href='/BetaCinema_Clone/admin/pages/movies/edit_movies.php?movie_id=" . htmlspecialchars($row['MoviesID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
+                        <a href='/BetaCinema_Clone/admin/pages/movies/delete_movies.php?movie_id=" . htmlspecialchars($row['MoviesID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá movie này không?');\">XOÁ</a>
+                    </td>";
                 echo "</tr>";
             }
             ?>
@@ -62,7 +62,7 @@
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 150px;
     }
 
     tbody td {

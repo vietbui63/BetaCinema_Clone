@@ -62,50 +62,50 @@
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
                         <input type="text" class="form-control" id="title" name="title"
-                            value="<?= htmlspecialchars($movie['Title']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Title']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="type" class="form-label">Type</label>
                         <input type="text" class="form-control" id="type" name="type"
-                            value="<?= htmlspecialchars($movie['Type']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Type']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="genre" class="form-label">Genre</label>
                         <input type="text" class="form-control" id="genre" name="genre"
-                            value="<?= htmlspecialchars($movie['Genre']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Genre']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="duration" class="form-label">Duration</label>
                         <input type="number" class="form-control" id="duration" name="duration"
-                            value="<?= htmlspecialchars($movie['Duration']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Duration']) ?>">
                     </div>
                 </div>
                 <div class="col">
                     <div class="mb-3">
                         <label for="release_date" class="form-label">Release Date</label>
                         <input type="date" class="form-control" id="release_date" name="release_date"
-                            value="<?= htmlspecialchars($movie['ReleaseDate']) ?>" required>
+                            value="<?= htmlspecialchars($movie['ReleaseDate']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="pic" class="form-label">Picture URL</label>
                         <input type="text" class="form-control" id="pic" name="pic"
-                            value="<?= htmlspecialchars($movie['Pic']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Pic']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="trailer" class="form-label">Trailer URL</label>
                         <input type="text" class="form-control" id="trailer" name="trailer"
-                            value="<?= htmlspecialchars($movie['Trailer']) ?>" required>
+                            value="<?= htmlspecialchars($movie['Trailer']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="status" class="form-label">Status</label>
-                        <select class="form-control" id="status" name="status" required>
+                        <select class="form-control" id="status" name="status">
                             <option value="Phim đang chiếu" <?php if ($movie['status'] == 'Phim đang chiếu') echo 'selected'; ?>>Phim đang chiếu</option>
                             <option value="Phim sắp chiếu" <?php if ($movie['status'] == 'Phim sắp chiếu') echo 'selected'; ?>>Phim sắp chiếu</option>
                         </select>
                     </div>
                     <div class="mb-3">
                         <label for="special_show" class="form-label">Special Show</label>
-                        <select class="form-control" id="special_show" name="special_show" required>
+                        <select class="form-control" id="special_show" name="special_show">
                             <option value="0" <?php if ($movie['SpecialShow'] == '0') echo 'selected'; ?>>0</option>
                             <option value="1" <?php if ($movie['SpecialShow'] == '1') echo 'selected'; ?>>1</option>
                         </select>

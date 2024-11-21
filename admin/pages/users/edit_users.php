@@ -59,19 +59,21 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="fullname" class="form-label">Họ tên</label>
-                        <input type="text" class="form-control" id="fullname" name="fullname" value="<?= htmlspecialchars($user['Fullname']) ?>" required>
+                        <input type="text" class="form-control" id="fullname" name="fullname" value="<?= htmlspecialchars($user['Fullname']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['Email']) ?>" required>
+                        <input type="email" class="form-control" id="email" name="email" value="<?= htmlspecialchars($user['Email']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="password" class="form-label">Mật khẩu</label>
-                        <input type="password" class="form-control" id="password" name="password" value="<?= htmlspecialchars($user['Pass_word']) ?>" required>
+                        <input type="password" class="form-control" id="password" name="password" value="<?= htmlspecialchars($user['Pass_word']) ?>" 
+                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                            title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
                     </div>
                     <div class="mb-3">
                         <label for="role" class="form-label">Role</label>
-                        <select class="form-control" id="role" name="role" required>
+                        <select class="form-control" id="role" name="role">
                             <option value="0" <?php if ($user['Role'] == '0') echo 'selected'; ?>>0</option>
                             <option value="1" <?php if ($user['Role'] == '1') echo 'selected'; ?>>1</option>
                         </select>
@@ -80,7 +82,7 @@
                 <div class="col">
                     <div class="mb-3">
                         <label for="sex" class="form-label">Giới tính</label>
-                        <select class="form-control" id="sex" name="sex" required>
+                        <select class="form-control" id="sex" name="sex">
                             <option value="Nam" <?php if ($user['Sex'] == 'Nam') echo 'selected'; ?>>Nam</option>
                             <option value="Nữ" <?php if ($user['Sex'] == 'Nữ') echo 'selected'; ?>>Nữ</option>
                             <option value="Khác" <?php if ($user['Sex'] == 'Khác') echo 'selected'; ?>>Khác</option>
@@ -88,11 +90,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="phone" class="form-label">SĐT</label>
-                        <input type="text" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($user['Phone']) ?>" required>
+                        <input type="text" class="form-control" id="phone" name="phone" value="<?= htmlspecialchars($user['Phone']) ?>">
                     </div>
                     <div class="mb-3">
                         <label for="dob" class="form-label">Ngày sinh</label>
-                        <input type="date" class="form-control" id="dob" name="dob" value="<?= htmlspecialchars($user['Dob']) ?>" required>
+                        <input type="date" class="form-control" id="dob" name="dob" value="<?= htmlspecialchars($user['Dob']) ?>">
                     </div>
                 </div>
                 <div class="row text-center">
