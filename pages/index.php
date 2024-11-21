@@ -15,6 +15,7 @@
 
     <title>Beta Cinemas Clone (home page)</title>
 </head>
+
 <body>
     <?php
         require 'config.php';
@@ -47,6 +48,8 @@
                         <select name="cinemas" id="cinemas" class="nav-link" style="margin-right: 50px" onchange="submitForm()">
                             <option value="" selected>CHỌN RẠP PHIM</option>
                             <?php
+                                session_start();
+
                                 $query = "SELECT * FROM `cinemas` ORDER BY `Location`";
                                 $result = mysqli_query($connect, $query);
 
@@ -61,7 +64,12 @@
                                     $cinemas_by_location[$location][] = $row;
                                 }
 
-                                $selectedCinemaID = isset($_POST['cinemas']) ? $_POST['cinemas'] : null;
+                                if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+                                    $selectedCinemaID = isset($_POST['cinemas']) ? $_POST['cinemas'] : null;
+                                    $_SESSION['selectedCinemaID'] = $selectedCinemaID; // Lưu vào session
+                                } else {
+                                    $selectedCinemaID = isset($_SESSION['selectedCinemaID']) ? $_SESSION['selectedCinemaID'] : null; // Lấy từ session nếu tồn tại
+                                }
 
                                 foreach ($cinemas_by_location as $location => $cinemas) {
                                     echo "<optgroup label='" . htmlspecialchars($location) . "'>";
@@ -77,7 +85,7 @@
 
                     <li class="nav-item">
                         <?php
-                            if ($selectedCinemaID) 
+                            if (isset($_SESSION['selectedCinemaID']) && $_SESSION['selectedCinemaID']) 
                                 echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/rap.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 15px">RẠP</a>';
                             else
                                 echo '<a class="nav-link main" href="" style="margin-left: 15px" onclick="alert(\'Vui lòng chọn rạp phim.\')">RẠP</a>';
@@ -85,7 +93,7 @@
                     </li>
                     <li class="nav-item">
                         <?php
-                            if ($selectedCinemaID) 
+                            if (isset($_SESSION['selectedCinemaID']) && $_SESSION['selectedCinemaID']) 
                                 echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/gia_ve.php?cinema_id=' . $selectedCinemaID . '" style="margin-left: 15px">GIÁ VÉ</a>';
                             else
                                 echo '<a class="nav-link main" href="" style="margin-left: 15px" onclick="alert(\'Vui lòng chọn rạp phim.\')">GIÁ VÉ</a>';

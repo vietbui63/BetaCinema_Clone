@@ -73,7 +73,7 @@
                 <div class="col-12 col-md-6 mb-4 mb-md-0 mt-5">
                     <div class="row p-3">
                         <img src="/BetaCinema_Clone/assets/ic-screen.png" alt="Logo" class="img-fluid">
-                        <p class="text-start mb-4 mt-5" style="font-size: 20px">Lối Vào</p>
+                        <p class="text-start mb-4" style="font-size: 20px">Lối Vào</p>
                         <?php
                             $query_payment = "SELECT Seats FROM `payments` WHERE 
                                             MovieTitle = '$movie_title' AND 
