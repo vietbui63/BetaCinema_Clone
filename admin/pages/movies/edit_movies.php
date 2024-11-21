@@ -7,113 +7,117 @@
     <title>EDIT MOVIE</title>
 </head>
 <body>
-<?php
-require 'config.php';
+    <?php
+        require 'config.php';
 
-if (!isset($_GET['movie_id'])) {
-    die("MovieID not provided.");
-}
+        if (!isset($_GET['movie_id'])) {
+            die("MovieID not provided.");
+        }
 
-$movie_id = intval($_GET['movie_id']);
+        $movie_id = intval($_GET['movie_id']);
 
-$query = "SELECT * FROM movies WHERE MoviesID = $movie_id";
-$result = mysqli_query($connect, $query);
+        $query = "SELECT * FROM movies WHERE MoviesID = $movie_id";
+        $result = mysqli_query($connect, $query);
 
-if (!$result || mysqli_num_rows($result) == 0) {
-    die("Movie not found.");
-}
+        if (!$result || mysqli_num_rows($result) == 0) {
+            die("Movie not found.");
+        }
 
-$movie = mysqli_fetch_assoc($result);
+        $movie = mysqli_fetch_assoc($result);
 
-if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $title = $_POST['title'];
-    $type = $_POST['type'];
-    $genre = $_POST['genre'];
-    $duration = $_POST['duration'];
-    $release_date = $_POST['release_date'];
-    $pic = $_POST['pic'];
-    $trailer = $_POST['trailer'];
-    $status = $_POST['status'];
-    $special_show = $_POST['special_show'];
+        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+            $title = $_POST['title'];
+            $type = $_POST['type'];
+            $genre = $_POST['genre'];
+            $duration = $_POST['duration'];
+            $release_date = $_POST['release_date'];
+            $pic = $_POST['pic'];
+            $trailer = $_POST['trailer'];
+            $status = $_POST['status'];
+            $special_show = $_POST['special_show'];
 
-    $updateQuery = "UPDATE movies 
-                            SET Title='$title', Type='$type', Genre='$genre', Duration='$duration', ReleaseDate='$release_date', Pic='$pic', Trailer='$trailer', status='$status', SpecialShow='$special_show' 
-                            WHERE MoviesID=$movie_id";
+            $updateQuery = "UPDATE movies 
+                                    SET Title='$title', Type='$type', Genre='$genre', Duration='$duration', ReleaseDate='$release_date', Pic='$pic', Trailer='$trailer', status='$status', SpecialShow='$special_show' 
+                                    WHERE MoviesID=$movie_id";
 
-    if (mysqli_query($connect, $updateQuery)) {
-        header("Location: /BetaCinema_Clone/admin/pages/index.php?message=Movie updated successfully.");
-        exit();
-    } else {
-        $error = "Error: " . mysqli_error($connect);
-    }
-}
-?>
+            if (mysqli_query($connect, $updateQuery)) {
+                header("Location: /BetaCinema_Clone/admin/pages/index.php?message=Movie updated successfully.");
+                exit();
+            } else {
+                $error = "Error: " . mysqli_error($connect);
+            }
+        }
+    ?>
 
-<div class="container w-50">
-    <h2 class="text-center text-warning mb-4">CẬP NHẬT MOVIE <?= htmlspecialchars($movie_id) ?></h2>
+    <div class="container w-50">
+        <h2 class="text-center text-warning mb-4">CẬP NHẬT MOVIE <?= htmlspecialchars($movie_id) ?></h2>
 
-    <?php if (isset($error)): ?>
-        <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-    <?php endif; ?>
+        <?php if (isset($error)): ?>
+            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
+        <?php endif; ?>
 
-    <form method="POST">
-        <div class="row mt-5">
-            <div class="col">
-                <div class="mb-3">
-                    <label for="title" class="form-label">Title</label>
-                    <input type="text" class="form-control" id="title" name="title"
-                           value="<?= htmlspecialchars($movie['Title']) ?>" required>
+        <form method="POST">
+            <div class="row mt-5">
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="title" class="form-label">Title</label>
+                        <input type="text" class="form-control" id="title" name="title"
+                            value="<?= htmlspecialchars($movie['Title']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="type" class="form-label">Type</label>
+                        <input type="text" class="form-control" id="type" name="type"
+                            value="<?= htmlspecialchars($movie['Type']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="genre" class="form-label">Genre</label>
+                        <input type="text" class="form-control" id="genre" name="genre"
+                            value="<?= htmlspecialchars($movie['Genre']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="duration" class="form-label">Duration</label>
+                        <input type="number" class="form-control" id="duration" name="duration"
+                            value="<?= htmlspecialchars($movie['Duration']) ?>" required>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="type" class="form-label">Type</label>
-                    <input type="text" class="form-control" id="type" name="type"
-                           value="<?= htmlspecialchars($movie['Type']) ?>" required>
+                <div class="col">
+                    <div class="mb-3">
+                        <label for="release_date" class="form-label">Release Date</label>
+                        <input type="date" class="form-control" id="release_date" name="release_date"
+                            value="<?= htmlspecialchars($movie['ReleaseDate']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="pic" class="form-label">Picture URL</label>
+                        <input type="text" class="form-control" id="pic" name="pic"
+                            value="<?= htmlspecialchars($movie['Pic']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="trailer" class="form-label">Trailer URL</label>
+                        <input type="text" class="form-control" id="trailer" name="trailer"
+                            value="<?= htmlspecialchars($movie['Trailer']) ?>" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="status" class="form-label">Status</label>
+                        <select class="form-control" id="status" name="status" required>
+                            <option value="Phim đang chiếu" <?php if ($movie['status'] == 'Phim đang chiếu') echo 'selected'; ?>>Phim đang chiếu</option>
+                            <option value="Phim sắp chiếu" <?php if ($movie['status'] == 'Phim sắp chiếu') echo 'selected'; ?>>Phim sắp chiếu</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <label for="special_show" class="form-label">Special Show</label>
+                        <select class="form-control" id="special_show" name="special_show" required>
+                            <option value="0" <?php if ($movie['SpecialShow'] == '0') echo 'selected'; ?>>0</option>
+                            <option value="1" <?php if ($movie['SpecialShow'] == '1') echo 'selected'; ?>>1</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="mb-3">
-                    <label for="genre" class="form-label">Genre</label>
-                    <input type="text" class="form-control" id="genre" name="genre"
-                           value="<?= htmlspecialchars($movie['Genre']) ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="duration" class="form-label">Duration</label>
-                    <input type="number" class="form-control" id="duration" name="duration"
-                           value="<?= htmlspecialchars($movie['Duration']) ?>" required>
+                <div class="row text-center">
+                    <button type="submit" class="btn btn-warning mt-4">CẬP NHẬT</button>
+                    <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-warning mt-3">QUAY LẠI</a>
                 </div>
             </div>
-            <div class="col">
-                <div class="mb-3">
-                    <label for="release_date" class="form-label">Release Date</label>
-                    <input type="date" class="form-control" id="release_date" name="release_date"
-                           value="<?= htmlspecialchars($movie['ReleaseDate']) ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="pic" class="form-label">Picture URL</label>
-                    <input type="text" class="form-control" id="pic" name="pic"
-                           value="<?= htmlspecialchars($movie['Pic']) ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="trailer" class="form-label">Trailer URL</label>
-                    <input type="text" class="form-control" id="trailer" name="trailer"
-                           value="<?= htmlspecialchars($movie['Trailer']) ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="status" class="form-label">Status</label>
-                    <input type="text" class="form-control" id="status" name="status"
-                           value="<?= htmlspecialchars($movie['status']) ?>" required>
-                </div>
-                <div class="mb-3">
-                    <label for="special_show" class="form-label">Special Show</label>
-                    <input type="number" class="form-control" id="special_show" name="special_show"
-                           value="<?= htmlspecialchars($movie['SpecialShow']) ?>" required>
-                </div>
-            </div>
-            <div class="row text-center">
-                <button type="submit" class="btn btn-warning mt-4">CẬP NHẬT</button>
-                <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-warning mt-3">QUAY LẠI</a>
-            </div>
-        </div>
-    </form>
-</div>
+        </form>
+    </div>
 </body>
 <style>
     body {
