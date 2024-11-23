@@ -1,0 +1,66 @@
+body { 
+    background-image: url('/BetaCinema_Clone/assets/bg-thanh-vien.png'); 
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100vh;
+    font-size: 15px;
+}
+
+.container{
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(40px); 
+    padding: 30px; 
+    border-radius: 20px; 
+    max-width: 900px; 
+    margin: 50px auto; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.form-control{
+    font-size: 20px;
+}
+
+.nav-tabs .nav-link {
+    font-weight: bold;
+    color: #333;
+    font-size: 30px;
+}
+
+.nav-link:hover{
+    border: none;
+}
+
+.mb-3 label{
+    font-weight: bold;
+}
+
+span{
+    font-weight: bold;
+    color: red;
+}
+
+.btn-next, .btn-back{
+    font-size: 20px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.btn-next:hover, .btn-back:hover {
+    background-position: right center; 
+}
+
+.btn-next, .btn-next:hover{
+    background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
+}
+
+.btn-back, .btn-back:hover{
+    background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+}

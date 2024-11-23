@@ -1,0 +1,92 @@
+body {
+    background-image: url('/BetaCinema_Clone/assets/bg-lich-chieu.png'); 
+    background-position: center; 
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh; 
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.5); 
+    backdrop-filter: blur(30px); 
+    text-align: center;
+    width: 90%; 
+    max-width: 100%; 
+    margin: 0 auto;
+    padding: 50px;
+    border-radius: 20px; 
+}
+
+/* CHỌN GHẾ */
+.mt-4{
+    border-radius: 10px;
+}
+
+.kindofseat{
+    margin-left: 5px;
+}
+
+/* THÔNG TIN PHIM */
+.img-movie{
+    height: 80%;
+    border-radius: 20px;
+}
+
+h1{
+    color: #0077b6;
+    font-weight: bold;
+}
+
+.bi{
+    margin-right: 10px;
+}
+
+.table th, .table td {
+    text-align: left;
+    background: none; 
+    border: none;
+    font-size: 20px;
+}
+
+.table tr th{
+    padding-left: 40px;
+}
+
+/* BUTTON CHỌN GHẾ */
+.btn.selected {
+    background-color: #70e000; 
+    border: 1px solid #70e000;
+}
+
+/* TỔNG GIÁ */
+#total-price{
+    font-weight: bold;
+    font-size: 20px;
+    color: #c9184a;
+}
+
+/* BUTTON NEXT, BACK */
+.btn-next, .btn-back{
+    font-size: 20px;
+    text-align: center;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;
+    font-weight: bold;
+    border-radius: 10px;
+}
+
+.btn-next:hover, .btn-back:hover {
+    background-position: right center; 
+}
+
+.btn-next, .btn-next:hover{
+    background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
+}
+
+.btn-back, .btn-back:hover{
+    background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
+}
