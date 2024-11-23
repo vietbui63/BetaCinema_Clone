@@ -89,8 +89,13 @@
                     <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password" required>
                 </div>
             </div>
-            <div class="col mt-3">
-                Bạn chưa có tài khoản? <a href="/BetaCinema_Clone/auth/register.php">ĐĂNG KÝ</a>
+            <div class="row mt-3">
+                <div class="col-7">
+                    Bạn chưa có tài khoản? <a href="/BetaCinema_Clone/auth/register.php">ĐĂNG KÝ</a>
+                </div>
+                <div class="col-5 text-end">
+                    <a href="/BetaCinema_Clone/auth/forget_password.php">Quên mật khẩu</a>
+                </div>
             </div>
             <div class="row mt-4">
                 <div class="col-7">

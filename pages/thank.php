@@ -52,7 +52,7 @@
                 $mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
                 $mail->Port       = 465;
 
-                
+                $mail->CharSet = 'UTF-8';
                 $mail->setFrom('betacinema.clone@gmail.com', 'Beta Cinema Clone'); // Người gửi 
                 $mail->addAddress($email); // Email người nhận (lấy từ session)
 

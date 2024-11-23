@@ -134,17 +134,17 @@
                                         <label for="dob" class="form-label">Ngày sinh</label>
                                         <input type="date" class="form-control" id="dob" name="dob" value="<?php echo htmlspecialchars($user['Dob']); ?>" required>
                                     </div>
+                                    <!-- Mật khẩu hiện tại -->
+                                    <div class="mb-3">
+                                        <label for="current_password" class="form-label">Mật khẩu hiện tại</label>
+                                        <input type="password" class="form-control" id="current_password" name="current_password">
+                                    </div>
                                     <!-- Mật khẩu mới -->
                                     <div class="mb-3">
                                         <label for="new_password" class="form-label">Mật khẩu mới</label>
                                         <input type="password" class="form-control" id="new_password" name="new_password" 
                                             pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
                                             title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
-                                    </div>
-                                    <!-- Mật khẩu hiện tại -->
-                                    <div class="mb-3">
-                                        <label for="current_password" class="form-label">Mật khẩu hiện tại</label>
-                                        <input type="password" class="form-control" id="current_password" name="current_password">
                                     </div>
                                     <!-- Xác nhận mật khẩu mới -->
                                     <div class="mb-3">

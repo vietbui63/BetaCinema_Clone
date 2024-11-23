@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 23, 2024 at 03:24 AM
+-- Generation Time: Nov 23, 2024 at 04:37 AM
 -- Server version: 10.4.32-MariaDB
 -- PHP Version: 8.2.12
 
@@ -149,7 +149,8 @@ INSERT INTO `payments` (`PaymentID`, `PaymentDate`, `PaymentMethod`, `UserID`, `
 (40, '2024-11-21', 'Thanh toán tại Beta', 9, 'Thần Dược', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'B2, B3, B4', 135000),
 (46, '2024-11-21', 'Thanh toán tại Beta', 9, 'Cười Xuyên Biên Giới', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'A2, A3, A4', 135000),
 (47, '2024-11-21', 'Thanh toán tại Beta', 9, 'Venom: Kèo Cuối', 'Beta Nha Trang', '2024-11-30', 'P1', '17:00:00', 'A1, A2, A3', 135000),
-(54, '2024-11-21', 'Thanh toán tại Beta', 9, 'Linh Miêu', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'D3, D4, D5', 360000);
+(54, '2024-11-21', 'Thanh toán tại Beta', 9, 'Linh Miêu', 'Beta Nha Trang', '2024-11-30', 'P2', '17:00:00', 'D3, D4, D5', 360000),
+(55, '2024-11-23', 'Thanh toán tại Beta', 13, 'Red One: Mật Mã Đỏ', 'Beta Nha Trang', '2024-11-26', 'P2', '22:10:00', 'D1, D2, D3', 360000);
 
 -- --------------------------------------------------------
 
@@ -311,7 +312,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`UserID`, `Fullname`, `Email`, `Pass_word`, `Dob`, `Sex`, `Phone`, `Role`) VALUES
 (8, 'Nguyễn Huy Toàn', 'toan.nh.63cntt@ntu.edu.vn', '$2y$10$JZpN51oBCeJ3lklaJDhHf.LxHPRgeQD96Vv0DZkuRO.UK2DIQ8Sg6', '2003-03-14', 'Khác', '0935941419', '0'),
-(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$O0xgWOOv3uKUWLDeGxkixuZ0c6GJGyfNu5V45xVDc82Tu0Oo1FQWW', '2024-11-24', 'Nam', '0935941419', '1');
+(9, 'Nguyen Huy Toan', 'nguyenhuytoan1432k3@gmail.com', '$2y$10$diq/yh9KEFPnU8sTQvA30OsN/XEPXNtPY5eEopQNH4.348u3lPWtq', '2024-11-24', 'Nam', '0935941419', '1'),
+(13, 'Trìu', 'hoangtrieu02092003@gmail.com', '$2y$10$Um93bj.LZdo48x1K8QfcoObG0.TMKOeo0Kp54vs3FeFs8YDBvw2A6', '2024-11-23', 'Nam', '123456789', '1');
 
 --
 -- Indexes for dumped tables
@@ -390,7 +392,7 @@ ALTER TABLE `movies`
 -- AUTO_INCREMENT for table `payments`
 --
 ALTER TABLE `payments`
-  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `PaymentID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
 
 --
 -- AUTO_INCREMENT for table `seats`
@@ -408,7 +410,7 @@ ALTER TABLE `show_times`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- Constraints for dumped tables
