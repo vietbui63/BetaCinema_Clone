@@ -50,7 +50,7 @@
         $total_pages = ceil($total_records / $results_per_page);
     ?>
 
-    <div class="container mt-5">
+    <div class="container">
         <a href="/BetaCinema_Clone/admin/pages/showtimes/add_showtimes.php" class="btn btn-success text-center mt-5">THÊM MỚI SHOWTIMES</a>
         <table class="table table-info table-bordered border-info table-striped mt-3" id="font">
             <thead>

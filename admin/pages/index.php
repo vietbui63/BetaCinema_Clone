@@ -77,10 +77,10 @@
         <?php include './seats/seats.php'; ?>
     </div>
     <div id="content-showtimes" class="content" style="display:none;">
-        <?php include './show_times.php'; ?>
+        <?php include './showtimes/show_times.php'; ?>
     </div>
     <div id="content-payment" class="content" style="display:none;">
-        <?php include './payments.php'; ?>
+        <?php include './payments/payments.php'; ?>
     </div>
 </body>
 <style>

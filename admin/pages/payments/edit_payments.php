@@ -94,7 +94,7 @@
         }
     ?>
 
-    <div class="container mt-5">
+    <div class="container">
         <h2 class="text-center mb-4">CẬP NHẬT Payment</h2>
         <form method="POST">
             <div class="row">

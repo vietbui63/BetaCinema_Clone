@@ -19,7 +19,7 @@
         $stt = 1;
         
     ?>
-    <div class="container mt-5">
+    <div class="container">
         <a href="/BetaCinema_Clone/admin/pages/payments/add_payments.php" class="btn btn-success text-center mt-5">THÊM MỚI PAYMENTS</a>
         <table class="table table-info table-bordered border-info table-striped mt-3" id="font">
             <thead>
@@ -55,8 +55,8 @@
                     echo "<td>" . htmlspecialchars($row['Seats']) . "</td>";
                     echo "<td>" . number_format($row['TotalPrice'], 0, ',', '.') . " VNĐ</td>";
                     echo "<td>
-                            <a href='/BetaCinema_Clone/admin/pages/payments/edit_payments.php?id=" . htmlspecialchars($row['PaymentID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
-                            <a href='/BetaCinema_Clone/admin/pages/payments/delete_payments.php?id=" . htmlspecialchars($row['PaymentID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá user này không?');\">XOÁ</a>
+                            <a href='/BetaCinema_Clone/admin/pages/payments/edit_payments.php?id=" . htmlspecialchars($row['PaymentID']) . "' class='btn btn-warning btn-sm'>SỬA</a> <br>
+                            <a href='/BetaCinema_Clone/admin/pages/payments/delete_payments.php?id=" . htmlspecialchars($row['PaymentID']) . "' class='btn btn-danger btn-sm mt-1' onclick=\"return confirm('Bạn có chắc chắn muốn xoá user này không?');\">XOÁ</a>
                           </td>";
                     echo "</tr>";
                 }
@@ -66,6 +66,10 @@
     </div>
 </body>
 <style>
+    table {
+        table-layout: fixed;
+    }
+
     thead th {
         white-space: nowrap; 
         overflow: hidden;  
@@ -79,9 +83,6 @@
         overflow: hidden;  
         text-overflow: ellipsis; 
         max-width: 150px; 
-    }
-    #font {
-        font-size: 14px;
     }
 </style>
 </html>

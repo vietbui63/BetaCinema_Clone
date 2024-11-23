@@ -34,16 +34,16 @@ $total_pages = ceil($total_halls / $limit);
     <title>Halls</title>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <a href="/BetaCinema_Clone/admin/pages/halls/add_halls.php" class="btn btn-success text-center mt-5">THÊM MỚI
         HALL</a>
     <table class="table table-info table-bordered border-info table-striped mt-3">
         <thead>
         <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Hall Name</th>
-            <th scope="col">Seat Count</th>
-            <th scope="col">Cinema ID</th>
+            <th scope="col">Tên phòng</th>
+            <th scope="col">Số ghế</th>
+            <th scope="col">ID Rạp</th>
             <th scope="col">Function</th>
         </tr>
         </thead>
