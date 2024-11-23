@@ -7,6 +7,7 @@
 
     $id = intval($_GET['id']); 
 
+    
     $query = "SELECT * FROM payments WHERE PaymentID = $id";
     $result = mysqli_query($connect, $query);
 

@@ -11,6 +11,7 @@
     <?php
         $query = "SELECT * FROM users";
         $result = mysqli_query($connect, $query);
+        
     ?>
     <div class="container mt-5">
         <a href="/BetaCinema_Clone/admin/pages/users/add_users.php" class="btn btn-success text-center mt-5">THÊM MỚI USER</a>

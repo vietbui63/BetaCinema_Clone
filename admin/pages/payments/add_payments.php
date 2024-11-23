@@ -8,6 +8,7 @@
     <title>EDIT PAYMENT</title>
 </head>
 <body>
+    
     <?php
         require 'config.php';
 

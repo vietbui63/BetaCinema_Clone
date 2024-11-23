@@ -10,6 +10,7 @@
     <?php
         require 'config.php';
 
+        
         if (!isset($_GET['id'])) {
             die("UserID not provided.");
         }

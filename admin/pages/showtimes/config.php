@@ -7,4 +7,5 @@
 
     if(!$connect)
         die("Connect failed !" . mysqli_connect_error());
+    
 ?>

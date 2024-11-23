@@ -7,6 +7,7 @@
 
     $id = intval($_GET['id']); 
 
+
     $query = "SELECT * FROM users WHERE UserID = $id";
     $result = mysqli_query($connect, $query);
 

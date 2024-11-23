@@ -7,6 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <title>SHOWTIMES</title>
 </head>
+
 <body>
     <?php
         require 'config.php';  // Ensure your DB connection is correct

@@ -6,6 +6,7 @@
     }
 
     $id = intval($_GET['id']); 
+    
 
     $query = "SELECT * FROM show_times WHERE ShowtimeID = $id";
     $result = mysqli_query($connect, $query);
