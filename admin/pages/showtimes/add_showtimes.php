@@ -4,8 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>THÊM SHOWTIMES</title>
-    
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
+
+    <title>THÊM SHOWTIMES</title>    
 </head>
 <body>
     <?php
@@ -37,8 +38,8 @@
         }
     ?>
 
-    <div class="container mt-5">
-        <h2 class="text-center mb-4">THÊM MỚI SHOWTIMES</h2>
+    <div class="container mt-5 w-50">
+        <h2 class="text-center text-success mb-4">THÊM MỚI SHOWTIMES</h2>
         <form method="POST">
             <div class="row">
                 <div class="col-md-6">
@@ -94,9 +95,9 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
+            <div class="col text-center mt-4">
+                <a href="javascript:history.back()" class="btn btn-outline-success" style="margin-right:15px">QUAY LẠI</a>
                 <button type="submit" class="btn btn-success">THÊM</button>
-                <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-success">QUAY LẠI</a>
             </div>
         </form>
     </div>
@@ -119,49 +120,12 @@
         box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
     }
 
-    h2 {
-        color: #198754;
-        font-weight: bold;
-        text-transform: uppercase;
-        text-shadow: 1px 1px 3px rgba(0, 123, 255, 0.2);
-        margin-bottom: 20px;
+    .form-control {
+        border: 1px solid #111;
     }
 
     label {
         font-weight: bold;
-        font-size: 1rem;
-    }
-
-    .form-control {
-        border: 1px solid #111;
-        border-radius: 8px;
-        padding: 10px;
-        transition: border-color 0.3s ease, box-shadow 0.3s ease;
-    }
-
-    .form-control:focus {
-        border-color: #66afe9;
-        box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-    }
-
-    .btn-success {
-        border-radius: 25px;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .btn-success:hover {
-        transform: scale(1.05);
-    }
-
-    .btn-outline-success {
-        border-radius: 25px;
-        font-weight: bold;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-    }
-
-    .btn-outline-success:hover {
-        transform: scale(1.05);
     }
 </style>
 </html>

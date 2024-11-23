@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
     <title>ADD USERS</title>
 </head>
 <body>
@@ -37,7 +38,7 @@
 
         <form method="POST">
             <div class="row mt-5">
-                <div class="col">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="fullname" class="form-label">Họ tên</label>
                         <input type="text" class="form-control" id="fullname" name="fullname" required>
@@ -60,7 +61,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="col">
+                <div class="col-md-6">
                     <div class="mb-3">
                         <label for="sex" class="form-label">Giới tính</label>
                         <select class="form-control" id="sex" name="sex" required>
@@ -78,23 +79,23 @@
                         <input type="date" class="form-control" id="dob" name="dob" required>
                     </div>
                 </div>
-                <div class="row text-center">
-                    <button type="submit" class="btn btn-success mt-4">THÊM</button>
-                    <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-success mt-3">QUAY LẠI</a>
+                <div class="col text-center mt-4">
+                    <a href="javascript:history.back()" class="btn btn-outline-success" style="margin-right:15px">QUAY LẠI</a>
+                    <button type="submit" class="btn btn-success">THÊM</button>
                 </div>
             </div>
         </form>
     </div>
 </body>
 <style>
-    body{
+    body {
         background-color: #e5e5e5;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
     }
-
+    
     .container{
         border: 2px solid #198754;
         border-radius: 20px;

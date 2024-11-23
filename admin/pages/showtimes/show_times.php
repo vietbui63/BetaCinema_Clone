@@ -2,176 +2,196 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>SHOWTIMES</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/BetaCinema_Clone/admin/pages/index/css/style.css">
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
+    <title>SHOW TIMES</title>
 </head>
-
 <body>
     <?php
-        require 'config.php';  // Ensure your DB connection is correct
+        session_start();
+        require 'config.php';
 
-        // Define the number of results per page
-        $results_per_page = 5;
+        // Pagination
+        $rowsPerPage = 4;
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($currentPage - 1) * $rowsPerPage;
 
-        // Get the current page number from the URL, default to 1 if not set
-        if (isset($_GET['page']) && is_numeric($_GET['page'])) {
-            $current_page = $_GET['page'];
-        } else {
-            $current_page = 1;
+        // Filter inputs
+        $showdate = isset($_GET['showdate']) ? mysqli_real_escape_string($connect, $_GET['showdate']) : '';
+        $starttime = isset($_GET['starttime']) ? mysqli_real_escape_string($connect, $_GET['starttime']) : '';
+        $endtime = isset($_GET['endtime']) ? mysqli_real_escape_string($connect, $_GET['endtime']) : '';
+
+        // Build WHERE clause
+        $whereClauses = [];
+        if (!empty($showdate)) {
+            $whereClauses[] = "ShowDate = '$showdate'";
         }
+        if (!empty($starttime)) {
+            $whereClauses[] = "StartTime = '$starttime'";
+        }
+        if (!empty($endtime)) {
+            $whereClauses[] = "EndTime = '$endtime'";
+        }
+        $whereSQL = count($whereClauses) > 0 ? "WHERE " . implode(' AND ', $whereClauses) : '';
 
-        // Calculate the starting row for the query
-        $start_from = ($current_page - 1) * $results_per_page;
+        $countQuery = "SELECT COUNT(*) AS total FROM show_times $whereSQL";
+        $countResult = mysqli_query($connect, $countQuery);
+        $totalRows = mysqli_fetch_assoc($countResult)['total'];
 
-        // Modified query with LIMIT to fetch only the records for the current page
-        $query = "SELECT st.ShowtimeID, m.MoviesID AS MovieID, m.Title AS MovieTitle, st.ShowDate, st.StartTime, st.EndTime, h.HallName
-                  FROM show_times st
-                  JOIN movies m ON st.MovieID = m.MoviesID
-                  JOIN halls h ON st.HallID = h.HallID
-                  ORDER BY m.MoviesID, st.ShowDate, st.StartTime
-                  LIMIT $start_from, $results_per_page";
-
+        $query = "SELECT * FROM show_times $whereSQL LIMIT $offset, $rowsPerPage";
         $result = mysqli_query($connect, $query);
-
-        // Check if query is successful
-        if (!$result) {
-            die("Query failed: " . mysqli_error($connect));
-        }
-
-        // Get the total number of records for pagination
-        $total_query = "SELECT COUNT(*) AS total FROM show_times";
-        $total_result = mysqli_query($connect, $total_query);
-        $total_row = mysqli_fetch_assoc($total_result);
-        $total_records = $total_row['total'];
-
-        // Calculate total pages
-        $total_pages = ceil($total_records / $results_per_page);
+        $totalPages = ceil($totalRows / $rowsPerPage);
     ?>
 
-    <div class="container">
-        <a href="/BetaCinema_Clone/admin/pages/showtimes/add_showtimes.php" class="btn btn-success text-center mt-5">THÊM MỚI SHOWTIMES</a>
-        <table class="table table-info table-bordered border-info table-striped mt-3" id="font">
-            <thead>
-                <tr class="text-center">
-                    <th scope="col">Showtime ID</th>
-                    <th scope="col">Movie ID</th>
-                    <th scope="col">Tên phim</th>
-                    <th scope="col">Ngày chiếu</th>
-                    <th scope="col">Giờ chiếu</th>
-                    <th scope="col">Giờ kết thúc</th>
-                    <th scope="col">Phòng chiếu</th>
-                    <th scope="col">Function</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php
-                    // Initialize variables
-                    $previousMovieID = null;
-                    $previousMovieTitle = null;
+    <div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+			<div class="p-4">
+		  		<h1><a href="/BetaCinema_Clone/admin/pages/index/index.php" class="logo">BETA CINEMA <span>Best Movies</span></a></h1>
+				<div class="text-center bg-white" style="border-radius: 10px">
+					<img src="/BetaCinema_Clone/assets/logo.png" alt="Logo" class="mt-4 mb-4">
+				</div>
+	        	<ul class="list-unstyled components mb-5 mt-4">
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/users/users.php"><span class="fa fa-user mr-3"></span> USERS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/movies/movies.php"><span class="fa fa-film mr-3"></span> MOVIES</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/cinemas/cinemas.php"><span class="fa fa-building mr-3"></span> CINEMAS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/halls/halls.php"><span class="fa fa-television mr-3"></span> HALLS</a>
+					</li>
+					<li class="active">
+						<a href="/BetaCinema_Clone/admin/pages/seats/seats.php"><span class="fa fa-users mr-3"></span> SEATS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/showtimes/show_times.php"><span class="fa fa-video-camera mr-3"></span> SHOWTIMES</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/payments/payments.php"><span class="fa fa-money mr-3"></span> PAYMENT</a>
+					</li>
+				</ul>
 
-                    // Loop through the result set and display showtimes
-                    while ($row = $result->fetch_assoc()) {
-                        // If we are at a new movie, display the movie title once
-                        if ($row["MovieID"] != $previousMovieID) {
-                            $previousMovieID = $row["MovieID"];
-                            $previousMovieTitle = $row["MovieTitle"];
-                        }
+	        	<div class="footer text-center" style="font-size: 18px">
+	        		<?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <span class="text-white admin-name">Hi, <?php echo $_SESSION['Fullname']; ?></span>
+                        <a class="btn text-white" href="/BetaCinema_Clone/auth/logout.php"><i class="fa fa-sign-out"></i></a>
+                    <?php else: ?>
+                    <?php endif; ?>
+	        	</div>
+	      </div>
+    	</nav>
 
-                        // Display the showtime details for this movie
-                        echo "<tr class='text-center'>
-                                <td>" . $row["ShowtimeID"] . "</td>
-                                <td>" . $row["MovieID"] . "</td>
-                                <td>" . $previousMovieTitle . "</td>
-                                <td>" . (!empty($row['ShowDate']) ? date("d/m/Y", strtotime($row['ShowDate'])) : "N/A") . "</td>
-                                <td>" . $row["StartTime"] . "</td>
-                                <td>" . $row["EndTime"] . "</td>
-                                <td>" . $row["HallName"] . "</td>
-                                <td>
+        <!-- Page Content  -->
+      	<div id="content" class="bg-img p-5">
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-5">
+                <!-- BỘ LỌC -->
+                <form class="d-flex justify-content-center align-items-center w-50" method="GET" action="">
+                    <div class="form-group mr-2">
+                        <label for="starttime" class="mr-2 text-white">Giờ bắt đầu</label>
+                        <input type="time" name="starttime" class="form-control" value="<?= htmlspecialchars($_GET['starttime'] ?? '') ?>">
+                    </div>
+                    <div class="form-group mr-2">
+                        <label for="endtime" class="mr-2 text-white">Giờ kết thúc</label>
+                        <input type="time" name="endtime" class="form-control" value="<?= htmlspecialchars($_GET['endtime'] ?? '') ?>">
+                    </div>
+                    <div class="form-group mr-2">
+                        <label for="showdate" class="mr-2 text-white">Ngày chiếu</label>
+                        <input type="date" name="showdate" class="form-control" value="<?= htmlspecialchars($_GET['showdate'] ?? '') ?>">
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-3 ml-3"><i class="fa fa-filter"></i></button>
+                    <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>" class="btn btn-secondary ml-3 mt-3"><i class="fa fa-refresh"></i></a>
+                </form>
+                <h1 class="text-center text-white">THÔNG TIN <br> SHOW TIMES</h1>
+                <a href="/BetaCinema_Clone/admin/pages/showtimes/add_showtimes.php" class="btn btn-success">THÊM MỚI SHOW TIMES</a>
+            </div>
+            <table class="table table-bordered table-striped table-primary mt-3">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">Showtime ID</th>
+                        <th scope="col">Ngày chiếu</th>
+                        <th scope="col">Giờ chiếu</th>
+                        <th scope="col">Giờ kết thúc</th>
+                        <th scope="col">Movie ID</th>
+                        <th scope="col">Hall ID</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $stt = $offset + 1;
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr class='text-center'>";
+                            echo "<td>" . $stt++ . "</td>";
+                            echo "<td>" . htmlspecialchars($row['ShowDate']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['StartTime']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['EndTime']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['MovieID']) . "</td>";
+                            echo "<td>" . htmlspecialchars($row['HallID']) . "</td>";
+                            echo "<td>
                                     <a href='/BetaCinema_Clone/admin/pages/showtimes/edit_showtimes.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
-                                    <a href='/BetaCinema_Clone/admin/pages/showtimes/delete_showtimes.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá user này không?');\">XOÁ</a>
-                                </td>
-                            </tr>";
-                    }
-                ?>
-            </tbody>
-        </table>
+                                    <a href='/BetaCinema_Clone/admin/pages/seats/delete_seats.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá ghế này không?');\">XOÁ</a>
+                                </td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>   
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-center mb-5">
+                <ul class="pagination">
+                    <?php if ($currentPage > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?= $currentPage - 1 ?>&showdate=<?= urlencode($showdate) ?>&starttime=<?= urlencode($starttime) ?>&endtime=<?= urlencode($endtime) ?>">&#60;</a>
+                        </li>
+                    <?php endif; ?>
 
-        <!-- Pagination Links -->
-        <nav aria-label="Page navigation">
-            <ul class="pagination justify-content-center">
-                <!-- First Page Link -->
-                <?php if ($current_page > 1): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?page=1" aria-label="First">
-                            <span aria-hidden="true">&laquo;&laquo;</span> First
-                        </a>
-                    </li>
-                <?php endif; ?>
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?= ($i == $currentPage) ? 'active' : '' ?>">
+                            <a class="page-link" href="?page=<?= $i ?>&showdate=<?= urlencode($showdate) ?>&starttime=<?= urlencode($starttime) ?>&endtime=<?= urlencode($endtime) ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
 
-                <!-- Previous Page Link -->
-                <?php if ($current_page > 1): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?page=<?= $current_page - 1 ?>" aria-label="Previous">
-                            <span aria-hidden="true">&laquo;</span> Previous
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-                <!-- Page Number Links with Range -->
-                <?php 
-                    $start_page = max(1, $current_page - 2);
-                    $end_page = min($total_pages, $current_page + 2);
-
-                    // Display the range of page numbers
-                    for ($page = $start_page; $page <= $end_page; $page++): 
-                        $active_class = ($page == $current_page) ? 'active' : '';
-                ?>
-                    <li class="page-item <?= $active_class ?>">
-                        <a class="page-link" href="?page=<?= $page ?>"><?= $page ?></a>
-                    </li>
-                <?php endfor; ?>
-
-                <!-- Next Page Link -->
-                <?php if ($current_page < $total_pages): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?page=<?= $current_page + 1 ?>" aria-label="Next">
-                            <span aria-hidden="true">&raquo;</span> Next
-                        </a>
-                    </li>
-                <?php endif; ?>
-
-                <!-- Last Page Link -->
-                <?php if ($current_page < $total_pages): ?>
-                    <li class="page-item">
-                        <a class="page-link" href="?page=<?= $total_pages ?>" aria-label="Last">
-                            Last <span aria-hidden="true">&raquo;&raquo;</span>
-                        </a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
+                    <?php if ($currentPage < $totalPages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?page=<?= $currentPage + 1 ?>&showdate=<?= urlencode($showdate) ?>&starttime=<?= urlencode($starttime) ?>&endtime=<?= urlencode($endtime) ?>">&#62;</a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>
+      	</div>
+	</div>
+		
+    <script src="/BetaCinema_Clone/admin/pages/index/js/jquery.min.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/popper.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/bootstrap.min.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/main.js"></script>
 </body>
-
 <style>
-    thead th {
-        white-space: nowrap; 
-        overflow: hidden;  
-        text-overflow: ellipsis; 
-        max-width: 200px;
-        text-transform: uppercase;
+    form{
+        display: flex;
+        justify-content: center;
+        background: rgba(255, 255, 255, 0.5); 
+        backdrop-filter: blur(20px); 
+        border-radius: 10px; 
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 10px;
     }
 
-    tbody td {
-        white-space: nowrap; 
-        overflow: hidden;  
-        text-overflow: ellipsis; 
-        max-width: 150px; 
-    }
-    #font {
-        font-size: 14px;
+    label{
+        font-weight: bold;
     }
 </style>
 </html>

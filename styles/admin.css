@@ -1,0 +1,23 @@
+body { 
+    background-image: url('/BetaCinema_Clone/assets/bg-admin.png'); 
+}
+
+thead th {
+    white-space: nowrap; 
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+}
+
+tbody td {
+    white-space: nowrap; 
+    overflow: hidden;  
+    text-overflow: ellipsis; 
+}
+
+table {
+    table-layout: fixed;
+}
+
+.fa-sign-out{
+    font-size: 25px;
+}

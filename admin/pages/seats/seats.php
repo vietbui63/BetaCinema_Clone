@@ -2,158 +2,157 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="/BetaCinema_Clone/admin/pages/index/css/style.css">
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
     <title>SEATS</title>
 </head>
 <body>
-<?php
-require 'config.php';  // Kết nối cơ sở dữ liệu
+    <?php
+        session_start();
+        require 'config.php';
 
-// Thiết lập số hàng mỗi trang
-$limit = 5;
+        $rowsPerPage = 4;
+        $currentPage = isset($_GET['page']) ? (int)$_GET['page'] : 1;
+        $offset = ($currentPage - 1) * $rowsPerPage;
 
-// Lấy trang hiện tại từ URL, mặc định là 1
-$page = isset($_GET['page']) ? (int)$_GET['page'] : 1;
-$page = max($page, 1); // Đảm bảo không nhỏ hơn 1
+        // Xử lý tìm kiếm
+        $search = isset($_GET['search']) ? mysqli_real_escape_string($connect, $_GET['search']) : '';
 
-// Tính toán OFFSET
-$offset = ($page - 1) * $limit;
-
-// Lọc Hall ID nếu được chọn
-$hall_id_filter = isset($_GET['hall_id']) ? $_GET['hall_id'] : '';
-
-// Truy vấn danh sách các HallID
-$halls_query = "SELECT DISTINCT HallID FROM seats";
-$halls_result = mysqli_query($connect, $halls_query);
-
-// Truy vấn danh sách ghế dựa trên bộ lọc HallID và sắp xếp theo HallID và SeatNumber
-$query = "SELECT * FROM seats";
-if (!empty($hall_id_filter)) {
-    $query .= " WHERE HallID = '" . mysqli_real_escape_string($connect, $hall_id_filter) . "'";
-}
-
-// Thêm phân trang vào truy vấn
-$query .= " ORDER BY HallID ASC, SeatNumber ASC LIMIT $limit OFFSET $offset";
-
-// Thực thi truy vấn
-$result = mysqli_query($connect, $query);
-
-// Truy vấn để đếm tổng số ghế (cho phân trang)
-$count_query = "SELECT COUNT(*) as total FROM seats";
-if (!empty($hall_id_filter)) {
-    $count_query .= " WHERE HallID = '" . mysqli_real_escape_string($connect, $hall_id_filter) . "'";
-}
-$count_result = mysqli_query($connect, $count_query);
-$total_row = mysqli_fetch_assoc($count_result);
-$total_seats = $total_row['total'];
-
-// Tính tổng số trang
-$total_pages = ceil($total_seats / $limit);
-?>
-<div class="container mt-5">
-    <form method="GET" class="mb-6">
-        <div class="row align-items-center">
-            <!-- Nút thêm mới ghế -->
-            <div class="col-md-6 text-start">
-                <a href="/BetaCinema_Clone/admin/pages/seats/add_seats.php" class="btn btn-success">THÊM MỚI SEAT</a>
-            </div>
-            <!-- Thanh chọn lọc và nút lọc căn phải -->
-            <div class="col-md-6 text-end d-flex justify-content-end gap-4">
-                <!-- Thanh lọc Hall ID -->
-                <select name="hall_id" class="form-select w-auto">
-                    <option value="">-- Chọn Hall ID --</option>
-                    <?php
-                    while ($hall = mysqli_fetch_assoc($halls_result)) {
-                        $selected = ($hall_id_filter == $hall['HallID']) ? 'selected' : '';
-                        echo "<option value='" . htmlspecialchars($hall['HallID']) . "' $selected>Hall ID " . htmlspecialchars($hall['HallID']) . "</option>";
-                    }
-                    ?>
-                </select>
-                <!-- Nút lọc -->
-                <button type="submit" class="btn btn-primary">Lọc</button>
-            </div>
-        </div>
-    </form>
-
-    <!-- Bảng hiển thị dữ liệu -->
-    <table class="table table-info table-bordered border-info table-striped mt-3">
-        <thead>
-        <tr class="text-center">
-            <th scope="col">ID</th>
-            <th scope="col">Số Ghế</th>
-            <th scope="col">VIP</th>
-            <th scope="col">Couple</th>
-            <th scope="col">Hall ID</th>
-            <th scope="col">Function</th>
-        </tr>
-        </thead>
-        <tbody>
-        <?php
-        $counter = $offset + 1;
-        while ($row = mysqli_fetch_assoc($result)) {
-            echo "<tr class='text-center'>";
-            echo "<td>" . $counter++ . "</td>";
-            echo "<td>" . htmlspecialchars($row['SeatNumber']) . "</td>";
-            echo "<td>" . ($row['VIP'] == '1' ? 'Có' : 'Không') . "</td>";
-            echo "<td>" . ($row['Couple'] == '1' ? 'Có' : 'Không') . "</td>";
-            echo "<td>" . htmlspecialchars($row['HallID']) . "</td>";
-            echo "<td>
-                            <a href='/BetaCinema_Clone/admin/pages/seats/edit_seats.php?id=" . htmlspecialchars($row['SeatID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
-                            <a href='/BetaCinema_Clone/admin/pages/seats/delete_seats.php?id=" . htmlspecialchars($row['SeatID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá ghế này không?');\">XOÁ</a>
-                          </td>";
-            echo "</tr>";
+        if (!empty($search)) {
+            $countQuery = "SELECT COUNT(*) AS total FROM seats WHERE SeatNumber LIKE '%$search%'";
+            $query = "SELECT * FROM seats WHERE SeatNumber LIKE '%$search%' LIMIT $offset, $rowsPerPage";
+        } else {
+            $countQuery = "SELECT COUNT(*) AS total FROM seats";
+            $query = "SELECT * FROM seats LIMIT $offset, $rowsPerPage";
         }
-        ?>
-        </tbody>
-    </table>
 
-    <!-- Điều hướng phân trang -->
-    <div class="d-flex justify-content-center mt-4">
-        <nav aria-label="Pagination">
-            <ul class="pagination">
-                <!-- Nút Previous -->
-                <?php if ($page > 1): ?>
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="?hall_id=<?php echo $hall_id_filter; ?>&page=<?php echo $page - 1; ?>">Previous</a>
-                    </li>
-                <?php endif; ?>
+        $countResult = mysqli_query($connect, $countQuery);
+        $totalRows = mysqli_fetch_assoc($countResult)['total'];
+        $result = mysqli_query($connect, $query);
+        $totalPages = ceil($totalRows / $rowsPerPage);
+    ?>
 
-                <!-- Hiển thị số trang -->
-                <?php for ($i = 1; $i <= $total_pages; $i++): ?>
-                    <li class="page-item <?php echo ($i == $page) ? 'active' : ''; ?>">
-                        <a class="page-link"
-                           href="?hall_id=<?php echo $hall_id_filter; ?>&page=<?php echo $i; ?>"><?php echo $i; ?></a>
-                    </li>
-                <?php endfor; ?>
+    <div class="wrapper d-flex align-items-stretch">
+		<nav id="sidebar">
+			<div class="custom-menu">
+				<button type="button" id="sidebarCollapse" class="btn btn-primary">
+					<i class="fa fa-bars"></i>
+					<span class="sr-only">Toggle Menu</span>
+				</button>
+			</div>
+			<div class="p-4">
+		  		<h1><a href="/BetaCinema_Clone/admin/pages/index/index.php" class="logo">BETA CINEMA <span>Best Movies</span></a></h1>
+				<div class="text-center bg-white" style="border-radius: 10px">
+					<img src="/BetaCinema_Clone/assets/logo.png" alt="Logo" class="mt-4 mb-4">
+				</div>
+	        	<ul class="list-unstyled components mb-5 mt-4">
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/users/users.php"><span class="fa fa-user mr-3"></span> USERS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/movies/movies.php"><span class="fa fa-film mr-3"></span> MOVIES</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/cinemas/cinemas.php"><span class="fa fa-building mr-3"></span> CINEMAS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/halls/halls.php"><span class="fa fa-television mr-3"></span> HALLS</a>
+					</li>
+					<li class="active">
+						<a href="/BetaCinema_Clone/admin/pages/seats/seats.php"><span class="fa fa-users mr-3"></span> SEATS</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/showtimes/show_times.php"><span class="fa fa-video-camera mr-3"></span> SHOWTIMES</a>
+					</li>
+					<li>
+						<a href="/BetaCinema_Clone/admin/pages/payments/payments.php"><span class="fa fa-money mr-3"></span> PAYMENT</a>
+					</li>
+				</ul>
 
-                <!-- Nút Next -->
-                <?php if ($page < $total_pages): ?>
-                    <li class="page-item">
-                        <a class="page-link"
-                           href="?hall_id=<?php echo $hall_id_filter; ?>&page=<?php echo $page + 1; ?>">Next</a>
-                    </li>
-                <?php endif; ?>
-            </ul>
-        </nav>
-    </div>
-</div>
+	        	<div class="footer text-center" style="font-size: 18px">
+	        		<?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <span class="text-white admin-name">Hi, <?php echo $_SESSION['Fullname']; ?></span>
+                        <a class="btn text-white" href="/BetaCinema_Clone/auth/logout.php"><i class="fa fa-sign-out"></i></a>
+                    <?php else: ?>
+                    <?php endif; ?>
+	        	</div>
+	      </div>
+    	</nav>
+
+        <!-- Page Content  -->
+      	<div id="content" class="bg-img p-5">
+            <div class="d-flex justify-content-between align-items-center mb-3 mt-5">
+                <!-- FORM TÌM KIẾM -->
+                <form class="form-inline" method="GET" action="">
+                    <input type="text" name="search" class="form-control mr-2" placeholder="Tìm kiếm..." value="<?= htmlspecialchars($search) ?>" size="30">
+                    <button type="submit" class="btn btn-primary mr-2">Tìm kiếm</button>
+                    <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>" class="btn btn-secondary"><i class="fa fa-refresh"></i></a>
+                </form>
+                <h1 class="text-center text-white">THÔNG TIN SEATS</h1>
+                <a href="/BetaCinema_Clone/admin/pages/seats/add_seats.php" class="btn btn-success">THÊM MỚI SEATS</a>
+            </div>
+            <table class="table table-bordered table-striped table-primary mt-3">
+                <thead>
+                    <tr class="text-center">
+                        <th scope="col">ID</th>
+                        <th scope="col">Số Ghế</th>
+                        <th scope="col">VIP</th>
+                        <th scope="col">Couple</th>
+                        <th scope="col">Hall ID</th>
+                        <th scope="col">Chức năng</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                        $stt = $offset + 1;
+                        while ($row = mysqli_fetch_assoc($result)) {
+                            echo "<tr class='text-center'>";
+                            echo "<td>" . $stt++ . "</td>";
+                            echo "<td>" . htmlspecialchars($row['SeatNumber']) . "</td>";
+                            echo "<td>" . ($row['VIP'] == '1' ? 'Có' : 'Không') . "</td>";
+                            echo "<td>" . ($row['Couple'] == '1' ? 'Có' : 'Không') . "</td>";
+                            echo "<td>" . htmlspecialchars($row['HallID']) . "</td>";
+                            echo "<td>
+                                            <a href='/BetaCinema_Clone/admin/pages/seats/edit_seats.php?id=" . htmlspecialchars($row['SeatID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
+                                            <a href='/BetaCinema_Clone/admin/pages/seats/delete_seats.php?id=" . htmlspecialchars($row['SeatID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá ghế này không?');\">XOÁ</a>
+                                          </td>";
+                            echo "</tr>";
+                        }
+                    ?>
+                </tbody>
+            </table>   
+            <!-- PAGINATION -->
+            <div class="d-flex justify-content-center">
+                <ul class="pagination">
+                    <?php if ($currentPage > 1): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $currentPage - 1 ?>"><</a>
+                        </li>
+                    <?php endif; ?>
+
+                    <?php for ($i = 1; $i <= $totalPages; $i++): ?>
+                        <li class="page-item <?= ($i == $currentPage) ? 'active' : '' ?>">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $i ?>"><?= $i ?></a>
+                        </li>
+                    <?php endfor; ?>
+
+                    <?php if ($currentPage < $totalPages): ?>
+                        <li class="page-item">
+                            <a class="page-link" href="?search=<?= htmlspecialchars($search) ?>&page=<?= $currentPage + 1 ?>">></a>
+                        </li>
+                    <?php endif; ?>
+                </ul>
+            </div>      
+      	</div>
+	</div>
+		
+    <script src="/BetaCinema_Clone/admin/pages/index/js/jquery.min.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/popper.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/bootstrap.min.js"></script>
+    <script src="/BetaCinema_Clone/admin/pages/index/js/main.js"></script>
 </body>
-<style>
-    thead th {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 20px;
-    }
-
-    tbody td {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-        max-width: 50px;
-    }
-</style>
 </html>

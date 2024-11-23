@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
+
     <title>ADD HALL</title>
 </head>
 <body>
@@ -33,25 +35,27 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     <form method="POST">
         <div class="row mt-5">
-            <div class="col">
+            <div class="col-md-4">
                 <div class="mb-3">
                     <label for="hallname" class="form-label">Tên Hall</label>
                     <input type="text" class="form-control" id="hallname" name="hallname" required>
                 </div>
+            </div>
+            <div class="col-md-4">
                 <div class="mb-3">
                     <label for="seatcount" class="form-label">Số ghế</label>
                     <input type="number" class="form-control" id="seatcount" name="seatcount" required>
                 </div>
             </div>
-            <div class="col">
+            <div class="col-md-4">
                 <div class="mb-3">
                     <label for="cinemaid" class="form-label">Cinema ID</label>
                     <input type="number" class="form-control" id="cinemaid" name="cinemaid" required>
                 </div>
             </div>
-            <div class="row text-center">
-                <button type="submit" class="btn btn-success mt-4">THÊM</button>
-                <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-success mt-3">QUAY LẠI</a>
+            <div class="col text-center mt-4">
+                <a href="javascript:history.back()" class="btn btn-outline-success" style="margin-right:15px">QUAY LẠI</a>
+                <button type="submit" class="btn btn-success">THÊM</button>
             </div>
         </div>
     </form>
