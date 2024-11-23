@@ -263,7 +263,7 @@
                 <div class="tab-pane fade" id="special" role="tabpanel" aria-labelledby="special-tab">
                     <div class="row row-cols-1 row-cols-md-4 g-4">
                         <?php
-                            $query = "SELECT * FROM `movies` WHERE SpecialShow = 0";
+                            $query = "SELECT * FROM `movies` WHERE SpecialShow = '0'";
                             $result = mysqli_query($connect, $query);
 
                             if (!$result) {
