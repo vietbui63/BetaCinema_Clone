@@ -35,18 +35,18 @@ ob_end_flush();
     <title>CINEMAS</title>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <a href="/BetaCinema_Clone/admin/pages/cinemas/add_cinemas.php" class="btn btn-success text-center mt-5">THÊM MỚI CINEMA</a>
     <table class="table table-info table-bordered border-info table-striped mt-3">
         <thead>
         <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">Address</th>
-            <th scope="col">Location</th>
-            <th scope="col">Picture</th>
+            <th scope="col">Tên rạp</th>
+            <th scope="col">Địa chỉ</th>
+            <th scope="col">Thành phố</th>
+            <th scope="col">Ảnh</th>
             <th scope="col">Map</th>
-            <th scope="col">Ticket Price</th>
+            <th scope="col">Giá vé</th>
             <th scope="col">Hotline</th>
             <th scope="col">Function</th>
         </tr>
@@ -87,11 +87,15 @@ ob_end_flush();
 </div>
 </body>
 <style>
+    table {
+        table-layout: fixed;
+    }
+
     thead th {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 150px;
     }
 
     tbody td {
@@ -99,6 +103,10 @@ ob_end_flush();
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 150px;
+    }
+
+    .pagination{
+        background-color: #fff;
     }
 </style>
 </html>
