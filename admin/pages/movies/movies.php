@@ -34,18 +34,18 @@ $result = mysqli_query($connect, $query);
     <title>MOVIES</title>
 </head>
 <body>
-<div class="container mt-5">
+<div class="container">
     <a href="/BetaCinema_Clone/admin/pages/movies/add_movies.php" class="btn btn-success text-center mt-5">THÊM MỚI MOVIE</a>
     <table class="table table-info table-bordered border-info table-striped mt-3">
         <thead>
         <tr class="text-center">
             <th scope="col">ID</th>
-            <th scope="col">Title</th>
+            <th scope="col">Tên phim</th>
             <th scope="col">Type</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Duration</th>
-            <th scope="col">Release Date</th>
-            <th scope="col">Picture</th>
+            <th scope="col">Thể loại</th>
+            <th scope="col">Thời lượng</th>
+            <th scope="col">Ngày chiếu</th>
+            <th scope="col">Ảnh</th>
             <th scope="col">Trailer</th>
             <th scope="col">Status</th>
             <th scope="col">Special Show</th>
@@ -89,11 +89,15 @@ $result = mysqli_query($connect, $query);
 </div>
 </body>
 <style>
+    table {
+        table-layout: fixed;
+    }
+
     thead th {
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
-        max-width: 100px;
+        max-width: 200px;
     }
 
     tbody td {
@@ -101,6 +105,10 @@ $result = mysqli_query($connect, $query);
         overflow: hidden;
         text-overflow: ellipsis;
         max-width: 150px;
+    }
+
+    .pagination{
+        background-color: #fff;
     }
 </style>
 </html>

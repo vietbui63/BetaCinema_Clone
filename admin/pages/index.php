@@ -84,10 +84,6 @@
     </div>
 </body>
 <style>
-    body{
-        background-color: #e3f2fd;
-    }
-
     .content {
         display: none;
     }

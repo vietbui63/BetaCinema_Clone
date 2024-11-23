@@ -38,7 +38,7 @@
         <h2 class="text-center text-success mb-4">THÊM MỚI MOVIE</h2>
 
         <form method="POST">
-            <div class="row mt-5">
+            <div class="row">
                 <div class="col">
                     <div class="mb-3">
                         <label for="title" class="form-label">Title</label>
