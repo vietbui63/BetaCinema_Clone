@@ -77,7 +77,21 @@
                         while ($row = mysqli_fetch_assoc($result)) {
                             $startTime = $row['StartTime'];
                             $formattedTime = date("H:i", strtotime($startTime));
-                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($row['ShowDate']) . '">' . htmlspecialchars($formattedTime) . ' - Hall ' . htmlspecialchars($row['HallID']) . '</option>';
+
+                            // Tính số ghế còn trống
+                            $showDate = $row['ShowDate'];
+                            $hallID = $row['HallID'];
+                            $query_seats = "SELECT Seats FROM `payments` WHERE ShowDate = '$showDate' AND StartTime = '$startTime'";
+                            $result_seats = mysqli_query($connect, $query_seats);
+                            $bookedSeats = 0;
+
+                            while ($row_seats = mysqli_fetch_assoc($result_seats)) {
+                                $seatsArray = explode(',', $row_seats['Seats']);
+                                $bookedSeats += count($seatsArray);
+                            }
+                            $availableSeats = 20 - $bookedSeats;
+
+                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($showDate) . '">' . htmlspecialchars($formattedTime) . ' - Hall ' . htmlspecialchars($hallID) . ' (' . htmlspecialchars($availableSeats) . ' ghế còn trống)</option>';
                         }
                     ?>
                 </select>
@@ -113,29 +127,4 @@
         document.getElementById('showdate').dispatchEvent(new Event('change'));
     </script>
 </body>
-<style>
-    .btn{
-        font-size: 20px;
-        text-align: center;
-        transition: 0.5s;
-        background-size: 200% auto;
-        color: white;
-        font-weight: bold;
-        border-radius: 10px;
-    }
-
-    .btn, .btn:hover{
-        background-image: linear-gradient(to right, #fc3606 0%, #fda085 51%, #fc7704 100%) !important;
-        color: #fff;
-        border: none;
-    }
-
-    .btn:hover {
-        background-position: right center; 
-    }
-
-    .btn-back, .btn-back:hover{
-        background-image: linear-gradient(to right, #0a64a7 0%, #258dcf 51%, #3db1f3 100%) !important;
-    }
-</style>
 </html>
