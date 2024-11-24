@@ -25,6 +25,7 @@ if (!$result || mysqli_num_rows($result) == 0) {
 }
 
 $cinema = mysqli_fetch_assoc($result);
+$mess = '';
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $name = $_POST['name'];
@@ -40,10 +41,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             WHERE CinemaID=$cinema_id";
 
     if (mysqli_query($connect, $updateQuery)) {
-        header("Location: /BetaCinema_Clone/admin/pages/index.php?message=Cinema updated successfully.");
-        exit();
+        $mess = "Cập nhật thành công.";
     } else {
-        $error = "Error: " . mysqli_error($connect);
+        $mess = "Error: " . mysqli_error($connect);
     }
 }
 ?>
@@ -93,6 +93,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <a href="javascript:history.back()" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
                 <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
             </div>
+            <?php if ($mess): ?>
+                <div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>
+                    <?= $mess ?>
+                </div>
+                <script>
+                    setTimeout(function() {
+                        window.location.href = "/BetaCinema_Clone/admin/pages/cinemas/cinemas.php";
+                    }, 1000);
+                </script>
+            <?php endif; ?>
         </div>
     </form>
 </div>

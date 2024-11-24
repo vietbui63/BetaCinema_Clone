@@ -25,6 +25,7 @@
         }
 
         $seat = mysqli_fetch_assoc($result);
+        $mess = '';
 
         if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $seatNumber = $_POST['seatNumber'];
@@ -34,8 +35,7 @@
 
             $updateQuery = "UPDATE seats SET SeatNumber='$seatNumber', VIP='$vip', Couple='$couple', HallID=$hallID WHERE SeatID=$id";
             if (mysqli_query($connect, $updateQuery)) {
-                header("Location: /BetaCinema_Clone/admin/pages/index.php");
-                exit();
+                $mess = "Cập nhật thành công.";
             } else {
                 $error = "Error: " . mysqli_error($connect);
             }
@@ -97,6 +97,16 @@
                     <a href="javascript:history.back()" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
                     <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
                 </div>
+                <?php if ($mess): ?>
+                    <div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>
+                        <?= $mess ?>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "/BetaCinema_Clone/admin/pages/seats/seats.php";
+                        }, 1000);
+                    </script>
+                <?php endif; ?>
             </div>
         </form>
     </div>

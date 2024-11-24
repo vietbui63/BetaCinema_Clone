@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
 
     <title>CẬP NHẬT PAYMENT</title>
 
@@ -29,6 +30,7 @@
         }
 
         $payment = mysqli_fetch_assoc($result);
+        $mess = '';
 
         // Danh sách ghế và giá
         $seats = [
@@ -80,21 +82,14 @@
                             WHERE PaymentID = $paymentID";
 
             if (mysqli_query($connect, $updateQuery)) {
-                echo "<script>
-                    alert('Thanh toán đã được cập nhật thành công.');
-                    window.location.href = './payments.php';
-                </script>";
-                exit();
+                $mess = "Cập nhật thành công.";
             } else {
-                echo "<script>
-                    alert('Lỗi: " . mysqli_real_escape_string($connect, mysqli_error($connect)) . "' );
-                    window.history.back();
-                </script>";
+                $error = "Error: " . mysqli_error($connect);
             }
         }
     ?>
 
-    <div class="container">
+    <div class="container w-50">
         <h2 class="text-center mb-4">CẬP NHẬT Payment</h2>
         <form method="POST">
             <div class="row">
@@ -200,10 +195,20 @@
                     </div>
                 </div>
             </div>
-            <div class="text-center">
-                <a href="/BetaCinema_Clone/admin/pages/payments/payments.php" class="btn btn-outline-warning">QUAY LẠI</a>
+            <div class="col text-center mt-4">
+                <a href="javascript:history.back()" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
                 <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
             </div>
+            <?php if ($mess): ?>
+                <div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>
+                    <?= $mess ?>
+                </div>
+                <script>
+                    setTimeout(function() {
+                        window.location.href = "/BetaCinema_Clone/admin/pages/showtimes/show_times.php";
+                    }, 1000);
+                </script>
+            <?php endif; ?>
         </form>
     </div>
     <script>
@@ -259,7 +264,6 @@
 
         label {
             font-weight: bold;
-            font-size: 1rem;
         }
 
         .form-control {
@@ -272,18 +276,6 @@
         .form-control:focus {
             border-color: #66afe9;
             box-shadow: 0 0 5px rgba(0, 123, 255, 0.2);
-        }
-
-        .btn-warning {
-            border-radius: 25px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-
-        .btn-outline-warning {
-            border-radius: 25px;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
         .seat-selection {
@@ -307,6 +299,7 @@
             align-items: center;
             justify-content: center;
             box-sizing: border-box;
+            border: solid 1px #111;
         }
 
         .seat-option input[type="checkbox"] {
@@ -326,7 +319,6 @@
             width: 100%;
             height: 100%;
             font-weight: bold;
-            font-size: 1.3em;
             background-color: white;
             color: black;
             z-index: 1;

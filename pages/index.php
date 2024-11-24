@@ -45,7 +45,7 @@ session_start();
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <form action="" method="post" id="cinemaForm">
-                    <select name="cinemas" id="cinemas" class="nav-link" style="margin-right: 50px" onchange="submitForm()">
+                    <select name="cinemas" id="cinemas" class="nav-link" onchange="submitForm()">
                         <option value="" selected>CHỌN RẠP PHIM</option>
                         <?php
                         $query = "SELECT * FROM `cinemas` ORDER BY `Location`";
@@ -121,7 +121,7 @@ session_start();
                 </li>
             </ul>
             <form class="d-flex" role="search" method="post">
-                <input type="text" class="form-control search-movie" name="search" size="35" placeholder="Tìm kiếm phim..." aria-label="Search for movie">
+                <input type="text" class="form-control search-movie" name="search" placeholder="Tìm kiếm phim..." aria-label="Search for movie">
                 <button class="btn btn-outline-primary" type="submit"><i class="bi bi-search" style="font-size:20px;"></i></button>
             </form>
         </div>

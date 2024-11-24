@@ -73,10 +73,10 @@
 					<li>
 						<a href="/BetaCinema_Clone/admin/pages/halls/halls.php"><span class="fa fa-television mr-3"></span> HALLS</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="/BetaCinema_Clone/admin/pages/seats/seats.php"><span class="fa fa-users mr-3"></span> SEATS</a>
 					</li>
-					<li>
+					<li class="active">
 						<a href="/BetaCinema_Clone/admin/pages/showtimes/show_times.php"><span class="fa fa-video-camera mr-3"></span> SHOWTIMES</a>
 					</li>
 					<li>
@@ -96,26 +96,28 @@
 
         <!-- Page Content  -->
       	<div id="content" class="bg-img p-5">
-            <div class="d-flex justify-content-between align-items-center mb-3 mt-5">
-                <!-- BỘ LỌC -->
-                <form class="d-flex justify-content-center align-items-center w-50" method="GET" action="">
-                    <div class="form-group mr-2">
-                        <label for="starttime" class="mr-2 text-white">Giờ bắt đầu</label>
-                        <input type="time" name="starttime" class="form-control" value="<?= htmlspecialchars($_GET['starttime'] ?? '') ?>">
-                    </div>
-                    <div class="form-group mr-2">
-                        <label for="endtime" class="mr-2 text-white">Giờ kết thúc</label>
-                        <input type="time" name="endtime" class="form-control" value="<?= htmlspecialchars($_GET['endtime'] ?? '') ?>">
-                    </div>
-                    <div class="form-group mr-2">
-                        <label for="showdate" class="mr-2 text-white">Ngày chiếu</label>
-                        <input type="date" name="showdate" class="form-control" value="<?= htmlspecialchars($_GET['showdate'] ?? '') ?>">
-                    </div>
-                    <button type="submit" class="btn btn-primary mt-3 ml-3"><i class="fa fa-filter"></i></button>
-                    <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>" class="btn btn-secondary ml-3 mt-3"><i class="fa fa-refresh"></i></a>
-                </form>
-                <h1 class="text-center text-white">THÔNG TIN <br> SHOW TIMES</h1>
-                <a href="/BetaCinema_Clone/admin/pages/showtimes/add_showtimes.php" class="btn btn-success">THÊM MỚI SHOW TIMES</a>
+            <div class="rounded w-100">
+                <div class="d-flex justify-content-between align-items-center mb-3 mt-5">
+                    <!-- BỘ LỌC -->
+                    <form class="d-flex justify-content-center align-items-center w-50" method="GET" action="">
+                        <div class="form-group mr-2">
+                            <label for="starttime" class="mr-2 text-white">Giờ bắt đầu</label>
+                            <input type="time" name="starttime" class="form-control" value="<?= htmlspecialchars($_GET['starttime'] ?? '') ?>">
+                        </div>
+                        <div class="form-group mr-2">
+                            <label for="endtime" class="mr-2 text-white">Giờ kết thúc</label>
+                            <input type="time" name="endtime" class="form-control" value="<?= htmlspecialchars($_GET['endtime'] ?? '') ?>">
+                        </div>
+                        <div class="form-group mr-2">
+                            <label for="showdate" class="mr-2 text-white">Ngày chiếu</label>
+                            <input type="date" name="showdate" class="form-control" value="<?= htmlspecialchars($_GET['showdate'] ?? '') ?>">
+                        </div>
+                        <button type="submit" class="btn btn-primary mt-3 ml-3"><i class="fa fa-filter"></i></button>
+                        <a href="<?= strtok($_SERVER['REQUEST_URI'], '?') ?>" class="btn btn-secondary ml-3 mt-3"><i class="fa fa-refresh"></i></a>
+                    </form>
+                    <h1 class="text-center text-white">THÔNG TIN <br> SHOW TIMES</h1>
+                    <a href="/BetaCinema_Clone/admin/pages/showtimes/add_showtimes.php" class="btn btn-success">THÊM MỚI SHOW TIMES</a>
+                </div>
             </div>
             <table class="table table-bordered table-striped table-primary mt-3">
                 <thead>

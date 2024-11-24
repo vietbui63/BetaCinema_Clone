@@ -1,3 +1,42 @@
+<?php
+require 'config.php';
+
+if (!isset($_GET['id'])) {
+    die("UserID not provided.");
+}
+
+$id = intval($_GET['id']);
+$query = "SELECT * FROM users WHERE UserID = $id";
+$result = mysqli_query($connect, $query);
+
+if (!$result || mysqli_num_rows($result) == 0) {
+    die("User not found.");
+}
+
+$user = mysqli_fetch_assoc($result);
+$mess = '';
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $fullname = $_POST['fullname'];
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+    $dob = $_POST['dob'];
+    $sex = $_POST['sex'];
+    $phone = $_POST['phone'];
+    $role = $_POST['role'];
+
+    $updateQuery = "UPDATE users 
+                    SET Fullname='$fullname', Email='$email', Pass_word='$password', Dob='$dob', Sex='$sex', Phone='$phone', Role='$role' 
+                    WHERE UserID=$id";
+
+    if (mysqli_query($connect, $updateQuery)) {
+        $mess = "Cập nhật thành công.";
+    } else {
+        $mess = "Error: " . mysqli_error($connect);
+    }
+}
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -9,53 +48,8 @@
     <title>EDIT USER</title>
 </head>
 <body>
-    <?php
-        require 'config.php';
-
-        if (!isset($_GET['id'])) {
-            die("UserID not provided.");
-        }
-
-        $id = intval($_GET['id']);
-
-        $query = "SELECT * FROM users WHERE UserID = $id";
-        $result = mysqli_query($connect, $query);
-
-        if (!$result || mysqli_num_rows($result) == 0) {
-            die("User not found.");
-        }
-
-        $user = mysqli_fetch_assoc($result);
-
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $fullname = $_POST['fullname'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $dob = $_POST['dob'];
-            $sex = $_POST['sex'];
-            $phone = $_POST['phone'];
-            $role = $_POST['role'];
-
-            $updateQuery = "UPDATE users 
-                            SET Fullname='$fullname', Email='$email', Pass_word='$password', Dob='$dob', Sex='$sex', Phone='$phone', Role='$role' 
-                            WHERE UserID=$id";
-
-            if (mysqli_query($connect, $updateQuery)) {
-                header("Location: /BetaCinema_Clone/admin/pages/index.php?message=User updated successfully.");
-                exit();
-            } else {
-                $error = "Error: " . mysqli_error($connect);
-            }
-        }
-    ?>
-
     <div class="container w-50">
         <h2 class="text-center text-warning mb-4">CẬP NHẬT USERS</h2>
-
-        <?php if (isset($error)): ?>
-            <div class="alert alert-danger"><?= htmlspecialchars($error) ?></div>
-        <?php endif; ?>
-
         <form method="POST">
             <div class="row mt-5">
                 <div class="col-md-6">
@@ -100,9 +94,19 @@
                     </div>
                 </div>
                 <div class="col text-center mt-4">
-                    <a href="javascript:history.back()" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
+                    <a href="/BetaCinema_Clone/admin/pages/users/users.php" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
                     <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
                 </div>
+                <?php if ($mess): ?>
+                    <div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>
+                        <?= $mess ?>
+                    </div>
+                    <script>
+                        setTimeout(function() {
+                            window.location.href = "/BetaCinema_Clone/admin/pages/users/users.php";
+                        }, 1000);
+                    </script>
+                <?php endif; ?>
             </div>
         </form>
     </div>
