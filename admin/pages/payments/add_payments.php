@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <title>EDIT PAYMENT</title>
+    <title>ADD PAYMENT</title>
 </head>
 <body>
     
@@ -28,11 +28,12 @@
                     VALUES ('$paymentDate','$paymentMethod',$userID,'$movieTitle','$cinemaName','$showDate','$hallName','$startTime', '$seats', $totalPrice)";
             
             $result = mysqli_query($connect, $query);
-            
+            $payment = mysqli_fetch_assoc($result);
+
             if (mysqli_query($connect, $query)) {
                 echo "<script>
                     alert('Payment đã được cập nhật.');
-                    window.location.href = '/BetaCinema_Clone/admin/pages/index.php';
+                    window.location.href = './payments.php';
                 </script>";
                 exit();
             } else {
@@ -55,19 +56,63 @@
                     </div>
                     <div class="mb-3">
                         <label for="PaymentMethod" class="form-label">Phương Thức</label>
-                        <input type="text" class="form-control" id="PaymentMethod" name="PaymentMethod" required>
+                        <select class="form-control" id="PaymentMethod" name="PaymentMethod" required>
+                            <option value="" disabled selected>Chọn phương thức thanh toán</option>
+                            <option value="Zalopay" <?php if (isset($payment['PaymentMethod']) && $payment['PaymentMethod'] == 'Zalopay') echo 'selected'; ?>>Zalopay</option>
+                            <option value="Momo" <?php if (isset($payment['PaymentMethod']) && $payment['PaymentMethod'] == 'Momo') echo 'selected'; ?>>Momo</option>
+                            <option value="Thanh toán tại Beta" <?php if (isset($payment['PaymentMethod']) && $payment['PaymentMethod'] == 'Thanh toán tại Beta') echo 'selected'; ?>>Thanh toán tại Beta</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="UserID" class="form-label">ID User</label>
-                        <input type="text" class="form-control" id="UserID" name="UserID" required>
+                        <select class="form-control" id="UserID" name="UserID" required>
+                            <option value="" disabled selected>Chọn ID_User</option>
+                            <?php
+                            $userQuery = "SELECT UserID, Fullname FROM users";
+                            $userResult = mysqli_query($connect, $userQuery);
+
+                            if (mysqli_num_rows($userResult) > 0) {
+                                while ($user = mysqli_fetch_assoc($userResult)) {
+                                    $selected = ($user['UserID'] == $payment['UserID']) ? 'selected' : '';
+                                    echo "<option value='" . $user['UserID'] . "' $selected>" . $user['UserID'] . " - " . $user['Fullname'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="MovieTitle" class="form-label">Tên Phim</label>
-                        <input type="text" class="form-control" id="MovieTitle" name="MovieTitle" required>
+                        <select class="form-control" id="MovieTitle" name="MovieTitle" required>
+                            <option value="" disabled selected>Chọn tên phim</option>
+                            <?php
+                            $movieQuery = "SELECT Title FROM movies";
+                            $movieResult = mysqli_query($connect, $movieQuery);
+
+                            if (mysqli_num_rows($movieResult) > 0) {
+                                while ($movie = mysqli_fetch_assoc($movieResult)) {
+                                    $selected = ($movie['Title'] == $payment['MovieTitle']) ? 'selected' : '';
+                                    echo "<option value='" . $movie['Title'] . "' $selected>" . $movie['Title'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="CinemaName" class="form-label">Rạp Chiếu</label>
-                        <input type="text" class="form-control" id="CinemaName" name="CinemaName" required>
+                        <select class="form-control" id="CinemaName" name="CinemaName" required>
+                            <option value="" disabled selected>Chọn rạp chiếu</option>
+                            <?php
+                            $cinemaQuery = "SELECT CinemaName FROM cinemas";
+                            $cinemaResult = mysqli_query($connect, $cinemaQuery);
+
+                            if (mysqli_num_rows($cinemaResult) > 0) {
+                                while ($cinema = mysqli_fetch_assoc($cinemaResult)) {
+                                    $selected = ($cinema['CinemaName'] == $payment['CinemaName']) ? 'selected' : '';
+                                    echo "<option value='" . $cinema['CinemaName'] . "' $selected>" . $cinema['CinemaName'] . "</option>";
+                                }
+                            }
+                            ?>
+                        </select>
                     </div>
                 </div>
                 <div class="col-md-6">
@@ -77,7 +122,11 @@
                     </div>
                     <div class="mb-3">
                         <label for="HallName" class="form-label">Phòng Chiếu</label>
-                        <input type="text" class="form-control" id="HallName" name="HallName" required>
+                        <select class="form-control" id="HallName" name="HallName" required>
+                            <option value="" disabled selected>Chọn phòng chiếu</option>
+                            <option value="P1" <?php if (isset($payment['HallName']) && $payment['HallName'] == 'P1') echo 'selected'; ?>>P1</option>
+                            <option value="P2" <?php if (isset($payment['HallName']) && $payment['HallName'] == 'P2') echo 'selected'; ?>>P2</option>
+                        </select>
                     </div>
                     <div class="mb-3">
                         <label for="StartTime" class="form-label">Giờ Chiếu</label>
@@ -94,8 +143,9 @@
                 </div>
             </div>
             <div class="text-center">
+                <a href="/BetaCinema_Clone/admin/pages/payments/payments.php" class="btn btn-outline-success">QUAY LẠI</a>
                 <button type="submit" class="btn btn-success">THÊM</button>
-                <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-success">QUAY LẠI</a>
+
             </div>
         </form>
     </div>

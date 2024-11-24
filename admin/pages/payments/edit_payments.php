@@ -7,7 +7,7 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
     <title>CẬP NHẬT PAYMENT</title>
-    
+
 </head>
 <body>
     <?php
@@ -82,7 +82,7 @@
             if (mysqli_query($connect, $updateQuery)) {
                 echo "<script>
                     alert('Thanh toán đã được cập nhật thành công.');
-                    window.location.href = '/BetaCinema_Clone/admin/pages/index.php';
+                    window.location.href = './payments.php';
                 </script>";
                 exit();
             } else {
@@ -180,12 +180,12 @@
                         <label for="Seats" class="form-label">Chọn Ghế Ngồi</label>
                         <div class="seat-selection">
                             <?php foreach ($seats as $seat => $price): ?>
-                                <?php 
-                                    $isChecked = in_array($seat, $selectedSeats) ? 'checked' : ''; 
-                                    $divClass = $isChecked ? 'seat-option checked' : 'seat-option'; 
+                                <?php
+                                    $isChecked = in_array($seat, $selectedSeats) ? 'checked' : '';
+                                    $divClass = $isChecked ? 'seat-option checked' : 'seat-option';
                                 ?>
                                 <div class="<?= $divClass ?>">
-                                    <input type="checkbox" name="Seats[]" value="<?= $seat ?>" 
+                                    <input type="checkbox" name="Seats[]" value="<?= $seat ?>"
                                         <?= $isChecked ?> id="seat_<?= $seat ?>" onchange="updateTotal()">
                                     <label class="form-check-label" for="seat_<?= $seat ?>">
                                         <?= $seat ?>
@@ -201,8 +201,8 @@
                 </div>
             </div>
             <div class="text-center">
+                <a href="/BetaCinema_Clone/admin/pages/payments/payments.php" class="btn btn-outline-warning">QUAY LẠI</a>
                 <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
-                <a href="/BetaCinema_Clone/admin/pages/index.php" class="btn btn-outline-warning">QUAY LẠI</a>
             </div>
         </form>
     </div>
@@ -222,8 +222,8 @@
                 // Tính tổng tiền
                 let total = 0;
                 selected.forEach(function(cb) {
-                    const seat = cb.value; 
-                    const price = <?= json_encode($seats) ?>[seat]; 
+                    const seat = cb.value;
+                    const price = <?= json_encode($seats) ?>[seat];
                     total += price;
                 });
                 document.getElementById('TotalPrice').value = total.toLocaleString() + ' VNĐ';
@@ -245,8 +245,8 @@
             border: 2px solid #ffc107;
             border-radius: 20px;
             padding: 25px;
-            background-color: #fff; 
-            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); 
+            background-color: #fff;
+            box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
         }
 
         h2 {
@@ -286,7 +286,7 @@
             transition: background-color 0.3s ease, transform 0.2s ease;
         }
 
-        .seat-selection { 
+        .seat-selection {
             display: grid;
             height: 233px;
             grid-template-columns: repeat(5, 1fr);
@@ -328,7 +328,7 @@
             font-weight: bold;
             font-size: 1.3em;
             background-color: white;
-            color: black; 
+            color: black;
             z-index: 1;
             box-sizing: border-box;
         }

@@ -19,7 +19,7 @@
     if (mysqli_query($connect, $deleteQuery)) {
         echo "<script>
             alert('Payments đã được xóa thành công.');
-            window.location.href = '/BetaCinema_Clone/admin/pages/index.php';
+            window.location.href = './payments.php';
         </script>";
         exit();
     } else {
