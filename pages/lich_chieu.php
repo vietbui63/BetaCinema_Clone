@@ -90,7 +90,8 @@
                             // Tính số ghế còn trống
                             $showDate = $row['ShowDate'];
                             $hallID = $row['HallID'];
-                            $query_seats = "SELECT Seats FROM `payments` WHERE ShowDate = '$showDate' AND StartTime = '$startTime' AND HallName = '$hallName'";
+                            $query_seats = "SELECT Seats FROM `payments` 
+                                            WHERE CinemaName = '$cinemaName' AND ShowDate = '$showDate' AND StartTime = '$startTime' AND HallName = '$hallName'";
                             $result_seats = mysqli_query($connect, $query_seats);
                             $bookedSeats = 0;
 
