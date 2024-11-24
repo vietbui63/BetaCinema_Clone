@@ -3,7 +3,7 @@ Enable GD in xampp:
 2. Click Config of Apache
 3. Select PHP (php.ini)
 4. Search ";extension=gd"
-5 Delete ";"
+5. Delete ";"
 
 Install PHPMailer:
 1. Install composer (https://getcomposer.org/download/)
