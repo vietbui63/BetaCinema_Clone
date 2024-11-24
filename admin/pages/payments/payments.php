@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="../favicon.ico">
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700,800,900" rel="stylesheet">
@@ -152,20 +153,20 @@
                         <div class="row w-100">
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="sort_order" class="text-white">Sắp xếp</label>
-                                    <select class="form-select" id="sort_order" name="sort_order" >
-                                        <option value="asc" <?= isset($sortOrder) && $sortOrder === 'asc' ? 'selected' : '' ?>>Tăng dần</option>
-                                        <option value="desc" <?= isset($sortOrder) && $sortOrder === 'desc' ? 'selected' : '' ?>>Giảm dần</option>
+                                    <label for="group_by" class="text-white">Thống kê theo</label>
+                                    <select class="form-select" id="group_by" name="group_by">
+                                        <option value="day" <?php if ($groupBy == 'day') echo 'selected'; ?>>Ngày</option>
+                                        <option value="month" <?php if ($groupBy == 'month') echo 'selected'; ?>>Tháng</option>
+                                        <option value="year" <?php if ($groupBy == 'year') echo 'selected'; ?>>Năm</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="col-12 col-md-4">
                                 <div class="form-group">
-                                    <label for="group_by" class="text-white">Thống kê theo</label>
-                                    <select class="form-select" id="group_by" name="group_by">
-                                        <option value="day" <?php if ($groupBy == 'day') echo 'selected'; ?>>Theo ngày</option>
-                                        <option value="month" <?php if ($groupBy == 'month') echo 'selected'; ?>>Theo tháng</option>
-                                        <option value="year" <?php if ($groupBy == 'year') echo 'selected'; ?>>Theo năm</option>
+                                    <label for="sort_order" class="text-white">Sắp xếp</label>
+                                    <select class="form-select" id="sort_order" name="sort_order" >
+                                        <option value="asc" <?= isset($sortOrder) && $sortOrder === 'asc' ? 'selected' : '' ?>>Tăng dần</option>
+                                        <option value="desc" <?= isset($sortOrder) && $sortOrder === 'desc' ? 'selected' : '' ?>>Giảm dần</option>
                                     </select>
                                 </div>
                             </div>
