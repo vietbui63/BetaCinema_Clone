@@ -78,10 +78,18 @@
                             $startTime = $row['StartTime'];
                             $formattedTime = date("H:i", strtotime($startTime));
 
+                            // Lấy tên Hall từ bảng halls 
+                            $hallID = $row['HallID']; 
+                            $query_hall = "SELECT HallName, SeatCount FROM `halls` WHERE HallID = '$hallID'"; 
+                            $result_hall = mysqli_query($connect, $query_hall); 
+                            $row_hall = mysqli_fetch_assoc($result_hall); 
+                            $hallName = $row_hall['HallName'];
+                            $seatCount = $row_hall['SeatCount'];
+
                             // Tính số ghế còn trống
                             $showDate = $row['ShowDate'];
                             $hallID = $row['HallID'];
-                            $query_seats = "SELECT Seats FROM `payments` WHERE ShowDate = '$showDate' AND StartTime = '$startTime'";
+                            $query_seats = "SELECT Seats FROM `payments` WHERE ShowDate = '$showDate' AND StartTime = '$startTime' AND HallName = '$hallName'";
                             $result_seats = mysqli_query($connect, $query_seats);
                             $bookedSeats = 0;
 
@@ -89,9 +97,10 @@
                                 $seatsArray = explode(',', $row_seats['Seats']);
                                 $bookedSeats += count($seatsArray);
                             }
-                            $availableSeats = 20 - $bookedSeats;
 
-                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($showDate) . '">' . htmlspecialchars($formattedTime) . ' - Hall ' . htmlspecialchars($hallID) . ' (' . htmlspecialchars($availableSeats) . ' ghế còn trống)</option>';
+                            $availableSeats = $seatCount - $bookedSeats;
+
+                            echo '<option value="' . htmlspecialchars($startTime) . '" data-showdate="' . htmlspecialchars($showDate) . '">' . htmlspecialchars($formattedTime) . ' - Hall ' . htmlspecialchars($hallID) . ' - ' . htmlspecialchars($availableSeats) . ' ghế trống</option>';
                         }
                     ?>
                 </select>
