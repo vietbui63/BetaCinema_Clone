@@ -31,9 +31,8 @@
                     VALUES ('$paymentDate','$paymentMethod',$userID,'$movieTitle','$cinemaName','$showDate','$hallName','$startTime', '$seats', $totalPrice)";
             
             $result = mysqli_query($connect, $query);
-            $payment = mysqli_fetch_assoc($result);
 
-            if (mysqli_query($connect, $query)) {
+            if ($result) {
                 header("Location: /BetaCinema_Clone/admin/pages/payments/payments.php");
                 exit();
             } else {

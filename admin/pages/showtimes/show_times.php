@@ -73,10 +73,10 @@
 					<li>
 						<a href="/BetaCinema_Clone/admin/pages/halls/halls.php"><span class="fa fa-television mr-3"></span> HALLS</a>
 					</li>
-					<li class="active">
+					<li>
 						<a href="/BetaCinema_Clone/admin/pages/seats/seats.php"><span class="fa fa-users mr-3"></span> SEATS</a>
 					</li>
-					<li>
+					<li class="active">
 						<a href="/BetaCinema_Clone/admin/pages/showtimes/show_times.php"><span class="fa fa-video-camera mr-3"></span> SHOWTIMES</a>
 					</li>
 					<li>
@@ -142,7 +142,7 @@
                             echo "<td>" . htmlspecialchars($row['HallID']) . "</td>";
                             echo "<td>
                                     <a href='/BetaCinema_Clone/admin/pages/showtimes/edit_showtimes.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-warning btn-sm'>SỬA</a>
-                                    <a href='/BetaCinema_Clone/admin/pages/seats/delete_seats.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá ghế này không?');\">XOÁ</a>
+                                    <a href='/BetaCinema_Clone/admin/pages/showtimes/delete_showtimes.php?id=" . htmlspecialchars($row['ShowtimeID']) . "' class='btn btn-danger btn-sm' onclick=\"return confirm('Bạn có chắc chắn muốn xoá ghế này không?');\">XOÁ</a>
                                 </td>";
                             echo "</tr>";
                         }

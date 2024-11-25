@@ -25,16 +25,10 @@
             $result = mysqli_query($connect, $query);
             
             if ($result) {
-                echo "<script>
-                    alert('Showtime đã được thêm thành công.');
-                    window.location.href = '/BetaCinema_Clone/admin/pages/index.php';
-                </script>";
+                header('Location: /BetaCinema_Clone/admin/pages/showtimes/show_times.php');
                 exit();
             } else {
-                echo "<script>
-                    alert('Error: " . mysqli_real_escape_string($connect, mysqli_error($connect)) . "');
-                    window.history.back();
-                </script>";
+                echo "Error: " . mysqli_error($connect);
             }            
         }
     ?>
