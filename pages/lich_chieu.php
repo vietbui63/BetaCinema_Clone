@@ -86,12 +86,16 @@
                             $row_hall = mysqli_fetch_assoc($result_hall); 
                             $hallName = $row_hall['HallName'];
                             $seatCount = $row_hall['SeatCount'];
+                            
 
                             // Tính số ghế còn trống
                             $showDate = $row['ShowDate'];
                             $hallID = $row['HallID'];
                             $query_seats = "SELECT Seats FROM `payments` 
-                                            WHERE CinemaName = '$cinemaName' AND ShowDate = '$showDate' AND StartTime = '$startTime' AND HallName = '$hallName'";
+                                            WHERE CinemaName = '$cinema_name' 
+                                                AND ShowDate = '$showDate' 
+                                                AND StartTime = '$startTime' 
+                                                AND HallName = '$hallName'";
                             $result_seats = mysqli_query($connect, $query_seats);
                             $bookedSeats = 0;
 
