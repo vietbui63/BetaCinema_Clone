@@ -119,7 +119,7 @@
                         echo "<td>" . htmlspecialchars($row['Fullname']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Email']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Pass_word']) . "</td>";
-                        echo "<td>" . htmlspecialchars($row['Dob']) . "</td>";
+                        echo "<td>" . (!empty($row['Dob']) ? date("d/m/Y", strtotime($row['Dob'])) : "N/A") . "</td>";
                         echo "<td>" . htmlspecialchars($row['Sex']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Phone']) . "</td>";
                         echo "<td>" . htmlspecialchars($row['Role']) . "</td>";
