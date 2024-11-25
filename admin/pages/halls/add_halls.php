@@ -23,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $result = mysqli_query($connect, $query);
 
     if ($result) {
-        header('Location: /BetaCinema_Clone/admin/pages/index.php');
+        header('Location: /BetaCinema_Clone/admin/pages/halls/halls.php');
         exit();
     } else {
         echo "Error: " . mysqli_error($connect);

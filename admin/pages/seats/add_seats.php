@@ -21,7 +21,7 @@
 
             $query = "INSERT INTO seats (SeatNumber, VIP, Couple, HallID) VALUES ('$seatNumber', '$vip', '$couple', $hallID)";
             if (mysqli_query($connect, $query)) {
-                header("Location: /BetaCinema_Clone/admin/pages/index.php");
+                header("Location: /BetaCinema_Clone/admin/pages/seats/seats.php");
                 exit();
             } else {
                 $error = "Error: " . mysqli_error($connect);

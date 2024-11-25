@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
               VALUES ('$name', '$address', '$location', '$pic', '$map', '$giave', '$hotline')";
 
     if (mysqli_query($connect, $query)) {
-        header("Location: /BetaCinema_Clone/admin/pages/index.php?message=Cinema added successfully.");
+        header("Location: /BetaCinema_Clone/admin/pages/cinemas/cinemas.php");
         exit();
     } else {
         $error = "Error: " . mysqli_error($connect);

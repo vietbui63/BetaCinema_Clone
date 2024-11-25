@@ -22,7 +22,7 @@ if (!$result || mysqli_num_rows($result) == 0) {
 $deleteQuery = "DELETE FROM halls WHERE HallID = $id";
 if (mysqli_query($connect, $deleteQuery)) {
     // Sau khi xóa, chuyển hướng về trang danh sách Halls
-    header("Location: /BetaCinema_Clone/admin/pages/index.php");
+    header("Location: /BetaCinema_Clone/admin/pages/halls/halls.php");
     exit();
 } else {
     // Hiển thị lỗi nếu quá trình xóa thất bại

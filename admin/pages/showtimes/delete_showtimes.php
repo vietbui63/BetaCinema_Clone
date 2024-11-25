@@ -17,15 +17,9 @@
 
     $deleteQuery = "DELETE FROM show_times WHERE ShowtimeID = $id";
     if (mysqli_query($connect, $deleteQuery)) {
-        echo "<script>
-            alert('Showtimes đã được xóa thành công.');
-            window.location.href = '/BetaCinema_Clone/admin/pages/index.php';
-        </script>";
+        header("Location: /BetaCinema_Clone/admin/pages/showtimes/show_times.php");
         exit();
     } else {
-        echo "<script>
-            alert('Error: " . mysqli_real_escape_string($connect, mysqli_error($connect)) . "');
-            window.history.back();
-        </script>";
+        die("Error deleting seat: " . mysqli_error($connect));
     }     
 ?>

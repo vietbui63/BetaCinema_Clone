@@ -34,16 +34,10 @@
             $payment = mysqli_fetch_assoc($result);
 
             if (mysqli_query($connect, $query)) {
-                echo "<script>
-                    alert('Payment đã được cập nhật.');
-                    window.location.href = './payments.php';
-                </script>";
+                header("Location: /BetaCinema_Clone/admin/pages/payments/payments.php");
                 exit();
             } else {
-                echo "<script>
-                    alert('Error: " . mysqli_real_escape_string($connect, mysqli_error($connect)) . "');
-                    window.history.back();
-                </script>";
+                die("Error deleting seat: " . mysqli_error($connect));
             }            
         }
     ?>

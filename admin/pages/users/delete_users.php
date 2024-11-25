@@ -7,18 +7,16 @@
 
     $id = intval($_GET['id']); 
 
-    $query = "SELECT * FROM users WHERE UserID = $id";
-    $result = mysqli_query($connect, $query);
+    $query = "DELETE FROM payments WHERE UserID = $id";
+    mysqli_query($connect, $query);
 
-    if (!$result || mysqli_num_rows($result) == 0) {
-        die("User not found.");
-    }
-
+    // Sau đó, xóa người dùng
     $deleteQuery = "DELETE FROM users WHERE UserID = $id";
     if (mysqli_query($connect, $deleteQuery)) {
-        header("Location: /BetaCinema_Clone/admin/pages/index.php");
+        header("Location: /BetaCinema_Clone/admin/pages/users/users.php");
         exit();
     } else {
         die("Error deleting user: " . mysqli_error($connect));
     }
+
 ?>

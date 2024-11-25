@@ -26,7 +26,7 @@
             $result = mysqli_query($connect, $query);
 
             if ($result) {
-                header('Location: /BetaCinema_Clone/admin/pages/index.php');
+                header('Location: /BetaCinema_Clone/admin/pages/users/users.php');
                 exit();
             } else {
                 echo "Error: " . mysqli_error($connect);

@@ -15,7 +15,7 @@ if (!$result || mysqli_num_rows($result) == 0) {
 
 $deleteQuery = "DELETE FROM seats WHERE SeatID = $id";
 if (mysqli_query($connect, $deleteQuery)) {
-    header("Location: /BetaCinema_Clone/admin/pages/index.php");
+    header("Location: /BetaCinema_Clone/admin/pages/seats/seats.php");
     exit();
 } else {
     die("Error deleting seat: " . mysqli_error($connect));
