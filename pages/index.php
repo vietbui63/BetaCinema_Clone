@@ -111,14 +111,18 @@ session_start();
                 <li class="nav-item">
                     <a class="nav-link main" href="/BetaCinema_Clone/pages/nhuong_quyen.php" style="margin-left: 15px">NHƯỢNG QUYỀN</a>
                 </li>
-                <li class="nav-item">
-                    <?php
-                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true)
-                        echo '<a class="nav-link main" href="/BetaCinema_Clone/pages/thanh_vien.php" style="margin-left: 15px">THÀNH VIÊN</a>';
-                    else
-                        echo '<a class="nav-link main" href="/BetaCinema_Clone/auth/login.php" style="margin-left: 15px">THÀNH VIÊN</a>';
-                    ?>
-
+                <li class="nav-item dropdown">
+                    <?php if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true): ?>
+                        <a class="nav-link main dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="margin-left: 15px">
+                            THÀNH VIÊN
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item" href="/BetaCinema_Clone/pages/thong_tin_tk.php">Thông Tin Tài Khoản</a></li>
+                            <li><a class="dropdown-item" href="/BetaCinema_Clone/pages/hanh_trinh_dien_anh.php">Hành trình điện ảnh</a></li>
+                        </ul>
+                    <?php else: ?>
+                        <a class="nav-link main" href="/BetaCinema_Clone/auth/login.php" style="margin-left: 15px">THÀNH VIÊN</a>
+                    <?php endif; ?>
                 </li>
             </ul>
             <form class="d-flex" role="search" method="post">
