@@ -19,7 +19,7 @@ $mess = '';
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $fullname = $_POST['fullname'];
     $email = $_POST['email'];
-    $password = $_POST['password'];
+    $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
     $dob = $_POST['dob'];
     $sex = $_POST['sex'];
     $phone = $_POST['phone'];
