@@ -1,56 +1,56 @@
 <?php
-require 'config.php';
+    require 'config.php';
 
-$sql = "SHOW COLUMNS FROM `users` LIKE 'Sex'";
-$result = $connect->query($sql);
-$row = $result->fetch_assoc();
-$type = $row['Type'];
-preg_match("/^enum\(\'(.*)\'\)$/", $type, $matches);
-$enum_values = explode("','", $matches[1]);
+    $sql = "SHOW COLUMNS FROM `users` LIKE 'Sex'";
+    $result = $connect->query($sql);
+    $row = $result->fetch_assoc();
+    $type = $row['Type'];
+    preg_match("/^enum\(\'(.*)\'\)$/", $type, $matches);
+    $enum_values = explode("','", $matches[1]);
 
-$mess = $error = '';
-$fullname = $email = $password = $confirmPassword = $dob = $sex = $phone = '';
+    $mess = $error = '';
+    $fullname = $email = $password = $confirmPassword = $dob = $sex = $phone = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $fullname = $_POST['fullname'];
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $confirmPassword = $_POST['confirmpassword'];
-    $dob = $_POST['dob'];
-    $sex = $_POST['sex'];
-    $phone = $_POST['phone'];
+    if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $confirmPassword = $_POST['confirmpassword'];
+        $dob = $_POST['dob'];
+        $sex = $_POST['sex'];
+        $phone = $_POST['phone'];
 
-    $passwordPattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/";
+        $passwordPattern = "/^(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}$/";
 
-    if (!preg_match($passwordPattern, $password)) {
-        $error = 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt.';
-        $password = $confirmPassword = ''; // Clear password fields
-    } elseif ($password !== $confirmPassword) {
-        $error = 'Mật khẩu và xác nhận mật khẩu không khớp.';
-        $password = $confirmPassword = ''; // Clear password fields
-    } else {
-        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
-
-        $check_email = "SELECT Email FROM users WHERE Email = '$email'";
-        $result = $connect->query($check_email);
-
-        if ($result->num_rows > 0) {
-            $error = 'Email đã tồn tại. Vui lòng sử dụng email khác.';
-            $email = ''; // Clear email field
+        if (!preg_match($passwordPattern, $password)) {
+            $error = 'Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt.';
+            $password = $confirmPassword = ''; // Clear password fields
+        } elseif ($password !== $confirmPassword) {
+            $error = 'Mật khẩu và xác nhận mật khẩu không khớp.';
+            $password = $confirmPassword = ''; // Clear password fields
         } else {
-            $sql = "INSERT INTO users (Fullname, Email, Pass_word, DoB, Sex, Phone) VALUES ('$fullname', '$email', '$hashedPassword', '$dob', '$sex', '$phone')";
-            if ($connect->query($sql) === TRUE) {
-                session_start();
-                $_SESSION['success_message'] = 'Đăng ký thành công. Vui lòng đăng nhập.';
-                header("Location: /BetaCinema_Clone/auth/login.php");
-                exit();
+            $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+            $check_email = "SELECT Email FROM users WHERE Email = '$email'";
+            $result = $connect->query($check_email);
+
+            if ($result->num_rows > 0) {
+                $error = 'Email đã tồn tại. Vui lòng sử dụng email khác.';
+                $email = ''; // Clear email field
             } else {
-                echo "Lỗi: " . $sql . "<br>" . $connect->error;
+                $sql = "INSERT INTO users (Fullname, Email, Pass_word, DoB, Sex, Phone) VALUES ('$fullname', '$email', '$hashedPassword', '$dob', '$sex', '$phone')";
+                if ($connect->query($sql) === TRUE) {
+                    session_start();
+                    $_SESSION['success_message'] = 'Đăng ký thành công. Vui lòng đăng nhập.';
+                    header("Location: /BetaCinema_Clone/auth/login.php");
+                    exit();
+                } else {
+                    echo "Lỗi: " . $sql . "<br>" . $connect->error;
+                }
             }
         }
+        $connect->close();
     }
-    $connect->close();
-}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -77,20 +77,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
     }
 
-    function togglePasswordVisibility(fieldId, iconId) {
-        var passwordField = document.getElementById(fieldId);
-        var eyeIcon = document.getElementById(iconId);
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordField.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
-    }
-
     setTimeout(function () {
         var messageElement = document.getElementById("mess");
         if (messageElement) {
@@ -108,8 +94,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 <body>
 <div class="container">
     <form method="POST" action="">
-        <a class="navbar-brand" href="/BetaCinema_Clone/home/index.php"><img src="/BetaCinema_Clone/assets/logo.png"
-                                                                             alt="Logo"></a>
+        <a class="navbar-brand" href="/BetaCinema_Clone/pages/index.php">
+        <img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
         <div class="row">
             <div class="col">
                 <span>*</span>
@@ -134,9 +120,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <div class="input-group">
                     <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
                     <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password"
-                           value="<?php echo htmlspecialchars($password); ?>" required>
-                    <div class="input-group-text" onclick="togglePasswordVisibility('password', 'togglePassword')"><i
-                                class="bi bi-eye" id="togglePassword"></i></div>
+                           value="<?php echo htmlspecialchars($password); ?>" required
+                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                        title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
                 </div>
             </div>
             <div class="col">
@@ -144,11 +130,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <label for="confirmpassword" class="form-label">Xác nhận lại mật khẩu</label>
                 <div class="input-group">
                     <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                    <input type="password" class="form-control" placeholder="Xác nhận lại mật khẩu" id="confirmpassword"
-                           name="confirmpassword" value="<?php echo htmlspecialchars($confirmPassword); ?>" required>
-                    <div class="input-group-text"
-                         onclick="togglePasswordVisibility('confirmpassword', 'toggleConfirmPassword')"><i
-                                class="bi bi-eye" id="toggleConfirmPassword"></i></div>
+                    <input type="password" class="form-control" placeholder="Xác nhận lại mật khẩu" id="confirmpassword" name="confirmpassword" 
+                           value="<?php echo htmlspecialchars($confirmPassword); ?>" required 
+                           pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
+                           title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
                 </div>
             </div>
         </div>
@@ -212,12 +197,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <button type="submit" class="btn btn-submit col-12">ĐĂNG KÝ</button>
             </div>
         </div>
-        <?php if ($error) {
-            echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>";
-        } ?>
-        <?php if ($mess) {
-            echo "<div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>$mess</div>";
-        } ?>
+        <?php 
+            if ($mess) {
+                echo "<div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>$mess</div>";
+            }
+            if ($error) {
+                echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>";
+            }
+         ?>
     </form>
 </div>
 </body>

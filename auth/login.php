@@ -20,20 +20,6 @@
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
     }
 
-    function togglePasswordVisibility() {
-        var passwordField = document.getElementById("password");
-        var eyeIcon = document.getElementById("togglePassword");
-        if (passwordField.type === "password") {
-            passwordField.type = "text";
-            eyeIcon.classList.remove("bi-eye");
-            eyeIcon.classList.add("bi-eye-slash");
-        } else {
-            passwordField.type = "password";
-            eyeIcon.classList.remove("bi-eye-slash");
-            eyeIcon.classList.add("bi-eye");
-        }
-    }
-
     setTimeout(function() {
         var messageElement = document.getElementById("error");
         if (messageElement) {
@@ -43,59 +29,59 @@
 </script>
 <body>
 <?php
-require 'config.php';
+    require 'config.php';
 
-session_start();
+    session_start();
 
-$error = '';
+    $error = '';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['refreshCaptcha'])) {
-    $email = $_POST['email'];
-    $password = $_POST['password'];
-    $captcha = $_POST['captcha'];  // Mã CAPTCHA từ form
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['refreshCaptcha'])) {
+        $email = $_POST['email'];
+        $password = $_POST['password'];
+        $captcha = $_POST['captcha'];  // Mã CAPTCHA từ form
 
-    // Kiểm tra mã CAPTCHA
-    if ($captcha !== $_SESSION['captcha']) {
-        $error = 'Mã CAPTCHA không đúng!';
-    } else {
-        // Xử lý đăng nhập
-        $sql = "SELECT * FROM users WHERE Email='$email'";
-        $result = mysqli_query($connect, $sql);
+        // Kiểm tra mã CAPTCHA
+        if ($captcha !== $_SESSION['captcha']) {
+            $error = 'Mã CAPTCHA không đúng!';
+        } else {
+            // Xử lý đăng nhập
+            $sql = "SELECT * FROM users WHERE Email='$email'";
+            $result = mysqli_query($connect, $sql);
 
-        if ($result && mysqli_num_rows($result) == 1) {
-            $user = mysqli_fetch_assoc($result);
-            if (password_verify($password, $user['Pass_word'])) {
-                $_SESSION['loggedin'] = true;
-                $_SESSION['Fullname'] = $user['Fullname'];
-                $_SESSION['UserID'] = $user['UserID'];
-                $_SESSION['Email'] = $user['Email'];
+            if ($result && mysqli_num_rows($result) == 1) {
+                $user = mysqli_fetch_assoc($result);
+                if (password_verify($password, $user['Pass_word'])) {
+                    $_SESSION['loggedin'] = true;
+                    $_SESSION['Fullname'] = $user['Fullname'];
+                    $_SESSION['UserID'] = $user['UserID'];
+                    $_SESSION['Email'] = $user['Email'];
 
-                if ($user['Role'] == 1) {
-                    header("Location: /BetaCinema_Clone/pages/index.php");
-                } else if ($user['Role'] == 0) {
-                    header("Location: /BetaCinema_Clone/admin/pages/index/index.php");
+                    if ($user['Role'] == 1) {
+                        header("Location: /BetaCinema_Clone/pages/index.php");
+                    } else if ($user['Role'] == 0) {
+                        header("Location: /BetaCinema_Clone/admin/pages/index/index.php");
+                    }
+
+                    exit();
+                } else {
+                    $error = 'Email hoặc mật khẩu không đúng!';
                 }
-
-                exit();
             } else {
                 $error = 'Email hoặc mật khẩu không đúng!';
             }
-        } else {
-            $error = 'Email hoặc mật khẩu không đúng!';
         }
     }
-}
 ?>
 
 <div class="container" style="max-width:500px">
     <form method="POST" action="">
-        <a class="navbar-brand" href="/BetaCinema_Clone/pages/index.php"><img src="/BetaCinema_Clone/assets/logo.png"
-                                                                              alt="Logo"></a>
+        <a class="navbar-brand" href="/BetaCinema_Clone/pages/index.php">
+        <img src="/BetaCinema_Clone/assets/logo.png" alt="Logo"></a>
         <?php
-        if (isset($_SESSION['success_message'])) {
-            echo "<div class='alert alert-success mt-4 p-1 text-center' id='success' style='color:green; font-weight:bold'>{$_SESSION['success_message']}</div>";
-            unset($_SESSION['success_message']);
-        }
+            if (isset($_SESSION['success_message'])) {
+                echo "<div class='alert alert-success mt-4 p-1 text-center' id='success' style='color:green; font-weight:bold'>{$_SESSION['success_message']}</div>";
+                unset($_SESSION['success_message']);
+            }
         ?>
         <div class="row">
             <label for="email" class="form-label">Email</label>
@@ -108,10 +94,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && !isset($_POST['refreshCaptcha'])) {
             <label for="password" class="form-label">Mật khẩu</label>
             <div class="input-group">
                 <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
-                <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password"
-                       required>
-                <div class="input-group-text" onclick="togglePasswordVisibility()"><i class="bi bi-eye"
-                                                                                      id="togglePassword"></i></div>
+                <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password" required>
             </div>
         </div>
         <div class="row mt-3">
