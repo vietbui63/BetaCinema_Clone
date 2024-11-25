@@ -122,7 +122,7 @@
                             echo "<td>" . htmlspecialchars($row['Type']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['Genre']) . "</td>";
                             echo "<td>" . htmlspecialchars($row['Duration']) . "</td>";
-                            echo "<td>" . htmlspecialchars($row['ReleaseDate']) . "</td>";
+                            echo "<td>" . (!empty($row['ReleaseDate']) ? date("d/m/Y", strtotime($row['ReleaseDate'])) : "N/A") . "</td>";
                             echo "<td><img src='" . htmlspecialchars($row['Pic']) . "' alt='" . htmlspecialchars($row['Title']) . "' style='width:50px;height:50px;'></td>";
                             echo "<td><a href='" . htmlspecialchars($row['Trailer']) . "' target='_blank'>Trailer</a></td>";
                             echo "<td>" . htmlspecialchars($row['status']) . "</td>";
