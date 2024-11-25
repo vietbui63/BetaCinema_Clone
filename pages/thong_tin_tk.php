@@ -87,87 +87,87 @@
         }
     ?>
 
-    <div class="d-flex justify-content-center">
-        <div class="container">
-                <h3 class="text-center mb-5">THÔNG TIN TÀI KHOẢN</h3>
-                <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
-                    <?php if (isset($user)) { ?>
-                        <form method="POST" action="">
-                            <div class="row">
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <span>*</span>
-                                        <label for="fullname" class="form-label">Họ tên</label>
-                                        <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo htmlspecialchars($user['Fullname']); ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <span>*</span>
-                                        <label for="phone" class="form-label">Số điện thoại</label>
-                                        <input type="text" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($user['Phone']); ?>" required>
-                                    </div>
-                                    <div class="mb-3">
-                                        <label for="sex" class="form-label">Giới tính</label>
-                                        <select class="form-control" id="sex" name="sex" required>
-                                            <option value="Nam" <?php if ($user['Sex'] == 'Nam') echo 'selected'; ?>>Nam</option>
-                                            <option value="Nữ" <?php if ($user['Sex'] == 'Nữ') echo 'selected'; ?>>Nữ</option>
-                                            <option value="Khác" <?php if ($user['Sex'] == 'Khác') echo 'selected'; ?>>Khác</option>
-                                        </select>
-                                    </div> 
-                                </div>
-                                <div class="col">
-                                    <div class="mb-3">
-                                        <span>*</span>
-                                        <label for="email" class="form-label">Email</label>
-                                        <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
-                                    </div>
-                                    <div class="mb-3">
-                                        <span>*</span>
-                                        <label for="dob" class="form-label">Ngày sinh</label>
-                                        <input type="date" class="form-control" id="dob" name="dob" value="<?php echo htmlspecialchars($user['Dob']); ?>" required>
-                                    </div>
-                                    <!-- Mật khẩu hiện tại -->
-                                    <div class="mb-3">
-                                        <label for="current_password" class="form-label">Mật khẩu hiện tại</label>
-                                        <input type="password" class="form-control" id="current_password" name="current_password">
-                                    </div>
-                                    <!-- Mật khẩu mới -->
-                                    <div class="mb-3">
-                                        <label for="new_password" class="form-label">Mật khẩu mới</label>
-                                        <input type="password" class="form-control" id="new_password" name="new_password" 
-                                            pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" 
-                                            title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
-                                    </div>
-                                    <!-- Xác nhận mật khẩu mới -->
-                                    <div class="mb-3">
-                                        <label for="confirm_password" class="form-label">Xác nhận mật khẩu mới</label>
-                                        <input type="password" class="form-control" id="confirm_password" name="confirm_password">
-                                    </div>
-                                </div>
-                            </div>
-                            
-                            <div class="row">
-                                <div class="col">
-                                    <a href="/BetaCinema_Clone/pages/index.php" class="btn btn-back col-12 w-100 mt-3">QUAY LẠI</a>
-                                </div>
-                                <div class="col">
-                                    <button type="submit" name="update_profile" class="btn btn-next w-100 mt-3">
-                                        CẬP NHẬT
-                                    </button>
-                                </div>
-                            </div>
-                            <?php if ($mess) { echo "<div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>$mess</div>"; } ?>
-                            <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>"; } ?>
-                        </form>
-                    <?php } else { ?>
-                        <p>Không thể lấy thông tin người dùng.</p>
-                    <?php } ?>
-                </div>       
-            </div>
+    <div class="container">
+        <h3 class="text-center mb-5">THÔNG TIN TÀI KHOẢN</h3>
+        <div class="tab-pane fade show active" id="info" role="tabpanel" aria-labelledby="info-tab">
+            <?php if (isset($user)) { ?>
+            <form method="POST" action="">
+                <div class="row">
+                    <div class="col">
+                        <div class="mb-3">
+                            <span>*</span>
+                            <label for="fullname" class="form-label">Họ tên</label>
+                            <input type="text" class="form-control" id="fullname" name="fullname" value="<?php echo htmlspecialchars($user['Fullname']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <span>*</span>
+                            <label for="phone" class="form-label">Số điện thoại</label>
+                            <input type="text" class="form-control" id="phone" name="phone" value="<?php echo htmlspecialchars($user['Phone']); ?>" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="sex" class="form-label">Giới tính</label>
+                            <select class="form-control" id="sex" name="sex" required>
+                                <option value="Nam" <?php if ($user['Sex'] == 'Nam') echo 'selected'; ?>>Nam</option>
+                                <option value="Nữ" <?php if ($user['Sex'] == 'Nữ') echo 'selected'; ?>>Nữ</option>
+                                <option value="Khác" <?php if ($user['Sex'] == 'Khác') echo 'selected'; ?>>Khác</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col">
+                        <div class="mb-3">
+                            <span>*</span>
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="email" name="email" value="<?php echo htmlspecialchars($user['Email']); ?>" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <span>*</span>
+                            <label for="dob" class="form-label">Ngày sinh</label>
+                            <input type="date" class="form-control" id="dob" name="dob" value="<?php echo htmlspecialchars($user['Dob']); ?>" required>
+                        </div>
+                        <!-- Mật khẩu hiện tại -->
+                        <div class="mb-3">
+                            <label for="current_password" class="form-label">Mật khẩu hiện tại</label>
+                            <input type="password" class="form-control" id="current_password" name="current_password">
+                        </div>
+                        <!-- Mật khẩu mới -->
+                        <div class="mb-3">
+                            <label for="new_password" class="form-label">Mật khẩu mới</label>
+                            <input type="password" class="form-control" id="new_password" name="new_password" pattern="(?=.*[a-z])(?=.*[A-Z])(?=.*\W).{8,}" title="Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và một ký tự đặc biệt">
+                        </div>
+                        <!-- Xác nhận mật khẩu mới -->
+                        <div class="mb-3">
+                            <label for="confirm_password" class="form-label">Xác nhận mật khẩu mới</label>
+                            <input type="password" class="form-control" id="confirm_password" name="confirm_password">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <a href="/BetaCinema_Clone/pages/index.php" class="btn btn-back col-12 w-100 mt-3">QUAY LẠI</a>
+                    </div>
+                    <div class="col">
+                        <button type="submit" name="update_profile" class="btn btn-next w-100 mt-3">
+                            CẬP NHẬT
+                        </button>
+                    </div>
+                </div>
+                <?php if ($mess) { echo "<div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>$mess</div>"; } ?>
+                <?php if ($error) { echo "<div class='alert alert-danger mt-4 p-1 text-center' id='error' style='color:red; font-weight:bold'>$error</div>"; } ?>
+            </form>
+            <?php } else { ?>
+            <p>Không thể lấy thông tin người dùng.</p>
+            <?php } ?>
+        </div>
     </div>
 </body>
 <style>
     body { 
         font-size: 15px;
+    }
+
+    .container{
+        width: 100%;
     }
 
     .form-control{
