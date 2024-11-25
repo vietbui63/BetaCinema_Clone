@@ -40,9 +40,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         } else {
             $sql = "INSERT INTO users (Fullname, Email, Pass_word, DoB, Sex, Phone) VALUES ('$fullname', '$email', '$hashedPassword', '$dob', '$sex', '$phone')";
             if ($connect->query($sql) === TRUE) {
-                $mess = 'Đăng ký thành công';
-                // Clear all fields on successful registration
-                $fullname = $email = $password = $confirmPassword = $dob = $sex = $phone = '';
+                session_start();
+                $_SESSION['success_message'] = 'Đăng ký thành công. Vui lòng đăng nhập.';
+                header("Location: /BetaCinema_Clone/auth/login.php");
+                exit();
             } else {
                 echo "Lỗi: " . $sql . "<br>" . $connect->error;
             }
@@ -51,7 +52,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $connect->close();
 }
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -75,6 +75,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     function refreshCaptcha() {
         event.preventDefault();
         document.getElementById('captcha-image').src = 'captcha.php?' + Math.random();
+    }
+
+    function togglePasswordVisibility(fieldId, iconId) {
+        var passwordField = document.getElementById(fieldId);
+        var eyeIcon = document.getElementById(iconId);
+        if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.classList.remove("bi-eye");
+            eyeIcon.classList.add("bi-eye-slash");
+        } else {
+            passwordField.type = "password";
+            eyeIcon.classList.remove("bi-eye-slash");
+            eyeIcon.classList.add("bi-eye");
+        }
     }
 
     setTimeout(function () {
@@ -121,6 +135,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
                     <input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password"
                            value="<?php echo htmlspecialchars($password); ?>" required>
+                    <div class="input-group-text" onclick="togglePasswordVisibility('password', 'togglePassword')"><i
+                                class="bi bi-eye" id="togglePassword"></i></div>
                 </div>
             </div>
             <div class="col">
@@ -130,6 +146,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                     <div class="input-group-text"><i class="bi bi-lock-fill"></i></div>
                     <input type="password" class="form-control" placeholder="Xác nhận lại mật khẩu" id="confirmpassword"
                            name="confirmpassword" value="<?php echo htmlspecialchars($confirmPassword); ?>" required>
+                    <div class="input-group-text"
+                         onclick="togglePasswordVisibility('confirmpassword', 'toggleConfirmPassword')"><i
+                                class="bi bi-eye" id="toggleConfirmPassword"></i></div>
                 </div>
             </div>
         </div>
