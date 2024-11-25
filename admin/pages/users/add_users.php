@@ -12,26 +12,28 @@
     <?php
         require 'config.php';
 
-        if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-            $fullname = $_POST['fullname'];
-            $email = $_POST['email'];
-            $password = $_POST['password'];
-            $dob = $_POST['dob'];
-            $sex = $_POST['sex'];
-            $phone = $_POST['phone'];
-            $role = $_POST['role'];
+    if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+        $fullname = $_POST['fullname'];
+        $email = $_POST['email'];
+        // Mã hóa mật khẩu
+        $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
+        $dob = $_POST['dob'];
+        $sex = $_POST['sex'];
+        $phone = $_POST['phone'];
+        $role = $_POST['role'];
 
-            $query = "INSERT INTO users (Fullname, Email, Pass_word, Dob, Sex, Phone, Role) 
-                    VALUES ('$fullname', '$email', '$password', '$dob', '$sex', '$phone', '$role')";
-            $result = mysqli_query($connect, $query);
+        $query = "INSERT INTO users (Fullname, Email, Pass_word, Dob, Sex, Phone, Role) 
+            VALUES ('$fullname', '$email', '$password', '$dob', '$sex', '$phone', '$role')";
+        $result = mysqli_query($connect, $query);
 
-            if ($result) {
-                header('Location: /BetaCinema_Clone/admin/pages/users/users.php');
-                exit();
-            } else {
-                echo "Error: " . mysqli_error($connect);
-            }
+        if ($result) {
+            header('Location: /BetaCinema_Clone/admin/pages/users/users.php');
+            exit();
+        } else {
+            echo "Error: " . mysqli_error($connect);
         }
+    }
+
     ?>
 
     <div class="container w-50">
