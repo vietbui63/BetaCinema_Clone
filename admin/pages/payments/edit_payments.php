@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="/BetaCinema_Clone/styles/admin.css">
 
     <title>CẬP NHẬT PAYMENT</title>
-
 </head>
 <body>
     <?php
@@ -31,7 +30,6 @@
         }
 
         $payment = mysqli_fetch_assoc($result);
-        $mess = '';
 
         // Danh sách ghế và giá
         $seats = [
@@ -70,22 +68,23 @@
             $totalPriceNumeric = preg_replace('/[^0-9]/', '', $totalPrice);
 
             $updateQuery = "UPDATE payments 
-                            SET PaymentDate = '$paymentDate', 
-                                PaymentMethod = '$paymentMethod', 
-                                UserID = $userID, 
-                                MovieTitle = '$movieTitle', 
-                                CinemaName = '$cinemaName', 
-                                ShowDate = '$showDate', 
-                                HallName = '$hallName', 
-                                StartTime = '$startTime', 
-                                Seats = '$seatsString', 
-                                TotalPrice = $totalPriceNumeric 
+                            SET `PaymentDate` = '$paymentDate', 
+                                `PaymentMethod` = '$paymentMethod', 
+                                `UserID` = $userID, 
+                                `MovieTitle` = '$movieTitle', 
+                                `CinemaName` = '$cinemaName', 
+                                `ShowDate` = '$showDate', 
+                                `HallName` = '$hallName', 
+                                `StartTime` = '$startTime', 
+                                `Seats` = '$seatsString', 
+                                `TotalPrice` = $totalPriceNumeric 
                             WHERE PaymentID = $paymentID";
 
             if (mysqli_query($connect, $updateQuery)) {
-                $mess = "Cập nhật thành công.";
+                header("Location: /BetaCinema_Clone/admin/pages/payments/payments.php");
+                exit;
             } else {
-                $error = "Error: " . mysqli_error($connect);
+                echo "Cập nhật thất bại. Lỗi: " . mysqli_error($connect);
             }
         }
     ?>
@@ -196,20 +195,10 @@
                     </div>
                 </div>
             </div>
-            <div class="col text-center mt-4">
+            <div class="col text-center">
                 <a href="javascript:history.back()" class="btn btn-outline-warning" style="margin-right:15px">QUAY LẠI</a>
                 <button type="submit" class="btn btn-warning">CẬP NHẬT</button>
             </div>
-            <?php if ($mess): ?>
-                <div class='alert alert-success mt-4 p-1 text-center' id='mess' style='color:green; font-weight:bold'>
-                    <?= $mess ?>
-                </div>
-                <script>
-                    setTimeout(function() {
-                        window.location.href = "/BetaCinema_Clone/admin/pages/showtimes/show_times.php";
-                    }, 1000);
-                </script>
-            <?php endif; ?>
         </form>
     </div>
     <script>
@@ -232,7 +221,7 @@
                     const price = <?= json_encode($seats) ?>[seat];
                     total += price;
                 });
-                document.getElementById('TotalPrice').value = total.toLocaleString() + ' VNĐ';
+                document.getElementById('TotalPrice').value = total.toLocaleString();
             });
         });
     </script>
